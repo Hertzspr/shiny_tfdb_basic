@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: SVG Graphics Driver</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for dsvg {ggiraph}"><tr><td>dsvg {ggiraph}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>SVG Graphics Driver</h2>
+
+<h3>Description</h3>
+
+<p>This function produces SVG files (compliant to the current w3 svg XML standard)
+where elements can be made interactive.
+</p>
+<p>In order to generate the output, used fonts must be available on the computer used to create the svg,
+used fonts must also be available on the computer used to render the svg.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dsvg(
+  file = "Rplots.svg",
+  width = 6,
+  height = 6,
+  bg = "white",
+  pointsize = 12,
+  standalone = TRUE,
+  setdims = TRUE,
+  canvas_id = "svg_1",
+  title = NULL,
+  desc = NULL,
+  fonts = list()
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>file</code></td>
+<td>
+<p>the file where output will appear.</p>
+</td></tr>
+<tr valign="top"><td><code>height, width</code></td>
+<td>
+<p>Height and width in inches.</p>
+</td></tr>
+<tr valign="top"><td><code>bg</code></td>
+<td>
+<p>Default background color for the plot (defaults to &quot;white&quot;).</p>
+</td></tr>
+<tr valign="top"><td><code>pointsize</code></td>
+<td>
+<p>default point size.</p>
+</td></tr>
+<tr valign="top"><td><code>standalone</code></td>
+<td>
+<p>Produce a stand alone svg file? If <code>FALSE</code>, omits
+xml header and default namespace.</p>
+</td></tr>
+<tr valign="top"><td><code>setdims</code></td>
+<td>
+<p>If <code>TRUE</code> (the default), the svg node will have attributes width &amp; height set.</p>
+</td></tr>
+<tr valign="top"><td><code>canvas_id</code></td>
+<td>
+<p>svg id within HTML page.</p>
+</td></tr>
+<tr valign="top"><td><code>title</code></td>
+<td>
+<p>A label for accessibility purposes (aria-label/aria-labelledby).
+Be aware that when using this, the browser will use it as a tooltip for the whole svg and
+it may class with the interactive elements' tooltip.</p>
+</td></tr>
+<tr valign="top"><td><code>desc</code></td>
+<td>
+<p>A longer description for accessibility purposes (aria-description/aria-describedby).</p>
+</td></tr>
+<tr valign="top"><td><code>fonts</code></td>
+<td>
+<p>Named list of font names to be aliased with
+fonts installed on your system. If unspecified, the R default
+families &quot;sans&quot;, &quot;serif&quot;, &quot;mono&quot; and &quot;symbol&quot;
+are aliased to the family returned by <code><a href="../../ggiraph/help/match_family.html">match_family()</a></code>.
+</p>
+<p>If fonts are available, the default mapping will use these values:</p>
+
+<table summary="Rd table">
+<tr>
+ <td style="text-align: left;">
+   R family </td><td style="text-align: left;"> Font on Windows </td><td style="text-align: left;"> Font on Unix </td><td style="text-align: left;"> Font on Mac OS </td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+   <code>sans</code> </td><td style="text-align: left;"> Arial </td><td style="text-align: left;"> DejaVu Sans </td><td style="text-align: left;"> Helvetica </td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+   <code>serif</code> </td><td style="text-align: left;"> Times New Roman </td><td style="text-align: left;"> DejaVu serif </td><td style="text-align: left;"> Times </td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+   <code>mono</code> </td><td style="text-align: left;"> Courier </td><td style="text-align: left;"> DejaVu mono </td><td style="text-align: left;"> Courier </td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+   <code>symbol</code> </td><td style="text-align: left;"> Symbol </td><td style="text-align: left;"> DejaVu Sans </td><td style="text-align: left;"> Symbol </td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+</td>
+</tr>
+
+</table>
+
+<p>As an example, using <code>fonts = list(sans = "Roboto")</code> would make the
+default font &quot;Roboto&quot; as many ggplot theme are using <code>theme_minimal(base_family="")</code> or
+<code>theme_minimal(base_family="sans")</code>.
+</p>
+<p>You can also use theme_minimal(base_family=&quot;Roboto&quot;).</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><a href="../../grDevices/html/Devices.html">Devices</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+fileout &lt;- tempfile(fileext = ".svg")
+dsvg(file = fileout)
+plot(rnorm(10), main="Simple Example", xlab = "", ylab = "")
+dev.off()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggiraph</em> version 0.8.9 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

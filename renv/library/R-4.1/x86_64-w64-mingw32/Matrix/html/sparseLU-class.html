@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Sparse LU Factorizations</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for sparseLU-class {Matrix}"><tr><td>sparseLU-class {Matrix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Sparse LU Factorizations</h2>
+
+<h3>Description</h3>
+
+<p><code>sparseLU</code> is the class of sparse, row- and column-pivoted
+LU factorizations of <i>n-by-n</i> real matrices <i>A</i>,
+having the general form
+</p>
+<p style="text-align: center;"><i>P1 * A * P2 = L * U</i></p>
+
+<p>or (equivalently)
+</p>
+<p style="text-align: center;"><i>A = P1' * L * U * P2'</i></p>
+
+<p>where
+<i>P1</i> and <i>P2</i> are permutation matrices,
+<i>L</i> is a unit lower triangular matrix, and
+<i>U</i> is an upper triangular matrix.
+</p>
+
+
+<h3>Slots</h3>
+
+
+<dl>
+<dt><code>Dim</code>, <code>Dimnames</code></dt><dd><p>inherited from virtual class
+<code><a href="../../Matrix/help/MatrixFactorization-class.html">MatrixFactorization</a></code>.</p>
+</dd>
+<dt><code>L</code></dt><dd><p>an object of class <code><a href="../../Matrix/help/dtCMatrix-class.html">dtCMatrix</a></code>,
+the unit lower triangular <i>L</i> factor.</p>
+</dd>
+<dt><code>U</code></dt><dd><p>an object of class <code><a href="../../Matrix/help/dtCMatrix-class.html">dtCMatrix</a></code>,
+the upper triangular <i>U</i> factor.</p>
+</dd>
+<dt><code>p</code>, <code>q</code></dt><dd><p>0-based integer vectors of length
+<code>Dim[1]</code>,
+specifying the permutations applied to the rows and columns of
+the factorized matrix.  <code>q</code> of length 0 is valid and
+equivalent to the identity permutation, implying no column pivoting.
+Using <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> syntax, the matrix <i>P1 * A * P2</i>
+is precisely <code>A[p+1, q+1]</code>
+(<code>A[p+1, ]</code> when <code>q</code> has length 0).</p>
+</dd>
+</dl>
+
+
+
+<h3>Extends</h3>
+
+<p>Class <code><a href="../../Matrix/help/LU-class.html">LU</a></code>, directly.
+Class <code><a href="../../Matrix/help/MatrixFactorization-class.html">MatrixFactorization</a></code>, by class
+<code><a href="../../Matrix/help/LU-class.html">LU</a></code>, distance 2.
+</p>
+
+
+<h3>Instantiation</h3>
+
+<p>Objects can be generated directly by calls of the form
+<code>new("sparseLU", ...)</code>, but they are more typically obtained
+as the value of <code><a href="../../Matrix/help/lu.html">lu</a>(x)</code> for <code>x</code> inheriting from
+<code><a href="../../Matrix/help/sparseMatrix-class.html">sparseMatrix</a></code> (often <code><a href="../../Matrix/help/dgCMatrix-class.html">dgCMatrix</a></code>).
+</p>
+
+
+<h3>Methods</h3>
+
+
+<dl>
+<dt><code>determinant</code></dt><dd><p><code>signature(from = "sparseLU", logarithm = "logical")</code>:
+computes the determinant of the factorized matrix <i>A</i>
+or its logarithm.</p>
+</dd>
+<dt><code>expand</code></dt><dd><p><code>signature(x = "sparseLU")</code>:
+see <code><a href="../../Matrix/help/expand-methods.html">expand-methods</a></code>.</p>
+</dd>
+<dt><code>expand1</code></dt><dd><p><code>signature(x = "sparseLU")</code>:
+see <code><a href="../../Matrix/help/expand1-methods.html">expand1-methods</a></code>.</p>
+</dd>
+<dt><code>expand2</code></dt><dd><p><code>signature(x = "sparseLU")</code>:
+see <code><a href="../../Matrix/help/expand2-methods.html">expand2-methods</a></code>.</p>
+</dd>
+<dt><code>solve</code></dt><dd><p><code>signature(a = "sparseLU", b = .)</code>:
+see <code><a href="../../Matrix/help/solve-methods.html">solve-methods</a></code>.</p>
+</dd>
+</dl>
+
+
+
+<h3>References</h3>
+
+<p>Davis, T. A. (2006).
+<em>Direct methods for sparse linear systems</em>.
+Society for Industrial and Applied Mathematics.
+doi: <a href="https://doi.org/10.1137/1.9780898718881">10.1137/1.9780898718881</a>
+</p>
+<p>Golub, G. H., &amp; Van Loan, C. F. (2013).
+<em>Matrix computations</em> (4th ed.).
+Johns Hopkins University Press.
+doi: <a href="https://doi.org/10.56021/9781421407944">10.56021/9781421407944</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Class <code><a href="../../Matrix/help/denseLU-class.html">denseLU</a></code> for dense LU factorizations.
+</p>
+<p>Class <code><a href="../../Matrix/help/dgCMatrix-class.html">dgCMatrix</a></code>.
+</p>
+<p>Generic functions <code><a href="../../Matrix/help/lu.html">lu</a></code>,
+<code><a href="../../Matrix/help/expand1.html">expand1</a></code> and <code><a href="../../Matrix/help/expand2.html">expand2</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+showClass("sparseLU")
+set.seed(2)
+
+A &lt;- as(readMM(system.file("external", "pores_1.mtx", package = "Matrix")),
+        "CsparseMatrix")
+(n &lt;- A@Dim[1L])
+
+## With dimnames, to see that they are propagated :
+dimnames(A) &lt;- dn &lt;- list(paste0("r", seq_len(n)),
+                          paste0("c", seq_len(n)))
+
+(lu.A &lt;- lu(A))
+str(e.lu.A &lt;- expand2(lu.A), max.level = 2L)
+
+ae1 &lt;- function(a, b, ...) all.equal(as(a, "matrix"), as(b, "matrix"), ...)
+ae2 &lt;- function(a, b, ...) ae1(unname(a), unname(b), ...)
+
+## A ~ P1' L U P2' in floating point
+stopifnot(exprs = {
+    identical(names(e.lu.A), c("P1.", "L", "U", "P2."))
+    identical(e.lu.A[["P1."]],
+              new("pMatrix", Dim = c(n, n), Dimnames = c(dn[1L], list(NULL)),
+                  margin = 1L, perm = invertPerm(lu.A@p, 0L, 1L)))
+    identical(e.lu.A[["P2."]],
+              new("pMatrix", Dim = c(n, n), Dimnames = c(list(NULL), dn[2L]),
+                  margin = 2L, perm = invertPerm(lu.A@q, 0L, 1L)))
+    identical(e.lu.A[["L"]], lu.A@L)
+    identical(e.lu.A[["U"]], lu.A@U)
+    ae1(A, with(e.lu.A, P1. %*% L %*% U %*% P2.))
+    ae2(A[lu.A@p + 1L, lu.A@q + 1L], with(e.lu.A, L %*% U))
+})
+
+## Factorization handled as factorized matrix
+b &lt;- rnorm(n)
+stopifnot(identical(det(A), det(lu.A)),
+          identical(solve(A, b), solve(lu.A, b)))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.6-5 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

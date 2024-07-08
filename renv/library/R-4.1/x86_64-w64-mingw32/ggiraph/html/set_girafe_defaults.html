@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Modify defaults girafe animation options</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for set_girafe_defaults {ggiraph}"><tr><td>set_girafe_defaults {ggiraph}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Modify defaults girafe animation options</h2>
+
+<h3>Description</h3>
+
+<p>girafe animation options (see <code><a href="../../ggiraph/help/girafe_defaults.html">girafe_defaults()</a></code>)
+are automatically applied to every girafe you produce.
+Use <code>set_girafe_defaults()</code> to override them. Use <code>init_girafe_defaults()</code>
+to re-init all values with the package defaults.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+set_girafe_defaults(
+  fonts = NULL,
+  opts_sizing = NULL,
+  opts_tooltip = NULL,
+  opts_hover = NULL,
+  opts_hover_key = NULL,
+  opts_hover_inv = NULL,
+  opts_hover_theme = NULL,
+  opts_selection = NULL,
+  opts_selection_inv = NULL,
+  opts_selection_key = NULL,
+  opts_selection_theme = NULL,
+  opts_zoom = NULL,
+  opts_toolbar = NULL
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>fonts</code></td>
+<td>
+<p>default values for <code>fonts</code>, see argument <code>fonts</code>
+of <code><a href="../../ggiraph/help/dsvg.html">dsvg()</a></code> function.</p>
+</td></tr>
+<tr valign="top"><td><code>opts_sizing</code></td>
+<td>
+<p>default values for <code><a href="../../ggiraph/help/opts_sizing.html">opts_sizing()</a></code> used
+in argument <code>options</code> of <code>girafe()</code> function.</p>
+</td></tr>
+<tr valign="top"><td><code>opts_tooltip</code></td>
+<td>
+<p>default values for <code><a href="../../ggiraph/help/opts_tooltip.html">opts_tooltip()</a></code> used
+in argument <code>options</code> of <code>girafe()</code> function.</p>
+</td></tr>
+<tr valign="top"><td><code>opts_hover</code></td>
+<td>
+<p>default values for <code><a href="../../ggiraph/help/opts_hover.html">opts_hover()</a></code> used in argument <code>options</code> of <code>girafe()</code> function.</p>
+</td></tr>
+<tr valign="top"><td><code>opts_hover_key</code></td>
+<td>
+<p>default values for <code><a href="../../ggiraph/help/opts_hover_key.html">opts_hover_key()</a></code> used in argument <code>options</code> of <code>girafe()</code> function.</p>
+</td></tr>
+<tr valign="top"><td><code>opts_hover_inv</code></td>
+<td>
+<p>default values for <code><a href="../../ggiraph/help/opts_hover_inv.html">opts_hover_inv()</a></code> used in argument <code>options</code> of <code>girafe()</code> function.</p>
+</td></tr>
+<tr valign="top"><td><code>opts_hover_theme</code></td>
+<td>
+<p>default values for <code><a href="../../ggiraph/help/opts_hover_theme.html">opts_hover_theme()</a></code> used in argument <code>options</code> of <code>girafe()</code> function.</p>
+</td></tr>
+<tr valign="top"><td><code>opts_selection</code></td>
+<td>
+<p>default values for <code><a href="../../ggiraph/help/opts_selection.html">opts_selection()</a></code> used in argument <code>options</code> of <code>girafe()</code> function.</p>
+</td></tr>
+<tr valign="top"><td><code>opts_selection_inv</code></td>
+<td>
+<p>default values for <code><a href="../../ggiraph/help/opts_selection_inv.html">opts_selection_inv()</a></code> used in argument <code>options</code> of <code>girafe()</code> function.</p>
+</td></tr>
+<tr valign="top"><td><code>opts_selection_key</code></td>
+<td>
+<p>default values for <code><a href="../../ggiraph/help/opts_selection_key.html">opts_selection_key()</a></code> used in argument <code>options</code> of <code>girafe()</code> function.</p>
+</td></tr>
+<tr valign="top"><td><code>opts_selection_theme</code></td>
+<td>
+<p>default values for <code><a href="../../ggiraph/help/opts_selection_theme.html">opts_selection_theme()</a></code> used in argument <code>options</code> of <code>girafe()</code> function.</p>
+</td></tr>
+<tr valign="top"><td><code>opts_zoom</code></td>
+<td>
+<p>default values for <code><a href="../../ggiraph/help/opts_zoom.html">opts_zoom()</a></code> used in argument <code>options</code> of <code>girafe()</code> function.</p>
+</td></tr>
+<tr valign="top"><td><code>opts_toolbar</code></td>
+<td>
+<p>default values for <code><a href="../../ggiraph/help/opts_toolbar.html">opts_toolbar()</a></code> used in argument <code>options</code> of <code>girafe()</code> function.</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p>Other girafe animation options: 
+<code><a href="../../ggiraph/help/girafe_defaults.html">girafe_defaults</a>()</code>,
+<code><a href="../../ggiraph/help/girafe_options.html">girafe_options</a>()</code>,
+<code><a href="../../ggiraph/help/init_girafe_defaults.html">init_girafe_defaults</a>()</code>,
+<code><a href="../../ggiraph/help/opts_hover.html">opts_hover</a>()</code>,
+<code><a href="../../ggiraph/help/opts_selection.html">opts_selection</a>()</code>,
+<code><a href="../../ggiraph/help/opts_sizing.html">opts_sizing</a>()</code>,
+<code><a href="../../ggiraph/help/opts_toolbar.html">opts_toolbar</a>()</code>,
+<code><a href="../../ggiraph/help/opts_tooltip.html">opts_tooltip</a>()</code>,
+<code><a href="../../ggiraph/help/opts_zoom.html">opts_zoom</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(ggplot2)
+
+set_girafe_defaults(
+  opts_hover = opts_hover(css = "r:10px;"),
+  opts_hover_inv = opts_hover_inv(),
+  opts_sizing = opts_sizing(rescale = FALSE, width = .8),
+  opts_tooltip = opts_tooltip(opacity = .7,
+                              offx = 20, offy = -10,
+                              use_fill = TRUE, use_stroke = TRUE,
+                              delay_mouseout = 1000),
+  opts_toolbar = opts_toolbar(position = "top", saveaspng = FALSE),
+  opts_zoom = opts_zoom(min = .8, max = 7)
+)
+
+init_girafe_defaults()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggiraph</em> version 0.8.9 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

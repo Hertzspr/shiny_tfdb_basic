@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a list of awesome icon data see &lt;URL:...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for awesomeIcons {leaflet}"><tr><td>awesomeIcons {leaflet}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a list of awesome icon data see
+<a href="https://github.com/lennardv2/Leaflet.awesome-markers">https://github.com/lennardv2/Leaflet.awesome-markers</a></h2>
+
+<h3>Description</h3>
+
+<p>An icon can be represented as a list of the form <code>list(icon, library,
+...)</code>. This function is vectorized over its arguments to create a list of
+icon data. Shorter argument values will be re-cycled. <code>NULL</code> values for
+these arguments will be ignored.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+awesomeIcons(
+  icon = "home",
+  library = "glyphicon",
+  markerColor = "blue",
+  iconColor = "white",
+  spin = FALSE,
+  extraClasses = NULL,
+  squareMarker = FALSE,
+  iconRotate = 0,
+  fontFamily = "monospace",
+  text = NULL
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>icon</code></td>
+<td>
+<p>Name of the icon</p>
+</td></tr>
+<tr valign="top"><td><code>library</code></td>
+<td>
+<p>Which icon library. Default <code>"glyphicon"</code>, other possible
+values are <code>"fa"</code> (fontawesome) or <code>"ion"</code> (ionicons).</p>
+</td></tr>
+<tr valign="top"><td><code>markerColor</code></td>
+<td>
+<p>Possible values are <code>"red"</code>, <code>"darkred"</code>, <code>"lightred"</code>, <code>"orange"</code>,
+<code>"beige"</code>, <code>"green"</code>, <code>"darkgreen"</code>, <code>"lightgreen"</code>, <code>"blue"</code>,
+<code>"darkblue"</code>, <code>"lightblue"</code>, <code>"purple"</code>, <code>"darkpurple"</code>, <code>"pink"</code>,
+<code>"cadetblue"</code>, <code>"white"</code>, <code>"gray"</code>, <code>"lightgray"</code>, <code>"black"</code></p>
+</td></tr>
+<tr valign="top"><td><code>iconColor</code></td>
+<td>
+<p>The color to use for the icon itself. Use any CSS-valid
+color (hex, rgba, etc.) or a named web color.</p>
+</td></tr>
+<tr valign="top"><td><code>spin</code></td>
+<td>
+<p>If <code>TRUE</code>, make the icon spin (only works when <code>library
+= "fa"</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>extraClasses</code></td>
+<td>
+<p>Additional css classes to include on the icon.</p>
+</td></tr>
+<tr valign="top"><td><code>squareMarker</code></td>
+<td>
+<p>Whether to use a square marker.</p>
+</td></tr>
+<tr valign="top"><td><code>iconRotate</code></td>
+<td>
+<p>Rotate the icon by a given angle.</p>
+</td></tr>
+<tr valign="top"><td><code>fontFamily</code></td>
+<td>
+<p>Used when <code>text</code> option is specified.</p>
+</td></tr>
+<tr valign="top"><td><code>text</code></td>
+<td>
+<p>Use this text string instead of an icon.
+argument of <code><a href="../../leaflet/help/addAwesomeMarkers.html">addAwesomeMarkers</a>()</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A list of awesome-icon data that can be passed to the <code>icon</code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet</em> version 2.2.1 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

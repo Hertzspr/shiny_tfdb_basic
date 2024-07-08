@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Reactive version of ggiraph object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for renderggiraph {ggiraph}"><tr><td>renderggiraph {ggiraph}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Reactive version of ggiraph object</h2>
+
+<h3>Description</h3>
+
+<p>Makes a reactive version of a ggiraph object for use in Shiny.
+</p>
+<p>This function is now deprecated, users should
+now use function <code><a href="../../ggiraph/help/renderGirafe.html">renderGirafe()</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+renderggiraph(expr, env = parent.frame(), quoted = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>expr</code></td>
+<td>
+<p>An expression that returns a <code><a href="../../ggiraph/help/ggiraph.html">ggiraph()</a></code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>env</code></td>
+<td>
+<p>The environment in which to evaluate expr.</p>
+</td></tr>
+<tr valign="top"><td><code>quoted</code></td>
+<td>
+<p>Is <code>expr</code> a quoted expression</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+if( require(shiny) &amp;&amp; interactive() ){
+  app_dir &lt;- file.path( system.file(package = "ggiraph"), "examples/shiny" )
+  shinyAppDir(appDir = app_dir )
+}
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggiraph</em> version 0.8.9 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

@@ -1,12 +1,16 @@
 {
     "left": {
+<<<<<<< HEAD
         "splitterpos": 105,
+=======
+        "splitterpos": 500,
+>>>>>>> parent of 1011375 (Integrating renv() for reproducibility)
         "topwindowstate": "HIDE",
         "panelheight": 841,
         "windowheight": 879
     },
     "right": {
-        "splitterpos": 303,
+        "splitterpos": 457,
         "topwindowstate": "NORMAL",
         "panelheight": 841,
         "windowheight": 879

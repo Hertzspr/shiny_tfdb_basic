@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Generate random proquint identifiers</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for proquint {ids}"><tr><td>proquint {ids}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Generate random proquint identifiers</h2>
+
+<h3>Description</h3>
+
+<p>Generate random &quot;proquint&quot; identifiers.  &quot;proquint&quot; stands for
+PRO-nouncable QUINT-uplets and were described by Daniel Wilkerson
+in <a href="https://arxiv.org/html/0901.4016">https://arxiv.org/html/0901.4016</a>.  Each &quot;word&quot; takes one
+of <i>2^16</i> possibilities.  A four word proquint has a keyspace
+of <i>10^19</i> possibilities but takes only 23 characters.
+Proquint identifiers can be interchanged with integers (though
+this is totally optional); see <code><a href="../../ids/help/proquint_to_int.html">proquint_to_int</a></code> and
+the other functions documented on that page.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+proquint(n = 1, n_words = 2L, use_cache = TRUE, use_openssl = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>number of ids to return.  If <code>NULL</code>, it instead
+returns the generating function</p>
+</td></tr>
+<tr valign="top"><td><code>n_words</code></td>
+<td>
+<p>The number of words for each identifier; each word
+has <code>2^16</code> (65536) possible combinations, a two-word
+proquint has <code>2^32</code> possible combinations and an
+<code>k</code>-word proquint has <code>2^(k * 16)</code> possible
+combinations.</p>
+</td></tr>
+<tr valign="top"><td><code>use_cache</code></td>
+<td>
+<p>Because there are relatively few combinations per
+word, and because constructing short strings is relatively
+expensive in R, it may be useful to cache all 65536 possible
+words.  If <code>TRUE</code> then the first time that this function is
+used all words will be cached and the results used - the first
+time may take up to ~1/4 of a second and subsequent calls will
+be much faster.  The identifiers selected will not change with
+this option (i.e., given a particular random seed, changing this
+option will not affect the identifiers randomly selected).</p>
+</td></tr>
+<tr valign="top"><td><code>use_openssl</code></td>
+<td>
+<p>Use openssl for random number generation, with
+the primary effect that the identifiers will not be affected by
+R's random seed (at a small speed cost).</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>In the abstract of their paper, Wilkerson introduces proquints:
+</p>
+<p>&quot;Identifiers (IDs) are pervasive throughout our modern
+life. We suggest that these IDs would be easier to manage and
+remember if they were easily readable, spellable, and
+pronounceable. As a solution to this problem we propose using
+PRO-nouncable QUINT-uplets of alternating unambiguous consonants
+and vowels: proquints.&quot;
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# A single, two word, proquint
+proquint()
+
+# Longer identifier:
+proquint(n_words = 5)
+
+# More identifiers
+proquint(10)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ids</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

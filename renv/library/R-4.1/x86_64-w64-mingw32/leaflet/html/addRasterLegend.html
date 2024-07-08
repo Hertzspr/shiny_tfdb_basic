@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add a color legend for a SpatRaster to a map</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for addRasterLegend {leaflet}"><tr><td>addRasterLegend {leaflet}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add a color legend for a SpatRaster to a map</h2>
+
+<h3>Description</h3>
+
+<p>A function for adding a <a href="../../leaflet/help/addLegend.html">legend</a> that is specifically designed
+for <a href="../../terra/help/SpatRaster-class.html">terra::SpatRaster</a> objects, with categorical values, that carry their
+own <a href="../../terra/help/colors.html">color table</a>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+addRasterLegend(map, x, layer = 1, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>map</code></td>
+<td>
+<p>a map widget object</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a <a href="../../terra/help/SpatRaster-class.html">SpatRaster</a> object with a color table</p>
+</td></tr>
+<tr valign="top"><td><code>layer</code></td>
+<td>
+<p>the layer of the raster to target</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional arguments to pass through to <code><a href="../../leaflet/help/addLegend.html">addLegend()</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../leaflet/help/addRasterImage.html">addRasterImage()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+
+library(terra)
+
+r &lt;- rast("/vsicurl/https://geodata.ucdavis.edu/test/pr_nlcd.tif")
+leaflet() %&gt;%
+  addTiles() %&gt;%
+  addRasterImage(r, opacity = 0.75) %&gt;%
+  addRasterLegend(r, opacity = 0.75)
+
+plot.new() # pause in interactive mode
+
+rr &lt;- r
+levels(rr)  &lt;- NULL
+leaflet() %&gt;%
+  addTiles() %&gt;%
+  addRasterImage(rr, opacity = 0.75) %&gt;%
+  addRasterLegend(rr, opacity = 0.75)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet</em> version 2.2.1 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

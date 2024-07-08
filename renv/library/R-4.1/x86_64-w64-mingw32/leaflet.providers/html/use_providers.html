@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Use custom tile provider</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for use_providers {leaflet.providers}"><tr><td>use_providers {leaflet.providers}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Use custom tile provider</h2>
+
+<h3>Description</h3>
+
+<p>Use a custom <code>leaflet_providers</code> object, e.g. providers data fetched with
+<a href="../../leaflet.providers/help/get_providers.html">get_providers</a>, with the <code>leaflet</code> package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+use_providers(providers_info = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>providers_info</code></td>
+<td>
+<p>A custom <code>leaflet_providers</code> object.
+If <code>NULL</code>, uses default providers.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+if (require("V8") &amp;&amp; require("jsonlite")) {
+  # Set providers to latest providers
+  use_providers(get_providers())
+
+  # Set providers to a custom providers object (specific version number)
+  use_providers(get_providers("1.4.0"))
+  use_providers("1.4.0")
+}
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet.providers</em> version 2.0.0 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

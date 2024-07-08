@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: List of validated default fonts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for validated_fonts {ggiraph}"><tr><td>validated_fonts {ggiraph}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>List of validated default fonts</h2>
+
+<h3>Description</h3>
+
+<p>Validates and possibly modifies the fonts to be used as default
+value in a graphic according to the fonts available on the machine. It process
+elements named &quot;sans&quot;, &quot;serif&quot;, &quot;mono&quot; and &quot;symbol&quot;.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+validated_fonts(fonts = list())
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>fonts</code></td>
+<td>
+<p>Named list of font names to be aliased with
+fonts installed on your system. If unspecified, the R default
+families &quot;sans&quot;, &quot;serif&quot;, &quot;mono&quot; and &quot;symbol&quot;
+are aliased to the family returned by <code><a href="../../ggiraph/help/match_family.html">match_family()</a></code>.
+</p>
+<p>If fonts are available, the default mapping will use these values:</p>
+
+<table summary="Rd table">
+<tr>
+ <td style="text-align: left;">
+   R family </td><td style="text-align: left;"> Font on Windows </td><td style="text-align: left;"> Font on Unix </td><td style="text-align: left;"> Font on Mac OS </td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+   <code>sans</code> </td><td style="text-align: left;"> Arial </td><td style="text-align: left;"> DejaVu Sans </td><td style="text-align: left;"> Helvetica </td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+   <code>serif</code> </td><td style="text-align: left;"> Times New Roman </td><td style="text-align: left;"> DejaVu serif </td><td style="text-align: left;"> Times </td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+   <code>mono</code> </td><td style="text-align: left;"> Courier </td><td style="text-align: left;"> DejaVu mono </td><td style="text-align: left;"> Courier </td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+   <code>symbol</code> </td><td style="text-align: left;"> Symbol </td><td style="text-align: left;"> DejaVu Sans </td><td style="text-align: left;"> Symbol </td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+</td>
+</tr>
+
+</table>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a named list of validated font family names
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../ggiraph/help/girafe.html">girafe()</a></code>, <code><a href="../../ggiraph/help/dsvg.html">dsvg()</a></code>
+</p>
+<p>Other functions for font management: 
+<code><a href="../../ggiraph/help/font_family_exists.html">font_family_exists</a>()</code>,
+<code><a href="../../ggiraph/help/match_family.html">match_family</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+validated_fonts()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggiraph</em> version 0.8.9 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

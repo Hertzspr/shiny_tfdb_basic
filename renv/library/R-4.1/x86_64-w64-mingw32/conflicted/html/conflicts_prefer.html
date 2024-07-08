@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Declare many preferences at once</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for conflicts_prefer {conflicted}"><tr><td>conflicts_prefer {conflicted}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Declare many preferences at once</h2>
+
+<h3>Description</h3>
+
+<p><code>conflicts_prefer()</code> allows you to declare &quot;winners&quot; of conflicts,
+declaring one or many winners at once.
+</p>
+<p>See <code><a href="../../conflicted/help/conflict_prefer.html">conflict_prefer()</a></code> for more precise control.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+conflicts_prefer(..., .quiet = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Functions to prefer in form <code>pkg::fun</code> or <code>pkg::fun()</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>.quiet</code></td>
+<td>
+<p>If <code>TRUE</code>, all output will be suppressed</p>
+</td></tr>
+</table>
+
+
+<h3>Best practices</h3>
+
+<p>I recommend placing a single call to <code>conflicts_prefer()</code> at the top of
+your script, immediately after loading all needed packages with calls to
+<code>library()</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+conflicts_prefer(
+  dplyr::filter(),
+  dplyr::lag(),
+)
+
+# or
+conflicts_prefer(
+  dplyr::filter,
+  dplyr::lag,
+)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>conflicted</em> version 1.2.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

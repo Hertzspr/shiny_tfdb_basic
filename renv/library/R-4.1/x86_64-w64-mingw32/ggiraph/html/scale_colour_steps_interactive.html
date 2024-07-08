@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create interactive binned gradient colour scales</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for scale_colour_steps_interactive {ggiraph}"><tr><td>scale_colour_steps_interactive {ggiraph}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create interactive binned gradient colour scales</h2>
+
+<h3>Description</h3>
+
+<p>These scales are based on
+<code><a href="../../ggplot2/html/scale_steps.html">scale_colour_steps()</a></code>,
+<code><a href="../../ggplot2/html/scale_steps.html">scale_fill_steps()</a></code>,
+<code><a href="../../ggplot2/html/scale_steps.html">scale_colour_steps2()</a></code>,
+<code><a href="../../ggplot2/html/scale_steps.html">scale_fill_steps2()</a></code>,
+<code><a href="../../ggplot2/html/scale_steps.html">scale_colour_stepsn()</a></code> and
+<code><a href="../../ggplot2/html/scale_steps.html">scale_fill_stepsn()</a></code>.
+See the documentation for those functions for more details.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+scale_colour_steps_interactive(...)
+
+scale_color_steps_interactive(...)
+
+scale_fill_steps_interactive(...)
+
+scale_colour_steps2_interactive(...)
+
+scale_color_steps2_interactive(...)
+
+scale_fill_steps2_interactive(...)
+
+scale_colour_stepsn_interactive(...)
+
+scale_color_stepsn_interactive(...)
+
+scale_fill_stepsn_interactive(...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments passed to base function,
+plus any of the <a href="../../ggiraph/help/interactive_parameters.html">interactive_parameters</a>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An interactive scale object.
+</p>
+
+
+<h3>Details for interactive scale and interactive guide functions</h3>
+
+<p>For scales, the interactive parameters can be supplied as arguments in the relevant function
+and they can be scalar values or vectors, depending on the number of breaks (levels) and
+the type of the guide used.
+The guides do not accept any interactive parameter directly, they receive them from the scales.
+</p>
+<p>When guide of type <code>legend</code>, <code>bins</code>, <code>colourbar</code> or <code>coloursteps</code> is used,
+it will be converted to a <code><a href="../../ggiraph/help/guide_legend_interactive.html">guide_legend_interactive()</a></code>, <code><a href="../../ggiraph/help/guide_bins_interactive.html">guide_bins_interactive()</a></code>,
+<code><a href="../../ggiraph/help/guide_colourbar_interactive.html">guide_colourbar_interactive()</a></code> or <code><a href="../../ggiraph/help/guide_coloursteps_interactive.html">guide_coloursteps_interactive()</a></code> respectively,
+if it's not already.
+</p>
+<p>The length of each scale interactive parameter vector should match the length of the breaks.
+It can also be a named vector, where each name should correspond to the same break name.
+It can also be defined as function that takes the breaks as input and returns a named or
+unnamed vector of values as output.
+</p>
+<p>For binned guides like <code>bins</code> and <code>coloursteps</code> the breaks include the label breaks and the limits.
+The number of bins will be one less than the number of breaks and the interactive parameters can be
+constructed for each bin separately (look at the examples).
+For <code>colourbar</code> guide in raster mode, the breaks vector, is scalar 1 always, meaning the interactive
+parameters should be scalar too. For <code>colourbar</code> guide in non-raster mode, the bar is drawn using
+rectangles, and the breaks are the midpoints of each rectangle.
+</p>
+<p>The interactive parameters here, give interactivity only to the key elements of the guide.
+</p>
+<p>To provide interactivity to the rest of the elements of a guide, (title, labels, background, etc),
+the relevant theme elements or relevant guide arguments can be used.
+The <code>guide</code> arguments <code>title.theme</code> and <code>label.theme</code> can be defined as
+<code>element_text_interactive</code> (in fact, they will be converted to that if they are not
+already), either directly or via the theme.
+See the element_*_interactive section for more details.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../ggiraph/help/girafe.html">girafe()</a></code>
+</p>
+<p>Other interactive scale: 
+<code><a href="../../ggiraph/help/scale_alpha_interactive.html">scale_alpha_interactive</a>()</code>,
+<code><a href="../../ggiraph/help/scale_colour_brewer_interactive.html">scale_colour_brewer_interactive</a>()</code>,
+<code><a href="../../ggiraph/help/scale_colour_interactive.html">scale_colour_interactive</a></code>,
+<code><a href="../../ggiraph/help/scale_gradient_interactive.html">scale_gradient_interactive</a></code>,
+<code><a href="../../ggiraph/help/scale_linetype_interactive.html">scale_linetype_interactive</a>()</code>,
+<code><a href="../../ggiraph/help/scale_manual_interactive.html">scale_manual_interactive</a></code>,
+<code><a href="../../ggiraph/help/scale_shape_interactive.html">scale_shape_interactive</a>()</code>,
+<code><a href="../../ggiraph/help/scale_size_interactive.html">scale_size_interactive</a>()</code>,
+<code><a href="../../ggiraph/help/scale_viridis_interactive.html">scale_viridis_interactive</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>ggiraph</em> version 0.8.9 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

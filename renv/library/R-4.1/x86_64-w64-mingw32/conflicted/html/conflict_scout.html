@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Find conflicts amongst a set of packages</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for conflict_scout {conflicted}"><tr><td>conflict_scout {conflicted}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Find conflicts amongst a set of packages</h2>
+
+<h3>Description</h3>
+
+<p><code>conflict_scout()</code> is the workhorse behind the conflicted package. You can
+call it directly yourself if you want to see all conflicts before hitting
+them in practice.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+conflict_scout(pkgs = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>pkgs</code></td>
+<td>
+<p>Set of packages for which to report conflicts. If <code>NULL</code>,
+the default, will report conflicts for all loaded packages</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A named list of character vectors. The names are functions and
+the values are the packages where they appear. If there is only a single
+package listed, it means that an automated disambiguation has selected
+that function.
+</p>
+<p>A user friendly print method displays the result as bulleted list.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+conflict_scout()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>conflicted</em> version 1.2.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

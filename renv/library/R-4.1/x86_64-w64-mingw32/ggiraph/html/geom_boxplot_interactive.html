@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create interactive boxplot</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for geom_boxplot_interactive {ggiraph}"><tr><td>geom_boxplot_interactive {ggiraph}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create interactive boxplot</h2>
+
+<h3>Description</h3>
+
+<p>The geometry is based on <code><a href="../../ggplot2/html/geom_boxplot.html">geom_boxplot()</a></code>.
+See the documentation for that function for more details.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+geom_boxplot_interactive(...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments passed to base function,
+plus any of the <a href="../../ggiraph/help/interactive_parameters.html">interactive_parameters</a>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>You can supply <code style="white-space: pre;">interactive parameters</code> for the outlier points by prefixing them
+with <code>outlier.</code> prefix. For example: aes(outlier.tooltip = 'bla', outlier.data_id = 'blabla').
+</p>
+<p>IMPORTANT: when supplying outlier interactive parameters,
+the correct <code>group</code> aesthetic <em>must</em> be also supplied. Otherwise the default group calculation
+will be incorrect, which will result in an incorrect plot.
+</p>
+
+
+<h3>Details for interactive geom functions</h3>
+
+<p>The interactive parameters can be supplied with two ways:
+</p>
+
+<ul>
+<li><p> As aesthetics with the mapping argument (via <code><a href="../../ggplot2/html/aes.html">aes()</a></code>).
+In this way they can be mapped to data columns and apply to a set of geometries.
+</p>
+</li>
+<li><p> As plain arguments into the geom_*_interactive function.
+In this way they can be set to a scalar value.
+</p>
+</li></ul>
+
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../ggiraph/help/girafe.html">girafe()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# add interactive boxplot -------
+library(ggplot2)
+library(ggiraph)
+
+p &lt;- ggplot(mpg, aes(x = class, y = hwy, tooltip = class)) +
+  geom_boxplot_interactive()
+
+x &lt;- girafe(ggobj = p)
+if (interactive()) print(x)
+
+p &lt;- ggplot(mpg) +
+  geom_boxplot_interactive(
+    aes(
+      x = drv, y = hwy,
+      fill = class,
+      data_id = class,
+      tooltip = after_stat({
+        paste0(
+          "class: ", .data$fill,
+          "\nQ1: ", prettyNum(.data$ymin),
+          "\nQ3: ", prettyNum(.data$ymax),
+          "\nmedian: ", prettyNum(.data$middle)
+        )
+      })
+    ),
+    outlier.colour = "red"
+  ) +
+  guides(fill = "none") +
+  theme_minimal()
+
+x &lt;- girafe(ggobj = p)
+if (interactive()) print(x)
+
+
+p &lt;- ggplot(mpg) +
+  geom_boxplot_interactive(
+    aes(
+      x = drv, y = hwy,
+      fill = class, group = paste(drv, class),
+      data_id = class,
+      tooltip = after_stat({
+        paste0(
+          "class: ", .data$fill,
+          "\nQ1: ", prettyNum(.data$ymin),
+          "\nQ3: ", prettyNum(.data$ymax),
+          "\nmedian: ", prettyNum(.data$middle)
+        )
+      }),
+      outlier.tooltip = paste(
+        "I am an outlier!\nhwy:", hwy, "\ndrv:", drv, "\nclass:", class
+      )
+    ),
+    outlier.colour = "red"
+  ) +
+  guides(fill = "none") +
+  theme_minimal()
+
+x &lt;- girafe(ggobj = p)
+if (interactive()) print(x)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggiraph</em> version 0.8.9 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

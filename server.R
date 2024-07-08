@@ -363,7 +363,7 @@ server <- function(input, output, session) {
       labs(title = mt, subtitle = st, x = xt, y = yt)+
       facet_wrap(vars(team_name))+
       scale_color_manual(values = group_color)+
-      scale_y_continuous(labels = label_number(scale_cut = cut_short_scale(space = T)))+
+      scale_y_continuous(labels = label_number_si())+
       theme_setting
 
     gpcc <- girafe(
@@ -616,15 +616,7 @@ server <- function(input, output, session) {
     #transfers_transformations()
     #dfsncf()
     #
-    df_dir <-
-      dfsncf() %>%
-      arrange(desc(transfer_fee)) %>%
-      head(n = 10) %>%
-      mutate(tf_direction = ifelse(
-        transfer_type == "Departures", transfer_fee * -1, transfer_fee
-      ))
-
-    return(df_dir)
+    df_dir()
   })
 }
 

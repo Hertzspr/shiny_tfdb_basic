@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Helper for a 'girafe' css string</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for girafe_css_bicolor {ggiraph}"><tr><td>girafe_css_bicolor {ggiraph}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Helper for a 'girafe' css string</h2>
+
+<h3>Description</h3>
+
+<p>It allows the creation of a css set of individual
+styles for animation of 'girafe' elements. The used model is
+based on a simple pattern that works <em>most of the time</em> for
+girafe hover effects and selection effects.
+</p>
+<p>It sets properties based on a primary and a secondary color.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+girafe_css_bicolor(primary = "orange", secondary = "gray")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>primary, secondary</code></td>
+<td>
+<p>colors used to define animations of
+fill and stroke properties with text, lines, areas, points
+and images in 'girafe' outputs.</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../ggiraph/help/girafe_css.html">girafe_css()</a></code>, <code><a href="../../ggiraph/help/girafe.html">girafe()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(ggplot2)
+library(ggiraph)
+
+dat &lt;- mtcars
+dat$id &lt;- "id"
+dat$label &lt;- "a line"
+dat &lt;- dat[order(dat$wt), ]
+
+p &lt;- ggplot(
+  data = dat,
+  mapping = aes(
+    x = wt, y = mpg, data_id = id, tooltip = label)) +
+  geom_line_interactive(color = "white", size  = .75,
+                        hover_nearest = TRUE) +
+  theme_dark() +
+  theme(plot.background = element_rect(fill="black"),
+        panel.background = element_rect(fill="black"),
+        text = element_text(colour = "white"),
+        axis.text = element_text(colour = "white")
+        )
+
+x &lt;- girafe(
+  ggobj = p,
+  options = list(
+    opts_hover(
+      css = girafe_css_bicolor(
+        primary = "yellow", secondary = "black"))
+))
+if (interactive()) print(x)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggiraph</em> version 0.8.9 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

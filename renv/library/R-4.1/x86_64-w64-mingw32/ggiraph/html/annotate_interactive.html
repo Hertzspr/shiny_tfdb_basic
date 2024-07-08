@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create interactive annotations</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for annotate_interactive {ggiraph}"><tr><td>annotate_interactive {ggiraph}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create interactive annotations</h2>
+
+<h3>Description</h3>
+
+<p>The layer is based on <code><a href="../../NLP/html/annotate.html">annotate()</a></code>.
+See the documentation for that function for more details.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+annotate_interactive(...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments passed to base function,
+plus any of the <a href="../../ggiraph/help/interactive_parameters.html">interactive_parameters</a>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details for annotate_*_interactive functions</h3>
+
+<p>The interactive parameters can be supplied as arguments in the relevant function
+and they can be scalar values or vectors depending on params on base function.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../ggiraph/help/girafe.html">girafe()</a></code>, <a href="../../ggiraph/help/interactive_parameters.html">interactive_parameters</a>, <code><a href="../../ggiraph/help/annotation_raster_interactive.html">annotation_raster_interactive()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# add interactive annotation to a ggplot -------
+library(ggplot2)
+library(ggiraph)
+
+gg &lt;- ggplot(mtcars, aes(x = disp, y = qsec )) +
+  geom_point(size=2) +
+  annotate_interactive(
+    "rect", xmin = 100, xmax = 400, fill = "red",
+    data_id = "an_id", tooltip = "a tooltip",
+    ymin = 18, ymax = 20, alpha = .5)
+
+x &lt;- girafe(ggobj = gg, width_svg = 5, height_svg = 4)
+if( interactive() ) print(x)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggiraph</em> version 0.8.9 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

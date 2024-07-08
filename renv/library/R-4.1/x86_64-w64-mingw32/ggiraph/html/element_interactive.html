@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create interactive theme elements</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for element_interactive {ggiraph}"><tr><td>element_interactive {ggiraph}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create interactive theme elements</h2>
+
+<h3>Description</h3>
+
+<p>With these functions the user can add interactivity to various <a href="../../ggplot2/help/theme.html">theme</a>
+elements.
+</p>
+<p>They are based on <code><a href="../../ggplot2/html/element.html">element_rect()</a></code>,
+<code><a href="../../ggplot2/html/element.html">element_line()</a></code> and <code><a href="../../ggplot2/html/element.html">element_text()</a></code>
+See the documentation for those functions for more details.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+element_line_interactive(...)
+
+element_rect_interactive(...)
+
+element_text_interactive(...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments passed to base function,
+plus any of the <a href="../../ggiraph/help/interactive_parameters.html">interactive_parameters</a>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details for element_*_interactive functions</h3>
+
+<p>The interactive parameters can be supplied as arguments in the relevant function
+and they should be scalar values.
+</p>
+<p>For theme text elements (<code><a href="../../ggiraph/help/element_text_interactive.html">element_text_interactive()</a></code>), the interactive parameters
+can also be supplied while setting a label value, via the <code><a href="../../ggplot2/html/labs.html">labs()</a></code> family
+of functions or when setting a scale/guide title or key label.
+Instead of setting a character value for the element, function
+<code><a href="../../ggiraph/help/label_interactive.html">label_interactive()</a></code> can be used to define interactive parameters
+to go along with the label.
+When the parameters are supplied that way, they override the default values
+that are set at the theme via <code><a href="../../ggiraph/help/element_text_interactive.html">element_text_interactive()</a></code> or via the <code>guide</code>'s
+theme parameters.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../ggiraph/help/girafe.html">girafe()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# add interactive theme elements -------
+library(ggplot2)
+library(ggiraph)
+
+dataset &lt;- structure(list(qsec = c(16.46, 17.02, 18.61, 19.44, 17.02, 20.22
+), disp = c(160, 160, 108, 258, 360, 225), carname = c("Mazda RX4",
+"Mazda RX4 Wag", "Datsun 710", "Hornet 4 Drive", "Hornet Sportabout",
+"Valiant"), wt = c(2.62, 2.875, 2.32, 3.215, 3.44, 3.46)), row.names = c("Mazda RX4",
+"Mazda RX4 Wag", "Datsun 710", "Hornet 4 Drive", "Hornet Sportabout",
+"Valiant"), class = "data.frame")
+
+# plots
+gg_point = ggplot(data = dataset) +
+  geom_point_interactive(aes(
+    x = wt,
+    y = qsec,
+    color = disp,
+    tooltip = carname,
+    data_id = carname
+  )) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text_interactive(
+      data_id = "plot.title",
+      tooltip = "plot title",
+      hover_css = "fill:red;stroke:none;font-size:12pt"
+    ),
+    plot.subtitle = element_text_interactive(
+      data_id = "plot.subtitle",
+      tooltip = "plot subtitle",
+      hover_css = "fill:none;"
+    ),
+    axis.title.x = element_text_interactive(
+      data_id = "axis.title.x",
+      tooltip = "Description for x axis",
+      hover_css = "fill:red;stroke:none;"
+    ),
+    axis.title.y = element_text_interactive(
+      data_id = "axis.title.y",
+      tooltip = "Description for y axis",
+      hover_css = "fill:red;stroke:none;"
+    ),
+    panel.grid.major = element_line_interactive(
+      data_id = "panel.grid",
+      tooltip = "Major grid lines",
+      hover_css = "fill:none;stroke:red;"
+    )
+  ) +
+  labs(
+    title = "Interactive points example!",
+    subtitle = label_interactive(
+      "by ggiraph",
+      tooltip = "Click me!",
+      onclick = "window.open(\"https://davidgohel.github.io/ggiraph/\")",
+      hover_css = "fill:magenta;cursor:pointer;"
+    )
+  )
+
+x &lt;- girafe(ggobj = gg_point)
+if( interactive() ) print(x)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggiraph</em> version 0.8.9 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

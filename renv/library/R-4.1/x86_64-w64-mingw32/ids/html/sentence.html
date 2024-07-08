@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Sentence style identifiers</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for sentence {ids}"><tr><td>sentence {ids}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Sentence style identifiers</h2>
+
+<h3>Description</h3>
+
+<p>Create a sentence style identifier.  This uses the approach
+described by Asana on their blog
+<a href="https://blog.asana.com/2011/09/6-sad-squid-snuggle-softly/">https://blog.asana.com/2011/09/6-sad-squid-snuggle-softly/</a>.
+This approach encodes 32 bits of information (so 2^32 ~= 4 billion
+possibilities) and in theory can be remapped to an integer if you
+really wanted to.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+sentence(n = 1, style = "snake", past = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>number of ids to return.  If <code>NULL</code>, it instead
+returns the generating function</p>
+</td></tr>
+<tr valign="top"><td><code>style</code></td>
+<td>
+<p>Style to join words with.  Can be one of &quot;Pascal&quot;,
+&quot;camel&quot;, &quot;snake&quot;, &quot;kebab&quot;, &quot;dot&quot;, &quot;title&quot;, &quot;sentence&quot;, &quot;lower&quot;,
+&quot;upper&quot;, and &quot;constant&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>past</code></td>
+<td>
+<p>Use the past tense for verbs (e.g., slurped or jogged
+rather than slurping or jogging)</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Rich FitzJohn
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Generate an identifier
+sentence()
+
+# Generate a bunch
+sentence(10)
+
+# As with adjective_animal, use "style" to control punctuation
+sentence(style = "Camel")
+sentence(style = "dot")
+sentence(style = "Title")
+
+# Change the tense of the verb:
+set.seed(1)
+sentence()
+set.seed(1)
+sentence(past = TRUE)
+
+# Pass n = NULL to bind arguments to a function
+id &lt;- sentence(NULL, past = TRUE, style = "dot")
+id()
+id(10)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ids</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

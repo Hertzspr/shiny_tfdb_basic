@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create an easyButton statestate</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for easyButtonState {leaflet}"><tr><td>easyButtonState {leaflet}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create an easyButton statestate</h2>
+
+<h3>Description</h3>
+
+<p>Create an easyButton statestate
+</p>
+<p>Creates an easy button.
+</p>
+<p>Add a EasyButton on the map
+see <a href="https://github.com/CliffCloud/Leaflet.EasyButton">https://github.com/CliffCloud/Leaflet.EasyButton</a>
+</p>
+<p>Add a easyButton bar on the map
+see <a href="https://github.com/CliffCloud/Leaflet.EasyButton">https://github.com/CliffCloud/Leaflet.EasyButton</a>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+easyButtonState(stateName, icon, title, onClick)
+
+easyButton(
+  icon = NULL,
+  title = NULL,
+  onClick = NULL,
+  position = "topleft",
+  id = NULL,
+  states = NULL
+)
+
+addEasyButton(map, button)
+
+addEasyButtonBar(map, ..., position = "topleft", id = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>stateName</code></td>
+<td>
+<p>a unique name for the state</p>
+</td></tr>
+<tr valign="top"><td><code>icon</code></td>
+<td>
+<p>the button icon</p>
+</td></tr>
+<tr valign="top"><td><code>title</code></td>
+<td>
+<p>text to show on hover</p>
+</td></tr>
+<tr valign="top"><td><code>onClick</code></td>
+<td>
+<p>the action to take</p>
+</td></tr>
+<tr valign="top"><td><code>position</code></td>
+<td>
+<p>topleft|topright|bottomleft|bottomright</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>id for the button</p>
+</td></tr>
+<tr valign="top"><td><code>states</code></td>
+<td>
+<p>the states</p>
+</td></tr>
+<tr valign="top"><td><code>map</code></td>
+<td>
+<p>a map widget object</p>
+</td></tr>
+<tr valign="top"><td><code>button</code></td>
+<td>
+<p>the button object created with <code><a href="../../leaflet/help/easyButton.html">easyButton</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>a list of buttons created with <code><a href="../../leaflet/help/easyButton.html">easyButton</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>easyButtonState()</code>: state of an easyButton.
+</p>
+</li>
+<li> <p><code>addEasyButton()</code>: add an EasyButton to the map
+</p>
+</li>
+<li> <p><code>addEasyButtonBar()</code>: add an EasyButton to the map
+</p>
+</li></ul>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../leaflet/help/easyButton.html">easyButton</a></code>
+</p>
+<p><a href="https://github.com/CliffCloud/Leaflet.EasyButton">https://github.com/CliffCloud/Leaflet.EasyButton</a>
+</p>
+<p><code><a href="../../leaflet/help/addEasyButton.html">addEasyButton</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+leaf &lt;- leaflet() %&gt;%
+  addTiles() %&gt;%
+  addEasyButton(easyButton(
+     icon = htmltools::span(class = "star", htmltools::HTML("&amp;starf;")),
+     onClick = JS("function(btn, map){ map.setZoom(1);}")))
+leaf
+
+leaf &lt;- leaflet() %&gt;%
+  addTiles() %&gt;%
+  addEasyButtonBar(
+   easyButton(
+     icon = htmltools::span(class = "star", htmltools::HTML("&amp;starf;")),
+     onClick = JS("function(btn, map){ alert(\"Button 1\");}")),
+   easyButton(
+     icon = htmltools::span(class = "star", htmltools::HTML("&amp;target;")),
+     onClick = JS("function(btn, map){ alert(\"Button 2\");}")))
+leaf
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet</em> version 2.2.1 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

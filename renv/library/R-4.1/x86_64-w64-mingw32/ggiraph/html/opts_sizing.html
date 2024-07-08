@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Girafe sizing settings</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for opts_sizing {ggiraph}"><tr><td>opts_sizing {ggiraph}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Girafe sizing settings</h2>
+
+<h3>Description</h3>
+
+<p>Allows customization of the svg style sizing
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+opts_sizing(rescale = TRUE, width = 1)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>rescale</code></td>
+<td>
+<p>If FALSE, graphic will not be resized and the dimensions are exactly
+those of the svg. If TRUE the graphic will be resize to fit its container</p>
+</td></tr>
+<tr valign="top"><td><code>width</code></td>
+<td>
+<p>widget width ratio (0 &lt; width &lt;= 1).</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p>Other girafe animation options: 
+<code><a href="../../ggiraph/help/girafe_defaults.html">girafe_defaults</a>()</code>,
+<code><a href="../../ggiraph/help/girafe_options.html">girafe_options</a>()</code>,
+<code><a href="../../ggiraph/help/init_girafe_defaults.html">init_girafe_defaults</a>()</code>,
+<code><a href="../../ggiraph/help/opts_hover.html">opts_hover</a>()</code>,
+<code><a href="../../ggiraph/help/opts_selection.html">opts_selection</a>()</code>,
+<code><a href="../../ggiraph/help/opts_toolbar.html">opts_toolbar</a>()</code>,
+<code><a href="../../ggiraph/help/opts_tooltip.html">opts_tooltip</a>()</code>,
+<code><a href="../../ggiraph/help/opts_zoom.html">opts_zoom</a>()</code>,
+<code><a href="../../ggiraph/help/set_girafe_defaults.html">set_girafe_defaults</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(ggplot2)
+
+dataset &lt;- mtcars
+dataset$carname = row.names(mtcars)
+
+gg &lt;- ggplot(
+  data = dataset,
+  mapping = aes(x = wt, y = qsec, color = disp,
+                tooltip = carname, data_id = carname) ) +
+  geom_point_interactive() + theme_minimal()
+
+x &lt;- girafe(ggobj = gg)
+x &lt;- girafe_options(x,
+  opts_sizing(rescale = FALSE) )
+if( interactive() ) print(x)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggiraph</em> version 0.8.9 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

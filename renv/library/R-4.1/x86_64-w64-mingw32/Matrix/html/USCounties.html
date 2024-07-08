@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Contiguity Matrix of U.S. Counties</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for USCounties {Matrix}"><tr><td>USCounties {Matrix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Contiguity Matrix of U.S. Counties</h2>
+
+<h3>Description</h3>
+
+<p>This matrix gives the contiguities of 3111 U.S. counties,
+using the queen criterion of at least one shared vertex
+or edge.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(USCounties)</pre>
+
+
+<h3>Format</h3>
+
+<p>A <i>3111-by-3111</i> sparse, symmetric
+matrix of class <code><a href="../../Matrix/help/dsCMatrix-class.html">dsCMatrix</a></code>, with 9101
+nonzero entries.
+</p>
+
+
+<h3>Source</h3>
+
+<p>GAL lattice file &lsquo;<span class="file">usc_q.GAL</span>&rsquo;
+(retrieved in 2008 from
+&lsquo;<span class="file">http://sal.uiuc.edu/weights/zips/usc.zip</span>&rsquo;
+with permission from Luc Anselin for use and distribution)
+was read into <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> using function <code>read.gal</code>
+from package <a href="https://CRAN.R-project.org/package=spdep"><span class="pkg">spdep</span></a>.
+</p>
+<p>Neighbour lists were augmented with row-standardized
+(and then symmetrized) spatial weights, using functions
+<code>nb2listw</code> and <code>similar.listw</code> from packages
+<a href="https://CRAN.R-project.org/package=spdep"><span class="pkg">spdep</span></a> and <a href="https://CRAN.R-project.org/package=spatialreg"><span class="pkg">spatialreg</span></a>.
+The resulting <code>listw</code> object was coerced to class
+<code><a href="../../Matrix/help/dsTMatrix-class.html">dsTMatrix</a></code>
+using <code>as_dsTMatrix_listw</code> from <a href="https://CRAN.R-project.org/package=spatialreg"><span class="pkg">spatialreg</span></a>,
+and subsequently to class <code><a href="../../Matrix/help/dsCMatrix-class.html">dsCMatrix</a></code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Ord, J. K. (1975).
+Estimation methods for models of spatial interaction.
+<em>Journal of the American Statistical Association</em>,
+<em>70</em>(349), 120-126.
+doi: <a href="https://doi.org/10.2307/2285387">10.2307/2285387</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+data(USCounties, package = "Matrix")
+(n &lt;- ncol(USCounties))
+I &lt;- .symDiagonal(n)
+
+set.seed(1)
+r &lt;- 50L
+rho &lt;- 1 / runif(r, 0, 0.5)
+
+system.time(MJ0 &lt;- sapply(rho, function(mult)
+    determinant(USCounties + mult * I, logarithm = TRUE)$modulus))
+
+## Can be done faster by updating the Cholesky factor:
+
+C1 &lt;- Cholesky(USCounties, Imult = 2)
+system.time(MJ1 &lt;- sapply(rho, function(mult)
+    determinant(update(C1, USCounties, mult), sqrt = FALSE)$modulus))
+stopifnot(all.equal(MJ0, MJ1))
+
+C2 &lt;- Cholesky(USCounties, super = TRUE, Imult = 2)
+system.time(MJ2 &lt;- sapply(rho, function(mult)
+    determinant(update(C2, USCounties, mult), sqrt = FALSE)$modulus))
+stopifnot(all.equal(MJ0, MJ2))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.6-5 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

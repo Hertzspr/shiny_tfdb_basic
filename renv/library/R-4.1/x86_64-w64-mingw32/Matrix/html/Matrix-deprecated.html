@@ -1,0 +1,438 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Deprecated Functions in Package 'Matrix'</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for Matrix-deprecated {Matrix}"><tr><td>Matrix-deprecated {Matrix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Deprecated Functions in Package <span class="pkg">Matrix</span></h2>
+
+<h3>Description</h3>
+
+<p>These functions are provided for compatibility with older versions
+of <span class="pkg">Matrix</span> only and may be defunct as soon as the next release.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+
+
+
+
+
+
+
+
+
+
+
+
+## Deprecated in 1.5-4
+..2dge(from)
+.C2nC(from, isTri)
+.T2Cmat(from, isTri)
+.asmatrix(x)
+.dense2sy(from, ...)
+.diag2mat(from)
+.diag2sT(from, uplo = "U", kind = ".", drop0 = TRUE)
+.diag2tT(from, uplo = "U", kind = ".", drop0 = TRUE)
+.dsy2dsp(from)
+.dsy2mat(from, keep.dimnames = TRUE)
+.dxC2mat(from, chkUdiag)
+.m2dgC(from)
+.m2lgC(from)
+.m2ngC(from)
+.m2ngCn(from, na.is.not.0 = FALSE)
+.m2ngTn(from, na.is.not.0 = FALSE)
+.n2dgT(from)
+.nC2d(from)
+.nC2l(from)
+
+## Deprecated in 1.5-0
+## S4 method for signature 'RsparseMatrix,dgeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ddenseMatrix,dgeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ddiMatrix,dgCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ddiMatrix,dgeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ddiMatrix,dtCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dgCMatrix,dgTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dgCMatrix,dgeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dgCMatrix,dsCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dgCMatrix,dtCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dgCMatrix,lgCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dgCMatrix,ngCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dgTMatrix,dgCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dgTMatrix,dgeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dgTMatrix,dsTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dgTMatrix,dtCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dgTMatrix,dtTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dgeMatrix,dgCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dgeMatrix,dgTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dgeMatrix,dsTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dgeMatrix,dspMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dgeMatrix,dsyMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dgeMatrix,dtrMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dgeMatrix,lgeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dsCMatrix,dgCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dsCMatrix,dgTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dsCMatrix,dgeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dsCMatrix,dsRMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dsCMatrix,dsTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dsCMatrix,dsyMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dsCMatrix,lsCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dsCMatrix,nsCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dsTMatrix,dgTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dsTMatrix,dgeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dsTMatrix,dsCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dsTMatrix,dsyMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dsTMatrix,lsTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dspMatrix,dsyMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dspMatrix,lspMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dsyMatrix,dsCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dsyMatrix,dsTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dsyMatrix,dspMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dsyMatrix,lsyMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dtCMatrix,dgCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dtCMatrix,dgTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dtCMatrix,dgeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dtCMatrix,dsCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dtCMatrix,dtTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dtCMatrix,dtrMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dtCMatrix,ltCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dtCMatrix,ntCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dtTMatrix,dgTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dtTMatrix,dgeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dtTMatrix,dtCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dtTMatrix,dtrMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dtpMatrix,dtTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dtpMatrix,dtrMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dtpMatrix,ltpMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dtrMatrix,dtpMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'dtrMatrix,ltrMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'indMatrix,ngTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'indMatrix,ngeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lMatrix,dgCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lgCMatrix,dgCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lgCMatrix,lgTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lgCMatrix,lgeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lgCMatrix,ltCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lgTMatrix,dgTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lgTMatrix,lgCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lgTMatrix,lgeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lgTMatrix,lsCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lgTMatrix,ltTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lgeMatrix,dgeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lgeMatrix,lgCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lgeMatrix,lgTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lgeMatrix,lspMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lgeMatrix,lsyMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lgeMatrix,ltpMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lgeMatrix,ltrMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lsCMatrix,dsCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lsCMatrix,lgCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lsCMatrix,lgTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lsCMatrix,lsTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lsTMatrix,lgCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lsTMatrix,lgTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lsTMatrix,lsCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lsTMatrix,lsyMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lspMatrix,dspMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lspMatrix,lgeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lspMatrix,lsyMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lsyMatrix,dsyMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lsyMatrix,lgeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'lsyMatrix,lspMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ltCMatrix,lgCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ltCMatrix,ltTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ltTMatrix,dtTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ltTMatrix,lgCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ltTMatrix,lgTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ltTMatrix,ltCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ltTMatrix,ltrMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ltpMatrix,dtpMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ltpMatrix,lgeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ltpMatrix,ltrMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ltrMatrix,dtrMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ltrMatrix,lgeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ltrMatrix,ltpMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,dgRMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,dgTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,dgeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,dsCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,dsTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,dspMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,dsyMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,dtCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,dtTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,dtpMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,dtrMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,lgCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,lgTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,lgeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,lsCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,lspMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,lsyMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,ltCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,ltTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,ltpMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,ltrMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,ngCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,ngTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,ngeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,nspMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,nsyMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,ntCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,ntTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,ntpMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'matrix,ntrMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ngCMatrix,dgCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ngCMatrix,lgCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ngCMatrix,ntCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ngTMatrix,dgTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ngTMatrix,lgTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ngTMatrix,lgeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ngTMatrix,ngCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ngTMatrix,ngeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ngTMatrix,ntTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ngeMatrix,dgeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ngeMatrix,lgeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ngeMatrix,ngCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ngeMatrix,ngTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ngeMatrix,nspMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ngeMatrix,nsyMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ngeMatrix,ntpMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ngeMatrix,ntrMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'nsCMatrix,dsCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'nsCMatrix,lsCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'nsCMatrix,ngCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'nsCMatrix,nsTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'nsTMatrix,dsTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'nsTMatrix,ngCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'nsTMatrix,ngTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'nsTMatrix,nsCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'nsTMatrix,nsyMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'nspMatrix,dspMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'nspMatrix,lspMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'nspMatrix,ngeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'nspMatrix,nsyMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'nsyMatrix,dsyMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'nsyMatrix,lsyMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'nsyMatrix,ngeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'nsyMatrix,nspMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ntCMatrix,dtCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ntCMatrix,ltCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ntCMatrix,ngCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ntTMatrix,dtTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ntTMatrix,ngCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ntTMatrix,ngTMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ntTMatrix,ntCMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ntTMatrix,ntrMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ntpMatrix,dtpMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ntpMatrix,ltpMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ntpMatrix,ngeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ntpMatrix,ntrMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ntrMatrix,dtrMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ntrMatrix,ltrMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ntrMatrix,ngeMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'ntrMatrix,ntpMatrix'
+coerce(from, to, strict = TRUE)
+## S4 method for signature 'numLike,dgeMatrix'
+coerce(from, to, strict = TRUE)
+</pre>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../base/html/Deprecated.html">Deprecated</a></code>,
+<code><a href="../../base/html/base-deprecated.html">base-deprecated</a></code>,
+<code><a href="../../Matrix/help/Matrix-defunct.html">Matrix-defunct</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.6-5 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

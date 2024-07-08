@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Interactive parameters</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for interactive_parameters {ggiraph}"><tr><td>interactive_parameters {ggiraph}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Interactive parameters</h2>
+
+<h3>Description</h3>
+
+<p>Throughout ggiraph there are functions that add interactivity to ggplot plot elements.
+The user can control the various aspects of interactivity by supplying
+a special set of parameters to these functions.
+</p>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>tooltip</code></td>
+<td>
+<p>Tooltip text to associate with one or more elements.
+If this is supplied a tooltip is shown when the element is hovered.
+Plain text or html is supported.
+</p>
+<p>To use html markup it is advised to use <code><a href="../../htmltools/help/HTML.html">htmltools::HTML()</a></code> function
+in order to mark the text as html markup.
+If the text is not marked as html and no opening/closing tags were detected,
+then any existing newline characters (<code style="white-space: pre;">\r\n</code>, <code style="white-space: pre;">\r</code> and <code style="white-space: pre;">\n</code>)
+are replaced with the <code style="white-space: pre;">&lt;br/&gt;</code> tag.</p>
+</td></tr>
+<tr valign="top"><td><code>onclick</code></td>
+<td>
+<p>Javascript code to associate with one or more elements.
+This code will be executed when the element is clicked.</p>
+</td></tr>
+<tr valign="top"><td><code>hover_css</code></td>
+<td>
+<p>Individual css style associate with one or more elements.
+This css style is applied when the element is hovered and overrides the default style,
+set via <code><a href="../../ggiraph/help/opts_hover.html">opts_hover()</a></code>, <code><a href="../../ggiraph/help/opts_hover_key.html">opts_hover_key()</a></code> or <code><a href="../../ggiraph/help/opts_hover_theme.html">opts_hover_theme()</a></code>.
+It can also be constructed with <code><a href="../../ggiraph/help/girafe_css.html">girafe_css()</a></code>,
+to give more control over the css for different element types (see <code><a href="../../ggiraph/help/opts_hover.html">opts_hover()</a></code> note).</p>
+</td></tr>
+<tr valign="top"><td><code>selected_css</code></td>
+<td>
+<p>Individual css style associate with one or more elements.
+This css style is applied when the element is selected and overrides the default style,
+set via <code><a href="../../ggiraph/help/opts_selection.html">opts_selection()</a></code>, <code><a href="../../ggiraph/help/opts_selection_key.html">opts_selection_key()</a></code> or <code><a href="../../ggiraph/help/opts_selection_theme.html">opts_selection_theme()</a></code>.
+It can also be constructed with <code><a href="../../ggiraph/help/girafe_css.html">girafe_css()</a></code>,
+to give more control over the css for different element types (see <code><a href="../../ggiraph/help/opts_selection.html">opts_selection()</a></code> note).</p>
+</td></tr>
+<tr valign="top"><td><code>data_id</code></td>
+<td>
+<p>Identifier to associate with one or more elements.
+This is mandatory parameter if hover and selection interactivity is desired.
+Identifiers are available as reactive input values in Shiny applications.</p>
+</td></tr>
+<tr valign="top"><td><code>tooltip_fill</code></td>
+<td>
+<p>Color to use for tooltip background when <code><a href="../../ggiraph/help/opts_tooltip.html">opts_tooltip()</a></code> <code>use_fill</code> is TRUE.
+Useful for setting the tooltip background color in <code><a href="../../ggiraph/help/geom_text_interactive.html">geom_text_interactive()</a></code> or
+<code><a href="../../ggiraph/help/geom_label_interactive.html">geom_label_interactive()</a></code>, when the geom text color may be the same as the tooltip text color.</p>
+</td></tr>
+<tr valign="top"><td><code>hover_nearest</code></td>
+<td>
+<p>Set to TRUE to apply the hover effect on the nearest element
+while moving the mouse. In this case it is mandatory to also set the <code>data_id</code> parameter</p>
+</td></tr>
+</table>
+
+
+<h3>Details for interactive geom functions</h3>
+
+<p>The interactive parameters can be supplied with two ways:
+</p>
+
+<ul>
+<li><p> As aesthetics with the mapping argument (via <code><a href="../../ggplot2/html/aes.html">aes()</a></code>).
+In this way they can be mapped to data columns and apply to a set of geometries.
+</p>
+</li>
+<li><p> As plain arguments into the geom_*_interactive function.
+In this way they can be set to a scalar value.
+</p>
+</li></ul>
+
+
+
+<h3>Details for annotate_*_interactive functions</h3>
+
+<p>The interactive parameters can be supplied as arguments in the relevant function
+and they can be scalar values or vectors depending on params on base function.
+</p>
+
+
+<h3>Details for interactive scale and interactive guide functions</h3>
+
+<p>For scales, the interactive parameters can be supplied as arguments in the relevant function
+and they can be scalar values or vectors, depending on the number of breaks (levels) and
+the type of the guide used.
+The guides do not accept any interactive parameter directly, they receive them from the scales.
+</p>
+<p>When guide of type <code>legend</code>, <code>bins</code>, <code>colourbar</code> or <code>coloursteps</code> is used,
+it will be converted to a <code><a href="../../ggiraph/help/guide_legend_interactive.html">guide_legend_interactive()</a></code>, <code><a href="../../ggiraph/help/guide_bins_interactive.html">guide_bins_interactive()</a></code>,
+<code><a href="../../ggiraph/help/guide_colourbar_interactive.html">guide_colourbar_interactive()</a></code> or <code><a href="../../ggiraph/help/guide_coloursteps_interactive.html">guide_coloursteps_interactive()</a></code> respectively,
+if it's not already.
+</p>
+<p>The length of each scale interactive parameter vector should match the length of the breaks.
+It can also be a named vector, where each name should correspond to the same break name.
+It can also be defined as function that takes the breaks as input and returns a named or
+unnamed vector of values as output.
+</p>
+<p>For binned guides like <code>bins</code> and <code>coloursteps</code> the breaks include the label breaks and the limits.
+The number of bins will be one less than the number of breaks and the interactive parameters can be
+constructed for each bin separately (look at the examples).
+For <code>colourbar</code> guide in raster mode, the breaks vector, is scalar 1 always, meaning the interactive
+parameters should be scalar too. For <code>colourbar</code> guide in non-raster mode, the bar is drawn using
+rectangles, and the breaks are the midpoints of each rectangle.
+</p>
+<p>The interactive parameters here, give interactivity only to the key elements of the guide.
+</p>
+<p>To provide interactivity to the rest of the elements of a guide, (title, labels, background, etc),
+the relevant theme elements or relevant guide arguments can be used.
+The <code>guide</code> arguments <code>title.theme</code> and <code>label.theme</code> can be defined as
+<code>element_text_interactive</code> (in fact, they will be converted to that if they are not
+already), either directly or via the theme.
+See the element_*_interactive section for more details.
+</p>
+
+
+<h3>Details for element_*_interactive functions</h3>
+
+<p>The interactive parameters can be supplied as arguments in the relevant function
+and they should be scalar values.
+</p>
+<p>For theme text elements (<code><a href="../../ggiraph/help/element_text_interactive.html">element_text_interactive()</a></code>), the interactive parameters
+can also be supplied while setting a label value, via the <code><a href="../../ggplot2/html/labs.html">labs()</a></code> family
+of functions or when setting a scale/guide title or key label.
+Instead of setting a character value for the element, function
+<code><a href="../../ggiraph/help/label_interactive.html">label_interactive()</a></code> can be used to define interactive parameters
+to go along with the label.
+When the parameters are supplied that way, they override the default values
+that are set at the theme via <code><a href="../../ggiraph/help/element_text_interactive.html">element_text_interactive()</a></code> or via the <code>guide</code>'s
+theme parameters.
+</p>
+
+
+<h3>Details for interactive_*_grob functions</h3>
+
+<p>The interactive parameters can be supplied as arguments in the relevant function
+and they can be scalar values or vectors depending on params on base function.
+</p>
+
+
+<h3>Custom interactive parameters</h3>
+
+<p>The argument <code>extra_interactive_params</code> can be passed to any of the *_interactive functions
+(geoms, grobs, scales, labeller, labels and theme elements),
+It should be a character vector of additional names to be treated as interactive parameters
+when evaluating the aesthetics.
+The values will eventually end up as attributes in the SVG elements of the output.
+</p>
+<p>Intended only for expert use.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../ggiraph/help/girafe_options.html">girafe_options()</a></code>, <code><a href="../../ggiraph/help/girafe.html">girafe()</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>ggiraph</em> version 0.8.9 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

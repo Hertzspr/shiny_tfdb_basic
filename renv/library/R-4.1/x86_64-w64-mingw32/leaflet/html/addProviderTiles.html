@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add a tile layer from a known map provider</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for addProviderTiles {leaflet}"><tr><td>addProviderTiles {leaflet}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add a tile layer from a known map provider</h2>
+
+<h3>Description</h3>
+
+<p>Add a tile layer from a known map provider
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+addProviderTiles(
+  map,
+  provider,
+  layerId = NULL,
+  group = NULL,
+  options = providerTileOptions()
+)
+
+providerTileOptions(
+  errorTileUrl = "",
+  noWrap = FALSE,
+  opacity = NULL,
+  zIndex = NULL,
+  updateWhenIdle = NULL,
+  detectRetina = FALSE,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>map</code></td>
+<td>
+<p>the map to add the tile layer to</p>
+</td></tr>
+<tr valign="top"><td><code>provider</code></td>
+<td>
+<p>the name of the provider (see
+<a href="https://leaflet-extras.github.io/leaflet-providers/preview/">https://leaflet-extras.github.io/leaflet-providers/preview/</a> and
+<a href="https://github.com/leaflet-extras/leaflet-providers">https://github.com/leaflet-extras/leaflet-providers</a>)</p>
+</td></tr>
+<tr valign="top"><td><code>layerId</code></td>
+<td>
+<p>the layer id to assign</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>the name of the group the newly created layers should belong to
+(for <code><a href="../../leaflet/help/clearGroup.html">clearGroup</a></code> and <code><a href="../../leaflet/help/addLayersControl.html">addLayersControl</a></code> purposes).
+Human-friendly group names are permitted&ndash;they need not be short,
+identifier-style names.</p>
+</td></tr>
+<tr valign="top"><td><code>options</code></td>
+<td>
+<p>tile options</p>
+</td></tr>
+<tr valign="top"><td><code>errorTileUrl, noWrap, opacity, zIndex, updateWhenIdle, detectRetina</code></td>
+<td>
+<p>the tile layer options; see
+<a href="https://web.archive.org/web/20220702182250/https://leafletjs.com/reference-1.3.4.html#tilelayer">https://web.archive.org/web/20220702182250/https://leafletjs.com/reference-1.3.4.html#tilelayer</a></p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>named parameters to add to the options</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>modified map object
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+leaflet() %&gt;%
+  addProviderTiles("Stamen.Watercolor") %&gt;%
+  addProviderTiles("Stamen.TonerHybrid")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet</em> version 2.2.1 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

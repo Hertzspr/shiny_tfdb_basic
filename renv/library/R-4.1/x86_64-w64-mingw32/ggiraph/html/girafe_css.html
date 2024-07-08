@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: CSS creation helper</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for girafe_css {ggiraph}"><tr><td>girafe_css {ggiraph}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>CSS creation helper</h2>
+
+<h3>Description</h3>
+
+<p>It allows specifying individual styles for various SVG elements.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+girafe_css(
+  css,
+  text = NULL,
+  point = NULL,
+  line = NULL,
+  area = NULL,
+  image = NULL
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>css</code></td>
+<td>
+<p>The generic css style</p>
+</td></tr>
+<tr valign="top"><td><code>text</code></td>
+<td>
+<p>Override style for text elements (svg:text)</p>
+</td></tr>
+<tr valign="top"><td><code>point</code></td>
+<td>
+<p>Override style for point elements (svg:circle)</p>
+</td></tr>
+<tr valign="top"><td><code>line</code></td>
+<td>
+<p>Override style for line elements (svg:line, svg:polyline)</p>
+</td></tr>
+<tr valign="top"><td><code>area</code></td>
+<td>
+<p>Override style for area elements (svg:rect, svg:polygon, svg:path)</p>
+</td></tr>
+<tr valign="top"><td><code>image</code></td>
+<td>
+<p>Override style for image elements (svg:image)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>css as scalar character
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../ggiraph/help/girafe_css_bicolor.html">girafe_css_bicolor()</a></code>, <code><a href="../../ggiraph/help/girafe.html">girafe()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(ggiraph)
+
+girafe_css(
+  css = "fill:orange;stroke:gray;",
+  text = "stroke:none; font-size: larger",
+  line = "fill:none",
+  area = "stroke-width:3px",
+  point = "stroke-width:3px",
+  image = "outline:2px red"
+)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggiraph</em> version 0.8.9 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

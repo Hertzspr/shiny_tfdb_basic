@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a ggiraph object (deprecated)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for ggiraph {ggiraph}"><tr><td>ggiraph {ggiraph}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a ggiraph object (deprecated)</h2>
+
+<h3>Description</h3>
+
+<p>Create an interactive graphic to be used in a web browser.
+</p>
+<p>This function is now deprecated, users should
+now use function <code><a href="../../ggiraph/help/girafe.html">girafe()</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ggiraph(
+  code,
+  ggobj = NULL,
+  pointsize = 12,
+  width = 0.75,
+  width_svg = 6,
+  height_svg = 5,
+  tooltip_extra_css = NULL,
+  hover_css = NULL,
+  tooltip_opacity = 0.9,
+  tooltip_offx = 10,
+  tooltip_offy = 0,
+  tooltip_zindex = 999,
+  zoom_max = 1,
+  selection_type = "multiple",
+  selected_css = NULL,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>code</code></td>
+<td>
+<p>Plotting code to execute</p>
+</td></tr>
+<tr valign="top"><td><code>ggobj</code></td>
+<td>
+<p>ggplot object to print. Argument <code>code</code> will
+be ignored if this argument is supplied.</p>
+</td></tr>
+<tr valign="top"><td><code>pointsize</code></td>
+<td>
+<p>the default pointsize of plotted text in pixels, default to 12.</p>
+</td></tr>
+<tr valign="top"><td><code>width</code></td>
+<td>
+<p>widget width ratio (0 &lt; width &lt;= 1).</p>
+</td></tr>
+<tr valign="top"><td><code>width_svg, height_svg</code></td>
+<td>
+<p>The width and height of the graphics region in inches.
+The default values are 6 and 5 inches. This will define the aspect ratio of the
+graphic as it will be used to define viewbox attribute of the SVG result.
+</p>
+<p>If you use <code>girafe()</code> in an 'R Markdown' document, we
+recommend not using these arguments so that the knitr
+options <code>fig.width</code> and <code>fig.height</code> are used instead.</p>
+</td></tr>
+<tr valign="top"><td><code>tooltip_extra_css</code></td>
+<td>
+<p>extra css (added to <code>position: absolute;pointer-events: none;</code>)
+used to customize tooltip area.</p>
+</td></tr>
+<tr valign="top"><td><code>hover_css</code></td>
+<td>
+<p>css to apply when mouse is hover and element with a data-id attribute.</p>
+</td></tr>
+<tr valign="top"><td><code>tooltip_opacity</code></td>
+<td>
+<p>tooltip opacity</p>
+</td></tr>
+<tr valign="top"><td><code>tooltip_offx</code></td>
+<td>
+<p>tooltip x offset</p>
+</td></tr>
+<tr valign="top"><td><code>tooltip_offy</code></td>
+<td>
+<p>tooltip y offset</p>
+</td></tr>
+<tr valign="top"><td><code>tooltip_zindex</code></td>
+<td>
+<p>tooltip css z-index, default to 999.</p>
+</td></tr>
+<tr valign="top"><td><code>zoom_max</code></td>
+<td>
+<p>maximum zoom factor</p>
+</td></tr>
+<tr valign="top"><td><code>selection_type</code></td>
+<td>
+<p>row selection mode (&quot;single&quot;, &quot;multiple&quot;, &quot;none&quot;)
+when widget is in a Shiny application.</p>
+</td></tr>
+<tr valign="top"><td><code>selected_css</code></td>
+<td>
+<p>css to apply when element is selected (shiny only).</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments passed on to <code><a href="../../ggiraph/help/dsvg.html">dsvg()</a></code></p>
+</td></tr>
+</table>
+
+<hr /><div style="text-align: center;">[Package <em>ggiraph</em> version 0.8.9 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

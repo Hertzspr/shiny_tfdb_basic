@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add or remove a scale bar</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for addScaleBar {leaflet}"><tr><td>addScaleBar {leaflet}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add or remove a scale bar</h2>
+
+<h3>Description</h3>
+
+<p>Uses Leaflet's built-in
+<a href="https://web.archive.org/web/20220702182250/https://leafletjs.com/reference-1.3.4.html#control-scale">scale bar</a>
+feature to add a scale bar.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+addScaleBar(
+  map,
+  position = c("topright", "bottomright", "bottomleft", "topleft"),
+  options = scaleBarOptions()
+)
+
+scaleBarOptions(
+  maxWidth = 100,
+  metric = TRUE,
+  imperial = TRUE,
+  updateWhenIdle = TRUE
+)
+
+removeScaleBar(map)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>map</code></td>
+<td>
+<p>the map to add the scale bar to</p>
+</td></tr>
+<tr valign="top"><td><code>position</code></td>
+<td>
+<p>position of control: &quot;topleft&quot;, &quot;topright&quot;, &quot;bottomleft&quot;, or
+&quot;bottomright&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>options</code></td>
+<td>
+<p>a list of additional options, intended to be provided by
+a call to <code>scaleBarOptions</code></p>
+</td></tr>
+<tr valign="top"><td><code>maxWidth</code></td>
+<td>
+<p>maximum width of the control in pixels (default 100)</p>
+</td></tr>
+<tr valign="top"><td><code>metric</code></td>
+<td>
+<p>if <code>TRUE</code> (the default), show a scale bar in metric units
+(m/km)</p>
+</td></tr>
+<tr valign="top"><td><code>imperial</code></td>
+<td>
+<p>if <code>TRUE</code> (the default), show a scale bar in imperial
+units (ft/mi)</p>
+</td></tr>
+<tr valign="top"><td><code>updateWhenIdle</code></td>
+<td>
+<p>if <code>FALSE</code> (the default), the scale bar is always
+up-to-date (updated on <code>move</code>). If <code>TRUE</code>, the control is updated
+on <code>moveend</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+leaflet() %&gt;%
+  addTiles() %&gt;%
+  addScaleBar()
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet</em> version 2.2.1 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

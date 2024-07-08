@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Methods in Package 'Matrix' for Function 'solve'</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for solve-methods {Matrix}"><tr><td>solve-methods {Matrix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Methods in Package <span class="pkg">Matrix</span> for Function <code>solve</code></h2>
+
+<h3>Description</h3>
+
+<p>Methods for generic function <code><a href="../../base/help/solve.html">solve</a></code> for solving
+linear systems of equations,
+i.e., for <i>X</i> in <i>A * X = B</i>,
+where <i>A</i> is a square matrix and <i>X</i> and <i>B</i> are matrices
+with dimensions consistent with <i>A</i>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+solve(a, b, ...)
+
+## S4 method for signature 'dgeMatrix,ANY'
+solve(a, b, tol = .Machine$double.eps, ...)
+
+## S4 method for signature 'dgCMatrix,missing'
+solve(a, b, sparse = TRUE, ...)
+## S4 method for signature 'dgCMatrix,matrix'
+solve(a, b, sparse = FALSE, ...)
+## S4 method for signature 'dgCMatrix,denseMatrix'
+solve(a, b, sparse = FALSE, ...)
+## S4 method for signature 'dgCMatrix,sparseMatrix'
+solve(a, b, sparse = TRUE, ...)
+
+## S4 method for signature 'denseLU,dgeMatrix'
+solve(a, b, ...)
+## S4 method for signature 'BunchKaufman,dgeMatrix'
+solve(a, b, ...)
+## S4 method for signature 'Cholesky,dgeMatrix'
+solve(a, b, ...)
+## S4 method for signature 'sparseLU,dgCMatrix'
+solve(a, b, tol = .Machine$double.eps, ...)
+## S4 method for signature 'sparseQR,dgCMatrix'
+solve(a, b, ...)
+## S4 method for signature 'CHMfactor,dgCMatrix'
+solve(a, b, system = c("A", "LDLt", "LD", "DLt", "L", "Lt", "D", "P", "Pt"), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>a</code></td>
+<td>
+<p>a <a href="../../Matrix/help/is.finite.html">finite</a> square matrix or
+<code><a href="../../Matrix/help/Matrix-class.html">Matrix</a></code> containing the coefficients
+of the linear system, or otherwise a
+<code><a href="../../Matrix/help/MatrixFactorization-class.html">MatrixFactorization</a></code>,
+in which case methods behave (by default)
+as if the factorized matrix were specified.</p>
+</td></tr>
+<tr valign="top"><td><code>b</code></td>
+<td>
+<p>a vector, <code><a href="../../Matrix/help/sparseVector-class.html">sparseVector</a></code>,
+matrix, or <code><a href="../../Matrix/help/Matrix-class.html">Matrix</a></code> satisfying
+<code>NROW(b) == nrow(a)</code>, giving the right-hand side(s)
+of the linear system.  Vectors <code>b</code> are treated as
+<code>length(b)</code>-by-1 matrices.  If <code>b</code> is missing,
+then methods take <code>b</code> to be an identity matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>tol</code></td>
+<td>
+<p>a non-negative number.  For <code>a</code> inheriting from
+<code><a href="../../Matrix/help/denseMatrix-class.html">denseMatrix</a></code>, an error is signaled if the
+reciprocal one-norm condition number (see <code><a href="../../base/help/rcond.html">rcond</a></code>)
+of <code>a</code> is less than <code>tol</code>, indicating that <code>a</code> is
+near-singular.  For <code>a</code> of class <code><a href="../../Matrix/help/sparseLU-class.html">sparseLU</a></code>,
+an error is signaled if the ratio <code>min(d)/max(d)</code> is less
+than <code>tol</code>, where <code>d = abs(diag(a@U))</code>.  (Interpret
+with care, as this ratio is a cheap heuristic and <em>not</em>
+in general equal to or even proportional to the reciprocal
+one-norm condition number.)  Setting <code>tol = 0</code> disables
+the test.</p>
+</td></tr>
+<tr valign="top"><td><code>sparse</code></td>
+<td>
+<p>a logical indicating if the result should be formally
+sparse, i.e., if the result should inherit from virtual class
+<code><a href="../../Matrix/help/sparseMatrix-class.html">sparseMatrix</a></code>.
+Only methods for sparse <code>a</code> and missing or matrix <code>b</code>
+have this argument.
+Methods for missing or sparse <code>b</code> use <code>sparse = TRUE</code>
+by default.  Methods for dense <code>b</code> use <code>sparse = FALSE</code>
+by default.</p>
+</td></tr>
+<tr valign="top"><td><code>system</code></td>
+<td>
+<p>a string specifying a linear system to be solved.
+Only methods for <code>a</code>
+inheriting from <code><a href="../../Matrix/help/CHMfactor-class.html">CHMfactor</a></code> have this argument.
+See &lsquo;Details&rsquo;.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments passed to or from methods.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Methods for general and symmetric matrices <code>a</code> compute a
+triangular factorization (LU, Bunch-Kaufman, or Cholesky)
+and call the method for the corresponding factorization class.
+The factorization is sparse if <code>a</code> is.  Methods for sparse,
+symmetric matrices <code>a</code> attempt a Cholesky factorization
+and perform an LU factorization only if that fails (typically
+because <code>a</code> is not positive definite).
+</p>
+<p>Triangular, diagonal, and permutation matrices do not require
+factorization (they are already &ldquo;factors&rdquo;), hence methods
+for those are implemented directly.  For triangular <code>a</code>,
+solutions are obtained by forward or backward substitution;
+for diagonal <code>a</code>, they are obtained by scaling the rows
+of <code>b</code>; and for permutations <code>a</code>, they are obtained
+by permuting the rows of <code>b</code>.
+</p>
+<p>Methods for dense <code>a</code> are built on 14 LAPACK routines:
+class <code>d..Matrix</code>, where <code>..=(ge|tr|tp|sy|sp|po|pp)</code>,
+uses routines <code>d..tri</code> and <code>d..trs</code> for missing
+and non-missing <code>b</code>, respectively.  A corollary is that
+these methods always give a dense result.
+</p>
+<p>Methods for sparse <code>a</code> are built on CSparse routines
+<code>cs_lsolve</code>, <code>cs_usolve</code>, and <code>cs_spsolve</code> and
+CHOLMOD routines <code>cholmod_solve</code> and <code>cholmod_spsolve</code>.
+By default, these methods give a vector result if <code>b</code>
+is a vector, a sparse matrix result if <code>b</code> is missing
+or a sparse matrix, and a dense matrix result if <code>b</code>
+is a dense matrix.  One can override this behaviour by setting
+the <code>sparse</code> argument, where available, but that should
+be done with care.  Note that a sparse result may be sparse only
+in the formal sense and not at all in the mathematical sense,
+depending on the nonzero patterns of <code>a</code> and <code>b</code>.
+Furthermore, whereas dense results are fully preallocated,
+sparse results must be &ldquo;grown&rdquo; in a loop over the columns
+of <code>b</code>.
+</p>
+<p>Methods for <code>a</code> of class <code><a href="../../Matrix/help/sparseQR-class.html">sparseQR</a></code>
+are simple wrappers around <code><a href="../../base/html/qr.html">qr.coef</a></code>, giving the
+<em>least squares</em> solution in overdetermined cases.
+</p>
+<p>Methods for <code>a</code> inheriting from <code><a href="../../Matrix/help/CHMfactor-class.html">CHMfactor</a></code>
+can solve systems other than the default one <i>A * X = B</i>.
+The correspondence between its <code>system</code> argument the system
+actually solved is outlined in the table below.
+See <code><a href="../../Matrix/help/CHMfactor-class.html">CHMfactor-class</a></code> for a definition of notation.
+</p>
+
+<table summary="Rd table">
+<tr>
+ <td style="text-align: right;">
+    <code>system</code> </td><td style="text-align: right;"> <code><a href="../../Matrix/help/isLDL.html">isLDL</a>(a)=TRUE</code> </td><td style="text-align: right;"> <code><a href="../../Matrix/help/isLDL.html">isLDL</a>(a)=FALSE</code></td>
+</tr>
+<tr>
+ <td style="text-align: right;">
+    <code>"A"</code> </td><td style="text-align: right;"> <i>A * X = B</i> </td><td style="text-align: right;"> <i>A * X = B</i></td>
+</tr>
+<tr>
+ <td style="text-align: right;">
+    <code>"LDLt"</code> </td><td style="text-align: right;"> <i>L1 * D * L1' * X = B</i> </td><td style="text-align: right;"> <i>L * L' * X = B</i></td>
+</tr>
+<tr>
+ <td style="text-align: right;">
+    <code>"LD"</code> </td><td style="text-align: right;"> <i>L1 * D * X = B</i> </td><td style="text-align: right;"> <i>L * X = B</i></td>
+</tr>
+<tr>
+ <td style="text-align: right;">
+    <code>"DLt"</code> </td><td style="text-align: right;"> <i>D * L1' * X = B</i> </td><td style="text-align: right;"> <i>L' * X = B</i></td>
+</tr>
+<tr>
+ <td style="text-align: right;">
+    <code>"L"</code> </td><td style="text-align: right;"> <i>L1 * X = B</i> </td><td style="text-align: right;"> <i>L * X = B</i></td>
+</tr>
+<tr>
+ <td style="text-align: right;">
+    <code>"Lt"</code> </td><td style="text-align: right;"> <i>L1' * X = B</i> </td><td style="text-align: right;"> <i>L' * X = B</i></td>
+</tr>
+<tr>
+ <td style="text-align: right;">
+    <code>"D"</code> </td><td style="text-align: right;"> <i>D * X = B</i> </td><td style="text-align: right;"> <i>X = B</i></td>
+</tr>
+<tr>
+ <td style="text-align: right;">
+    <code>"P"</code> </td><td style="text-align: right;"> <i>X = P1 * B</i> </td><td style="text-align: right;"> <i>X = P1 * B</i></td>
+</tr>
+<tr>
+ <td style="text-align: right;">
+    <code>"Pt"</code> </td><td style="text-align: right;"> <i>X = P1' * B</i> </td><td style="text-align: right;"> <i>X = P1' * B</i>
+  </td>
+</tr>
+
+</table>
+
+
+
+<h3>See Also</h3>
+
+<p>Virtual class <code><a href="../../Matrix/help/MatrixFactorization-class.html">MatrixFactorization</a></code> and its
+subclasses.
+</p>
+<p>Generic functions <code><a href="../../Matrix/help/Cholesky.html">Cholesky</a></code>, <code><a href="../../Matrix/help/BunchKaufman.html">BunchKaufman</a></code>,
+<code><a href="../../Matrix/help/Schur.html">Schur</a></code>, <code><a href="../../Matrix/help/lu.html">lu</a></code>, and <code><a href="../../Matrix/help/qr.html">qr</a></code> for
+<em>computing</em> factorizations.
+</p>
+<p>Generic function <code><a href="../../base/help/solve.html">solve</a></code> from <span class="pkg">base</span>.
+</p>
+<p>Function <code><a href="../../base/html/qr.html">qr.coef</a></code> from <span class="pkg">base</span> for computing
+least squares solutions of overdetermined linear systems.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## A close to symmetric example with "quite sparse" inverse:
+n1 &lt;- 7; n2 &lt;- 3
+dd &lt;- data.frame(a = gl(n1,n2), b = gl(n2,1,n1*n2))# balanced 2-way
+X &lt;- sparse.model.matrix(~ -1+ a + b, dd)# no intercept --&gt; even sparser
+XXt &lt;- tcrossprod(X)
+diag(XXt) &lt;- rep(c(0,0,1,0), length.out = nrow(XXt))
+
+n &lt;- nrow(ZZ &lt;- kronecker(XXt, Diagonal(x=c(4,1))))
+image(a &lt;- 2*Diagonal(n) + ZZ %*% Diagonal(x=c(10, rep(1, n-1))))
+isSymmetric(a) # FALSE
+image(drop0(skewpart(a)))
+image(ia0 &lt;- solve(a, tol = 0)) # checker board, dense [but really, a is singular!]
+try(solve(a, sparse=TRUE))##-&gt; error [ TODO: assertError ]
+ia. &lt;- solve(a, sparse=TRUE, tol = 1e-19)##-&gt; *no* error
+if(R.version$arch == "x86_64")
+  ## Fails on 32-bit [Fedora 19, R 3.0.2] from Matrix 1.1-0 on [FIXME ??] only
+  stopifnot(all.equal(as.matrix(ia.), as.matrix(ia0)))
+a &lt;- a + Diagonal(n)
+iad &lt;- solve(a)
+ias &lt;- solve(a, sparse=FALSE)
+stopifnot(all.equal(as(iad,"denseMatrix"), ias, tolerance=1e-14))
+I. &lt;- iad %*% a          ; image(I.)
+I0 &lt;- drop0(zapsmall(I.)); image(I0)
+.I &lt;- a %*% iad
+.I0 &lt;- drop0(zapsmall(.I))
+stopifnot( all.equal(as(I0, "diagonalMatrix"), Diagonal(n)),
+           all.equal(as(.I0,"diagonalMatrix"), Diagonal(n)) )
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.6-5 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

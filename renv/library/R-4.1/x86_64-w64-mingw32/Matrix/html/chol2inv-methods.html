@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Inverse from Cholesky Factor</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for chol2inv-methods {Matrix}"><tr><td>chol2inv-methods {Matrix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Inverse from Cholesky Factor</h2>
+
+<h3>Description</h3>
+
+<p>Given <em>formally</em> upper and lower triangular matrices
+<i>U</i> and <i>L</i>, compute <i>(U' U)^(-1)</i>
+and <i>(L L')^(-1)</i>, respectively.
+</p>
+<p>This function can be seen as way to compute the inverse of a
+symmetric positive definite matrix given its Cholesky factor.
+Equivalently, it can be seen as a way to compute
+<i>(X' X)^(-1)</i> given the <i>R</i> part of the
+QR factorization of <i>X</i>, if <i>R</i> is constrained to have
+positive diagonal entries.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+chol2inv(x, ...)
+## S4 method for signature 'dtrMatrix'
+chol2inv(x, ...)
+## S4 method for signature 'dtCMatrix'
+chol2inv(x, ...)
+## S4 method for signature 'generalMatrix'
+chol2inv(x, uplo = "U", ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a square matrix or <code><a href="../../Matrix/help/Matrix-class.html">Matrix</a></code>,
+typically the result of a call to <code><a href="../../Matrix/help/chol.html">chol</a></code>.
+If <code>x</code> is square but not (formally) triangular,
+then only the upper or lower triangle is considered,
+depending on optional argument <code>uplo</code> if <code>x</code>
+is a <code><a href="../../Matrix/help/Matrix-class.html">Matrix</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>uplo</code></td>
+<td>
+<p>a string, either <code>"U"</code> or <code>"L"</code>,
+indicating which triangle of <code>x</code> contains the
+Cholesky factor.  The default is <code>"U"</code>, to be
+consistent with <code><a href="../../base/help/chol2inv.html">chol2inv</a></code> from <span class="pkg">base</span>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments passed to or from methods.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A matrix, <code><a href="../../Matrix/help/symmetricMatrix-class.html">symmetricMatrix</a></code>,
+or <code><a href="../../Matrix/help/diagonalMatrix-class.html">diagonalMatrix</a></code> representing
+the inverse of the positive definite matrix whose
+Cholesky factor is <code>x</code>.
+The result is a traditional matrix if <code>x</code> is a
+traditional matrix, dense if <code>x</code> is dense, and
+sparse if <code>x</code> is sparse.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>The default method from <span class="pkg">base</span>, <code><a href="../../base/help/chol2inv.html">chol2inv</a></code>,
+called for traditional matrices <code>x</code>.
+</p>
+<p>Generic function <code><a href="../../Matrix/help/chol.html">chol</a></code>, for computing the upper
+triangular Cholesky factor <i>L'</i> of a symmetric positive
+semidefinite matrix.
+</p>
+<p>Generic function <code><a href="../../Matrix/help/solve.html">solve</a></code>, for solving linear systems
+and (as a corollary) for computing inverses more generally.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+(A &lt;- Matrix(cbind(c(1, 1, 1), c(1, 2, 4), c(1, 4, 16))))
+(R &lt;- chol(A))
+(L &lt;- t(R))
+(R2i &lt;- chol2inv(R))
+(L2i &lt;- chol2inv(R))
+stopifnot(exprs = {
+    all.equal(R2i, tcrossprod(solve(R)))
+    all.equal(L2i,  crossprod(solve(L)))
+    all.equal(as(R2i %*% A, "matrix"), diag(3L)) # the identity 
+    all.equal(as(L2i %*% A, "matrix"), diag(3L)) # ditto
+})
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.6-5 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

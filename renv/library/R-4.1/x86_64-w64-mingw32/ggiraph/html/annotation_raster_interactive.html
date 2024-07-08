@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create interactive raster annotations</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for annotation_raster_interactive {ggiraph}"><tr><td>annotation_raster_interactive {ggiraph}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create interactive raster annotations</h2>
+
+<h3>Description</h3>
+
+<p>The layer is based on <code><a href="../../ggplot2/html/annotation_raster.html">annotation_raster()</a></code>.
+See the documentation for that function for more details.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+annotation_raster_interactive(...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments passed to base function,
+plus any of the <a href="../../ggiraph/help/interactive_parameters.html">interactive_parameters</a>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details for annotate_*_interactive functions</h3>
+
+<p>The interactive parameters can be supplied as arguments in the relevant function
+and they can be scalar values or vectors depending on params on base function.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../ggiraph/help/girafe.html">girafe()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# add interactive raster annotation to a ggplot -------
+library(ggplot2)
+library(ggiraph)
+
+# Generate data
+rainbow &lt;- matrix(hcl(seq(0, 360, length.out = 50 * 50), 80, 70), nrow = 50)
+p &lt;- ggplot(mtcars, aes(mpg, wt)) +
+  geom_point() +
+  annotation_raster_interactive(rainbow, 15, 20, 3, 4, tooltip = "I am an image!")
+x &lt;- girafe(ggobj = p)
+if( interactive() ) print(x)
+
+# To fill up whole plot
+p &lt;- ggplot(mtcars, aes(mpg, wt)) +
+  annotation_raster_interactive(rainbow, -Inf, Inf, -Inf, Inf, tooltip = "I am an image too!") +
+  geom_point()
+x &lt;- girafe(ggobj = p)
+if( interactive() ) print(x)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggiraph</em> version 0.8.9 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

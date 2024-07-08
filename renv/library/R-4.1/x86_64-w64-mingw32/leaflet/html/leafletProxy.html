@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Send commands to a Leaflet instance in a Shiny app</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for leafletProxy {leaflet}"><tr><td>leafletProxy {leaflet}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Send commands to a Leaflet instance in a Shiny app</h2>
+
+<h3>Description</h3>
+
+<p>Creates a map-like object that can be used to customize and control a map
+that has already been rendered. For use in Shiny apps and Shiny docs only.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+leafletProxy(
+  mapId,
+  session = shiny::getDefaultReactiveDomain(),
+  data = NULL,
+  deferUntilFlush = TRUE
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mapId</code></td>
+<td>
+<p>single-element character vector indicating the output ID of the
+map to modify (if invoked from a Shiny module, the namespace will be added
+automatically)</p>
+</td></tr>
+<tr valign="top"><td><code>session</code></td>
+<td>
+<p>the Shiny session object to which the map belongs; usually the
+default value will suffice</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data object; see Details under the <code><a href="../../leaflet/help/leaflet.html">leaflet</a></code> help
+topic</p>
+</td></tr>
+<tr valign="top"><td><code>deferUntilFlush</code></td>
+<td>
+<p>indicates whether actions performed against this
+instance should be carried out right away, or whether they should be held
+until after the next time all of the outputs are updated; defaults to
+<code>TRUE</code></p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Normally, you create a Leaflet map using the <code><a href="../../leaflet/help/leaflet.html">leaflet</a></code> function.
+This creates an in-memory representation of a map that you can customize
+using functions like <code><a href="../../leaflet/help/addPolygons.html">addPolygons</a></code> and <code><a href="../../leaflet/help/setView.html">setView</a></code>.
+Such a map can be printed at the R console, included in an R Markdown
+document, or rendered as a Shiny output.
+</p>
+<p>In the case of Shiny, you may want to further customize a map, even after it
+is rendered to an output. At this point, the in-memory representation of the
+map is long gone, and the user's web browser has already realized the Leaflet
+map instance.
+</p>
+<p>This is where <code>leafletProxy</code> comes in. It returns an object that can
+stand in for the usual Leaflet map object. The usual map functions like
+<code><a href="../../leaflet/help/addPolygons.html">addPolygons</a></code> and <code><a href="../../leaflet/help/setView.html">setView</a></code> can be called, and
+instead of customizing an in-memory representation, these commands will
+execute on the live Leaflet map instance.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(shiny)
+
+ui &lt;- fluidPage(
+  leafletOutput("map1")
+)
+
+map &lt;- leaflet() %&gt;% addCircleMarkers(
+  lng = runif(10),
+  lat = runif(10),
+  layerId = paste0("marker", 1:10))
+server &lt;- function(input, output, session) {
+  output$map1 &lt;- renderLeaflet(map)
+
+  observeEvent(input$map1_marker_click, {
+    leafletProxy("map1", session) %&gt;%
+      removeMarker(input$map1_marker_click$id)
+  })
+}
+
+app &lt;- shinyApp(ui, server)
+if (interactive()) app
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet</em> version 2.2.1 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

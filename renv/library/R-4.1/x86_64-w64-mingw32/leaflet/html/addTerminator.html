@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add a daylight layer on top of the map</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for addTerminator {leaflet}"><tr><td>addTerminator {leaflet}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add a daylight layer on top of the map</h2>
+
+<h3>Description</h3>
+
+<p>See <a href="https://github.com/joergdietrich/Leaflet.Terminator">https://github.com/joergdietrich/Leaflet.Terminator</a>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+addTerminator(
+  map,
+  resolution = 2,
+  time = NULL,
+  layerId = NULL,
+  group = NULL,
+  options = pathOptions(pointerEvents = "none", clickable = FALSE)
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>map</code></td>
+<td>
+<p>a map widget object</p>
+</td></tr>
+<tr valign="top"><td><code>resolution</code></td>
+<td>
+<p>the step size at which the terminator points are computed.
+The step size is 1 degree/resolution, i.e. higher resolution values have
+smaller step sizes and more points in the polygon. The default value is 2.</p>
+</td></tr>
+<tr valign="top"><td><code>time</code></td>
+<td>
+<p>Time</p>
+</td></tr>
+<tr valign="top"><td><code>layerId</code></td>
+<td>
+<p>the layer id</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>the name of the group this layer belongs to.</p>
+</td></tr>
+<tr valign="top"><td><code>options</code></td>
+<td>
+<p>the path options for the daynight layer</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+leaf &lt;- leaflet() %&gt;%
+  addTiles() %&gt;%
+  addTerminator()
+leaf
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet</em> version 2.2.1 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

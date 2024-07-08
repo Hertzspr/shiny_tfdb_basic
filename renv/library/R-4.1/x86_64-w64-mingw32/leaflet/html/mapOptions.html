@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Set options on a leaflet map object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for mapOptions {leaflet}"><tr><td>mapOptions {leaflet}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Set options on a leaflet map object</h2>
+
+<h3>Description</h3>
+
+<p>Set options on a leaflet map object
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+mapOptions(map, zoomToLimits = c("always", "first", "never"))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>map</code></td>
+<td>
+<p>A map widget object created from <code><a href="../../leaflet/help/leaflet.html">leaflet</a>()</code></p>
+</td></tr>
+<tr valign="top"><td><code>zoomToLimits</code></td>
+<td>
+<p>Controls whether the map is zooms to the limits of the
+elements on the map. This is useful for interactive applications where the
+map data is updated. If <code>"always"</code> (the default), the map always
+re-zooms when new data is received; if <code>"first"</code>, it zooms to the
+elements on the first rendering, but does not re-zoom for subsequent data;
+if <code>"never"</code>, it never re-zooms, not even for the first rendering.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Don't auto-zoom to the objects (can be useful in interactive applications)
+leaflet() %&gt;%
+  addTiles() %&gt;%
+  addPopups(174.7690922, -36.8523071, "R was born here!") %&gt;%
+  mapOptions(zoomToLimits = "first")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet</em> version 2.2.1 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

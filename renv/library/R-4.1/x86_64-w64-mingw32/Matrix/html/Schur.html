@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Methods for Schur Factorization</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for Schur-methods {Matrix}"><tr><td>Schur-methods {Matrix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Methods for Schur Factorization</h2>
+
+<h3>Description</h3>
+
+<p>Computes the Schur factorization of an <i>n-by-n</i>
+real matrix <i>A</i>, which has the general form 
+</p>
+<p style="text-align: center;"><i>A = Q * T * Q'</i></p>
+
+<p>where
+<i>Q</i> is an orthogonal matrix and
+<i>T</i> is a block upper triangular matrix with
+<i>1-by-1</i> and <i>2-by-2</i> diagonal blocks
+specifying the real and complex conjugate eigenvalues of <i>A</i>.
+The column vectors of <i>Q</i> are the Schur vectors of <i>A</i>,
+and <i>T</i> is the Schur form of <i>A</i>.
+</p>
+<p>Methods are built on LAPACK routine <code>dgees</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+Schur(x, vectors = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a <a href="../../Matrix/help/is.finite.html">finite</a> square matrix or
+<code><a href="../../Matrix/help/Matrix-class.html">Matrix</a></code> to be factorized.</p>
+</td></tr>
+<tr valign="top"><td><code>vectors</code></td>
+<td>
+<p>a logical.  If <code>TRUE</code> (the default),
+then Schur vectors are computed in addition to the Schur form.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments passed to or from methods.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An object representing the factorization, inheriting
+from virtual class <code><a href="../../Matrix/help/SchurFactorization-class.html">SchurFactorization</a></code>
+if <code>vectors = TRUE</code>.  Currently, the specific class
+is always <code><a href="../../Matrix/help/Schur-class.html">Schur</a></code> in that case.
+
+An exception is if <code>x</code> is a traditional matrix,
+in which case the result is a named list containing
+<code>Q</code>, <code>T</code>, and <code>EValues</code> slots of the
+<code><a href="../../Matrix/help/Schur-class.html">Schur</a></code> object.
+</p>
+<p>If <code>vectors = FALSE</code>, then the result is the same
+named list but without <code>Q</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>The LAPACK source code, including documentation; see
+<a href="https://netlib.org/lapack/double/dgees.f">https://netlib.org/lapack/double/dgees.f</a>.
+</p>
+<p>Golub, G. H., &amp; Van Loan, C. F. (2013).
+<em>Matrix computations</em> (4th ed.).
+Johns Hopkins University Press.
+doi: <a href="https://doi.org/10.56021/9781421407944">10.56021/9781421407944</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Class <code><a href="../../Matrix/help/Schur-class.html">Schur</a></code> and its methods.
+</p>
+<p>Class <code><a href="../../Matrix/help/dgeMatrix-class.html">dgeMatrix</a></code>.
+</p>
+<p>Generic functions <code><a href="../../Matrix/help/expand1.html">expand1</a></code> and <code><a href="../../Matrix/help/expand2.html">expand2</a></code>,
+for constructing matrix factors from the result.
+</p>
+<p>Generic functions <code><a href="../../Matrix/help/Cholesky.html">Cholesky</a></code>, <code><a href="../../Matrix/help/BunchKaufman.html">BunchKaufman</a></code>,
+<code><a href="../../Matrix/help/lu.html">lu</a></code>, and <code><a href="../../Matrix/help/qr.html">qr</a></code>,
+for computing other factorizations.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+showMethods("Schur", inherited = FALSE)
+set.seed(0)
+
+Schur(Hilbert(9L)) # real eigenvalues
+
+(A &lt;- Matrix(round(rnorm(25L, sd = 100)), 5L, 5L))
+(sch.A &lt;- Schur(A)) # complex eigenvalues
+
+## A ~ Q T Q' in floating point
+str(e.sch.A &lt;- expand2(sch.A), max.level = 2L)
+stopifnot(all.equal(A, Reduce(`%*%`, e.sch.A)))
+
+(e1 &lt;- eigen(sch.A@T, only.values = TRUE)$values)
+(e2 &lt;- eigen(    A  , only.values = TRUE)$values)
+(e3 &lt;- sch.A@EValues)
+
+stopifnot(exprs = {
+    all.equal(e1, e2, tolerance = 1e-13)
+    all.equal(e1, e3[order(Mod(e3), decreasing = TRUE)], tolerance = 1e-13) 
+    identical(Schur(A, vectors = FALSE),
+              list(T = sch.A@T, EValues = e3))    
+    identical(Schur(as(A, "matrix")),
+              list(Q = as(sch.A@Q, "matrix"),
+                   T = as(sch.A@T, "matrix"), EValues = e3))
+})
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.6-5 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

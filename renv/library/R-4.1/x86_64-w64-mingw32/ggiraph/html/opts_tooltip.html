@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tooltip settings</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for opts_tooltip {ggiraph}"><tr><td>opts_tooltip {ggiraph}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tooltip settings</h2>
+
+<h3>Description</h3>
+
+<p>Settings to be used with <code><a href="../../ggiraph/help/girafe.html">girafe()</a></code>
+for tooltip customisation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+opts_tooltip(
+  css = NULL,
+  offx = 10,
+  offy = 0,
+  use_cursor_pos = TRUE,
+  opacity = 0.9,
+  use_fill = FALSE,
+  use_stroke = FALSE,
+  delay_mouseover = 200,
+  delay_mouseout = 500,
+  placement = c("auto", "doc", "container"),
+  zindex = 999
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>css</code></td>
+<td>
+<p>extra css (added to <code>position: absolute;pointer-events: none;</code>)
+used to customize tooltip area.</p>
+</td></tr>
+<tr valign="top"><td><code>offx, offy</code></td>
+<td>
+<p>tooltip x and y offset</p>
+</td></tr>
+<tr valign="top"><td><code>use_cursor_pos</code></td>
+<td>
+<p>should the cursor position be used to
+position tooltip (in addition to offx and offy). Setting to
+TRUE will have no effect in the RStudio browser windows.</p>
+</td></tr>
+<tr valign="top"><td><code>opacity</code></td>
+<td>
+<p>tooltip background opacity</p>
+</td></tr>
+<tr valign="top"><td><code>use_fill, use_stroke</code></td>
+<td>
+<p>logical, use fill and stroke properties to
+color tooltip.</p>
+</td></tr>
+<tr valign="top"><td><code>delay_mouseover</code></td>
+<td>
+<p>The duration in milliseconds of the
+transition associated with tooltip display.</p>
+</td></tr>
+<tr valign="top"><td><code>delay_mouseout</code></td>
+<td>
+<p>The duration in milliseconds of the
+transition associated with tooltip end of display.</p>
+</td></tr>
+<tr valign="top"><td><code>placement</code></td>
+<td>
+<p>Defines the container used for the tooltip element.
+It can be one of &quot;auto&quot; (default), &quot;doc&quot; or &quot;container&quot;.
+</p>
+
+<ul>
+<li><p> doc: the host document's body is used as tooltip container.
+The tooltip may cover areas outside of the svg graphic.
+</p>
+</li>
+<li><p> container: the svg container is used as tooltip container.
+In this case the tooltip content may wrap to fit inside the svg bounds.
+It will also inherit the CSS styles and transforms applied to the parent containers
+(like scaling in a slide presentation).
+</p>
+</li>
+<li><p> auto: This is the default, ggiraph choses the best option according
+to use cases. Usually it redirects to &quot;doc&quot;, however in a <em>xaringan</em> context,
+it redirects to &quot;container&quot;.
+</p>
+</li></ul>
+</td></tr>
+<tr valign="top"><td><code>zindex</code></td>
+<td>
+<p>tooltip css z-index, default to 999.</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p>Other girafe animation options: 
+<code><a href="../../ggiraph/help/girafe_defaults.html">girafe_defaults</a>()</code>,
+<code><a href="../../ggiraph/help/girafe_options.html">girafe_options</a>()</code>,
+<code><a href="../../ggiraph/help/init_girafe_defaults.html">init_girafe_defaults</a>()</code>,
+<code><a href="../../ggiraph/help/opts_hover.html">opts_hover</a>()</code>,
+<code><a href="../../ggiraph/help/opts_selection.html">opts_selection</a>()</code>,
+<code><a href="../../ggiraph/help/opts_sizing.html">opts_sizing</a>()</code>,
+<code><a href="../../ggiraph/help/opts_toolbar.html">opts_toolbar</a>()</code>,
+<code><a href="../../ggiraph/help/opts_zoom.html">opts_zoom</a>()</code>,
+<code><a href="../../ggiraph/help/set_girafe_defaults.html">set_girafe_defaults</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(ggplot2)
+
+dataset &lt;- mtcars
+dataset$carname = row.names(mtcars)
+
+gg &lt;- ggplot(
+  data = dataset,
+  mapping = aes(x = wt, y = qsec, color = disp,
+                tooltip = carname, data_id = carname) ) +
+  geom_point_interactive() + theme_minimal()
+
+x &lt;- girafe(ggobj = gg)
+x &lt;- girafe_options(x,
+  opts_tooltip(opacity = .7,
+    offx = 20, offy = -10,
+    use_fill = TRUE, use_stroke = TRUE,
+    delay_mouseout = 1000) )
+if( interactive() ) print(x)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggiraph</em> version 0.8.9 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

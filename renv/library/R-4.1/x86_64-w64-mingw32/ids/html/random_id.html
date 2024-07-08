@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Cryptographically generated random identifiers</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for random_id {ids}"><tr><td>random_id {ids}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Cryptographically generated random identifiers</h2>
+
+<h3>Description</h3>
+
+<p>Random identifiers.  By default this uses the <code>openssl</code>
+package to produce a random set of bytes, and expresses that as a
+hex character string.  This does not affect R's random number
+stream.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+random_id(n = 1, bytes = 16, use_openssl = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>number of ids to return.  If <code>NULL</code>, it instead
+returns the generating function</p>
+</td></tr>
+<tr valign="top"><td><code>bytes</code></td>
+<td>
+<p>The number of bytes to include for each identifier.
+The length of the returned identifiers will be twice this long
+with each pair of characters representing a single byte.</p>
+</td></tr>
+<tr valign="top"><td><code>use_openssl</code></td>
+<td>
+<p>A logical, indicating if we should use the
+openssl for generating the random identifiers.  The openssl
+random bytestream is not affected by the state of the R random
+number generator (e.g., via <code><a href="../../base/html/Random.html">set.seed</a></code>) so may not be
+suitable for use where reproducibility is important.  The speed
+should be very similar for both approaches.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Rich FitzJohn
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Generate a random id:
+random_id()
+
+# Generate 10 of them!
+random_id(10)
+
+# Different length ids
+random_id(bytes = 8)
+# (note that the number of characters is twice the number of bytes)
+
+# The ids are not affected by R's RNG state:
+set.seed(1)
+(id1 &lt;- random_id())
+set.seed(1)
+(id2 &lt;- random_id())
+# The generated identifiers are different, despite the seed being the same:
+id1 == id2
+
+# If you need these identifiers to be reproducible, pass use_openssl = FALSE
+set.seed(1)
+(id1 &lt;- random_id(use_openssl = FALSE))
+set.seed(1)
+(id2 &lt;- random_id(use_openssl = FALSE))
+# This time they are the same:
+id1 == id2
+
+# Pass \code{n = NULL} to generate a function that binds your arguments:
+id8 &lt;- random_id(NULL, bytes = 8)
+id8(10)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ids</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

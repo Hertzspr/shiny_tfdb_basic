@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add additional panes to leaflet map to control layer order</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for addMapPane {leaflet}"><tr><td>addMapPane {leaflet}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add additional panes to leaflet map to control layer order</h2>
+
+<h3>Description</h3>
+
+<p>map panes can be created by supplying a name and a zIndex to control layer
+ordering. We recommend a <code>zIndex</code> value between 400 (the default
+overlay pane) and 500 (the default shadow pane). You can then use this pane
+to render overlays (points, lines, polygons) by setting the <code>pane</code>
+argument in <code>leafletOptions</code>. This will give you control
+over the order of the layers, e.g. points always on top of polygons.
+If two layers are provided to the same pane, overlay will be determined by
+order of adding. See examples below.
+See <a href="https://web.archive.org/web/20220702182250/https://leafletjs.com/reference-1.3.4.html#map-pane">https://web.archive.org/web/20220702182250/https://leafletjs.com/reference-1.3.4.html#map-pane</a> for details.
+</p>
+<p>If the error &quot;Cannot read property 'appendChild' of undefined&quot; occurs, make
+sure the pane being used for used for display has already been added to the map.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+addMapPane(map, name, zIndex)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>map</code></td>
+<td>
+<p>A <code>leaflet</code> or <code>mapview</code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>name</code></td>
+<td>
+<p>The name of the new pane (refer to this in <code>leafletOptions</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>zIndex</code></td>
+<td>
+<p>The zIndex of the pane. Panes with higher index are rendered
+above panes with lower indices.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+rand_lng &lt;- function(n = 10) rnorm(n, -93.65, .01)
+rand_lat &lt;- function(n = 10) rnorm(n, 42.0285, .01)
+
+random_data &lt;- data.frame(
+  lng = rand_lng(50),
+  lat = rand_lat(50),
+  radius = runif(50, 50, 150),
+  circleId = paste0("circle #", 1:50),
+  lineId = paste0("circle #", 1:50)
+)
+
+# display circles (zIndex: 420) above the lines (zIndex: 410), even when added first
+leaflet() %&gt;%
+  addTiles() %&gt;%
+  # move the center to Snedecor Hall
+  setView(-93.65, 42.0285, zoom = 14) %&gt;%
+  addMapPane("ames_lines", zIndex = 410) %&gt;% # shown below ames_circles
+  addMapPane("ames_circles", zIndex = 420) %&gt;% # shown above ames_lines
+  # points above polygons
+  addCircles(
+    data = random_data, ~lng, ~lat, radius = ~radius, popup = ~circleId,
+    options = pathOptions(pane = "ames_circles")
+  ) %&gt;%
+  # lines in 'ames_lines' pane
+  addPolylines(
+    data = random_data, ~lng, ~lat, color = "#F00", weight = 20,
+    options = pathOptions(pane = "ames_lines")
+  )
+
+
+# same example but circles (zIndex: 420) are below the lines (zIndex: 430)
+leaflet() %&gt;%
+  addTiles() %&gt;%
+  # move the center to Snedecor Hall
+  setView(-93.65, 42.0285, zoom = 14) %&gt;%
+  addMapPane("ames_lines", zIndex = 430) %&gt;% # shown below ames_circles
+  addMapPane("ames_circles", zIndex = 420) %&gt;% # shown above ames_lines
+  # points above polygons
+  addCircles(
+    data = random_data, ~lng, ~lat, radius = ~radius, popup = ~circleId,
+    options = pathOptions(pane = "ames_circles")
+  ) %&gt;%
+  # lines in 'ames_lines' pane
+  addPolylines(
+    data = random_data, ~lng, ~lat, color = "#F00", weight = 20,
+    options = pathOptions(pane = "ames_lines")
+  )
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet</em> version 2.2.1 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

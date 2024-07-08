@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Methods for QR Factorization</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for qr-methods {Matrix}"><tr><td>qr-methods {Matrix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Methods for QR Factorization</h2>
+
+<h3>Description</h3>
+
+<p>Computes the pivoted QR factorization of an <i>m-by-n</i>
+real matrix <i>A</i>, which has the general form
+</p>
+<p style="text-align: center;"><i>P1 * A * P2 = Q * R</i></p>
+
+<p>or (equivalently)
+</p>
+<p style="text-align: center;"><i>A = P1' * Q * R * P2'</i></p>
+
+<p>where
+<i>P1</i> and <i>P2</i> are permutation matrices,
+<i>Q = prod(Hj : j = 1,...,n)</i>
+is an <i>m-by-m</i> orthogonal matrix
+equal to the product of <i>n</i> Householder matrices <i>Hj</i>, and
+<i>R</i> is an <i>m-by-n</i> upper trapezoidal matrix.
+</p>
+<p><code><a href="../../Matrix/help/denseMatrix-class.html">denseMatrix</a></code> use the default method implemented
+in <span class="pkg">base</span>, namely <code><a href="../../base/html/qr.html">qr.default</a></code>.  It is built on
+LINPACK routine <code>dqrdc</code> and LAPACK routine <code>dgeqp3</code>, which
+do not pivot rows, so that <i>P1</i> is an identity matrix.
+</p>
+<p>Methods for <code><a href="../../Matrix/help/sparseMatrix-class.html">sparseMatrix</a></code> are built on
+CSparse routines <code>cs_sqr</code> and <code>cs_qr</code>, which require
+<i>m &gt;= n</i>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+qr(x, ...)
+## S4 method for signature 'dgCMatrix'
+qr(x, order = 3L, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a <a href="../../Matrix/help/is.finite.html">finite</a> matrix or
+<code><a href="../../Matrix/help/Matrix-class.html">Matrix</a></code> to be factorized,
+satisfying <code>nrow(x) &gt;= ncol(x)</code> if sparse.</p>
+</td></tr>
+<tr valign="top"><td><code>order</code></td>
+<td>
+<p>an integer in <code>0:3</code> passed to CSparse routine
+<code>cs_sqr</code>, indicating a strategy for choosing the column
+permutation <i>P2</i>.  0 means no column permutation.
+1, 2, and 3 indicate a fill-reducing ordering of <i>A + A'</i>,
+<i>A~' * A~</i>, and <i>A' * A</i>,
+where <i>A~</i> is <i>A</i> with &ldquo;dense&rdquo; rows
+removed.
+Do not set to 0 unless you know that the column order of <i>A</i>
+is already sensible.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments passed to or from methods.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>If <code>x</code> is sparse and structurally rank deficient, having
+structural rank <i>r &lt; n</i>, then <code>x</code> is augmented with
+<i>(n-r)</i> rows of (partly non-structural) zeros, such that
+the augmented matrix has structural rank <i>n</i>.
+This augmented matrix is factorized as described above:
+</p>
+<pre>P1 * A * P2 = P1 * [A0; 0] * P2 = Q * R</pre>
+<p>where <i>A0</i> denotes the original, user-supplied
+<i>(m-(n-r))-by-n</i> matrix.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object representing the factorization, inheriting from
+virtual S4 class <code><a href="../../Matrix/help/QR-class.html">QR</a></code> or S3 class
+<code><a href="../../base/help/qr.html">qr</a></code>.  The specific class is <code>qr</code>
+unless <code>x</code> inherits from virtual class
+<code><a href="../../Matrix/help/sparseMatrix-class.html">sparseMatrix</a></code>, in which case it is
+<code><a href="../../Matrix/help/sparseQR-class.html">sparseQR</a></code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Davis, T. A. (2006).
+<em>Direct methods for sparse linear systems</em>.
+Society for Industrial and Applied Mathematics.
+doi: <a href="https://doi.org/10.1137/1.9780898718881">10.1137/1.9780898718881</a>
+</p>
+<p>Golub, G. H., &amp; Van Loan, C. F. (2013).
+<em>Matrix computations</em> (4th ed.).
+Johns Hopkins University Press.
+doi: <a href="https://doi.org/10.56021/9781421407944">10.56021/9781421407944</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Class <code><a href="../../Matrix/help/sparseQR-class.html">sparseQR</a></code> and its methods.
+</p>
+<p>Class <code><a href="../../Matrix/help/dgCMatrix-class.html">dgCMatrix</a></code>.
+</p>
+<p>Generic function <code><a href="../../base/help/qr.html">qr</a></code> from <span class="pkg">base</span>,
+whose default method <code>qr.default</code> &ldquo;defines&rdquo;
+the S3 class <code>qr</code> of dense QR factorizations.
+</p>
+<p>Generic functions <code><a href="../../Matrix/help/expand1.html">expand1</a></code> and <code><a href="../../Matrix/help/expand2.html">expand2</a></code>,
+for constructing matrix factors from the result.
+</p>
+<p>Generic functions <code><a href="../../Matrix/help/Cholesky.html">Cholesky</a></code>, <code><a href="../../Matrix/help/BunchKaufman.html">BunchKaufman</a></code>,
+<code><a href="../../Matrix/help/Schur.html">Schur</a></code>, and <code><a href="../../Matrix/help/lu.html">lu</a></code>,
+for computing other factorizations.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+showMethods("qr", inherited = FALSE)
+
+## Rank deficient: columns 3 {b2} and 6 {c3} are "extra"
+M &lt;- as(cbind(a1 = 1,
+              b1 = rep(c(1, 0), each = 3L),
+              b2 = rep(c(0, 1), each = 3L),
+              c1 = rep(c(1, 0, 0), 2L),
+              c2 = rep(c(0, 1, 0), 2L),
+              c3 = rep(c(0, 0, 1), 2L)),
+        "CsparseMatrix")
+rownames(M) &lt;- paste0("r", seq_len(nrow(M)))
+b &lt;- 1:6
+eps &lt;- .Machine$double.eps
+
+## .... [1] full rank ..................................................
+## ===&gt; a least squares solution of A x = b exists
+##      and is unique _in exact arithmetic_
+
+(A1 &lt;- M[, -c(3L, 6L)])
+(qr.A1 &lt;- qr(A1))
+
+stopifnot(exprs = {
+    rankMatrix(A1) == ncol(A1)
+    { d1 &lt;- abs(diag(qr.A1@R)); sum(d1 &lt; max(d1) * eps) == 0L }
+    rcond(crossprod(A1)) &gt;= eps
+    all.equal(qr.coef(qr.A1, b), drop(solve(crossprod(A1), crossprod(A1, b))))
+    all.equal(qr.fitted(qr.A1, b) + qr.resid(qr.A1, b), b)
+})
+
+## .... [2] numerically rank deficient with full structural rank .......
+## ===&gt; a least squares solution of A x = b does not
+##      exist or is not unique _in exact arithmetic_
+
+(A2 &lt;- M)
+(qr.A2 &lt;- qr(A2))
+
+stopifnot(exprs = {
+    rankMatrix(A2) == ncol(A2) - 2L
+    { d2 &lt;- abs(diag(qr.A2@R)); sum(d2 &lt; max(d2) * eps) == 2L }
+    rcond(crossprod(A2)) &lt; eps
+
+    ## 'qr.coef' computes unique least squares solution of "nearby" problem
+    ## Z x = b for some full rank Z ~ A, currently without warning {FIXME} !
+    tryCatch({ qr.coef(qr.A2, b); TRUE }, condition = function(x) FALSE)
+
+    all.equal(qr.fitted(qr.A2, b) + qr.resid(qr.A2, b), b)
+})
+
+## .... [3] numerically and structurally rank deficient ................
+## ===&gt; factorization of _augmented_ matrix with
+##      full structural rank proceeds as in [2]
+
+##  NB: implementation details are subject to change; see (*) below
+
+A3 &lt;- M
+A3[, c(3L, 6L)] &lt;- 0
+A3
+(qr.A3 &lt;- qr(A3)) # with a warning ... "additional 2 row(s) of zeros"
+
+stopifnot(exprs = {
+    ## sparseQR object preserves the unaugmented dimensions (*)
+    dim(qr.A3  ) == dim(A3)
+    dim(qr.A3@V) == dim(A3) + c(2L, 0L)
+    dim(qr.A3@R) == dim(A3) + c(2L, 0L)
+
+    ## The augmented matrix remains numerically rank deficient
+    rankMatrix(A3) == ncol(A3) - 2L
+    { d3 &lt;- abs(diag(qr.A3@R)); sum(d3 &lt; max(d3) * eps) == 2L }
+    rcond(crossprod(A3)) &lt; eps
+})
+
+## Auxiliary functions accept and return a vector or matrix
+## with dimensions corresponding to the unaugmented matrix (*),
+## in all cases with a warning
+qr.coef  (qr.A3, b)
+qr.fitted(qr.A3, b)
+qr.resid (qr.A3, b)
+
+## .... [4] yet more examples ..........................................
+
+## By disabling column pivoting, one gets the "vanilla" factorization
+## A = Q~ R, where Q~ := P1' Q is orthogonal because P1 and Q are
+
+(qr.A1.pp &lt;- qr(A1, order = 0L)) # partial pivoting
+
+ae1 &lt;- function(a, b, ...) all.equal(as(a, "matrix"), as(b, "matrix"), ...)
+ae2 &lt;- function(a, b, ...) ae1(unname(a), unname(b), ...)
+
+stopifnot(exprs = {
+    length(qr.A1   @q) == ncol(A1)
+    length(qr.A1.pp@q) == 0L # indicating no column pivoting
+    ae2(A1[, qr.A1@q + 1L], qr.Q(qr.A1   ) %*% qr.R(qr.A1   ))
+    ae2(A1                , qr.Q(qr.A1.pp) %*% qr.R(qr.A1.pp))
+})
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.6-5 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

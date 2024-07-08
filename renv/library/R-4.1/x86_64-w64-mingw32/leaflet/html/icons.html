@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a list of icon data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for icons {leaflet}"><tr><td>icons {leaflet}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a list of icon data</h2>
+
+<h3>Description</h3>
+
+<p>An icon can be represented as a list of the form <code>list(iconUrl,
+iconSize, ...)</code>. This function is vectorized over its arguments to create a
+list of icon data. Shorter argument values will be re-cycled. <code>NULL</code>
+values for these arguments will be ignored.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+icons(
+  iconUrl = NULL,
+  iconRetinaUrl = NULL,
+  iconWidth = NULL,
+  iconHeight = NULL,
+  iconAnchorX = NULL,
+  iconAnchorY = NULL,
+  shadowUrl = NULL,
+  shadowRetinaUrl = NULL,
+  shadowWidth = NULL,
+  shadowHeight = NULL,
+  shadowAnchorX = NULL,
+  shadowAnchorY = NULL,
+  popupAnchorX = NULL,
+  popupAnchorY = NULL,
+  className = NULL
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>iconUrl</code></td>
+<td>
+<p>the URL or file path to the icon image</p>
+</td></tr>
+<tr valign="top"><td><code>iconRetinaUrl</code></td>
+<td>
+<p>the URL or file path to a retina sized version of the
+icon image</p>
+</td></tr>
+<tr valign="top"><td><code>iconWidth, iconHeight</code></td>
+<td>
+<p>size of the icon image in pixels</p>
+</td></tr>
+<tr valign="top"><td><code>iconAnchorX, iconAnchorY</code></td>
+<td>
+<p>the coordinates of the &quot;tip&quot; of the icon
+(relative to its top left corner, i.e. the top left corner means
+<code>iconAnchorX = 0</code> and <code>iconAnchorY = 0</code>), and the icon will be
+aligned so that this point is at the marker's geographical location</p>
+</td></tr>
+<tr valign="top"><td><code>shadowUrl</code></td>
+<td>
+<p>the URL or file path to the icon shadow image</p>
+</td></tr>
+<tr valign="top"><td><code>shadowRetinaUrl</code></td>
+<td>
+<p>the URL or file path to the retina sized version of
+the icon shadow image</p>
+</td></tr>
+<tr valign="top"><td><code>shadowWidth, shadowHeight</code></td>
+<td>
+<p>size of the shadow image in pixels</p>
+</td></tr>
+<tr valign="top"><td><code>shadowAnchorX, shadowAnchorY</code></td>
+<td>
+<p>the coordinates of the &quot;tip&quot; of the shadow</p>
+</td></tr>
+<tr valign="top"><td><code>popupAnchorX, popupAnchorY</code></td>
+<td>
+<p>the coordinates of the point from which
+popups will &quot;open&quot;, relative to the icon anchor</p>
+</td></tr>
+<tr valign="top"><td><code>className</code></td>
+<td>
+<p>a custom class name to assign to both icon and shadow images</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A list of icon data that can be passed to the <code>icon</code> argument of
+<code><a href="../../leaflet/help/addMarkers.html">addMarkers</a>()</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(leaflet)
+
+# adapted from https://leafletjs.com/examples/custom-icons.html
+
+iconData &lt;- data.frame(
+  lat = c(rnorm(10, 0), rnorm(10, 1), rnorm(10, 2)),
+  lng = c(rnorm(10, 0), rnorm(10, 3), rnorm(10, 6)),
+  group = rep(sort(c("green", "red", "orange")), each = 10),
+  stringsAsFactors = FALSE
+)
+
+leaflet() %&gt;% addMarkers(
+  data = iconData,
+  icon = ~ icons(
+    iconUrl = sprintf("https://leafletjs.com/examples/custom-icons/leaf-%s.png", group),
+    shadowUrl = "https://leafletjs.com/examples/custom-icons/leaf-shadow.png",
+    iconWidth = 38, iconHeight = 95, shadowWidth = 50, shadowHeight = 64,
+    iconAnchorX = 22, iconAnchorY = 94, shadowAnchorX = 4, shadowAnchorY = 62,
+    popupAnchorX = -3, popupAnchorY = -76
+  )
+)
+
+
+
+# use point symbols from base R graphics as icons
+pchIcons &lt;- function(pch = 0:14, width = 30, height = 30, ...) {
+  n &lt;- length(pch)
+  files &lt;- character(n)
+  # create a sequence of png images
+  for (i in seq_len(n)) {
+    f &lt;- tempfile(fileext = ".png")
+    png(f, width = width, height = height, bg = "transparent")
+    par(mar = c(0, 0, 0, 0))
+    plot.new()
+    points(.5, .5, pch = pch[i], cex = min(width, height) / 8, ...)
+    dev.off()
+    files[i] &lt;- f
+  }
+  files
+}
+
+iconData &lt;- matrix(rnorm(500), ncol = 2)
+res &lt;- kmeans(iconData, 10)
+iconData &lt;- cbind(iconData, res$cluster)
+colnames(iconData) &lt;- c("lat", "lng", "group")
+iconData &lt;- as.data.frame(iconData)
+
+# 10 random point shapes for the 10 clusters in iconData
+shapes &lt;- sample(0:14, 10)
+iconFiles &lt;- pchIcons(shapes, 40, 40, col = "steelblue", lwd = 2)
+
+# note the data has 250 rows, and there are 10 icons in iconFiles; they are
+# connected by the `group` variable: the i-th row of iconData uses the
+# group[i]-th icon in the icon list
+leaflet() %&gt;% addMarkers(
+  data = iconData,
+  icon = ~ icons(
+    iconUrl = iconFiles[group],
+    popupAnchorX = 20, popupAnchorY = 0
+  ),
+  popup = ~ sprintf(
+    "lat = %.4f, long = %.4f, group = %s, pch = %s", lat, lng, group, shapes[group]
+  )
+)
+
+unlink(iconFiles)  # clean up the tmp png files that have been embedded
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet</em> version 2.2.1 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

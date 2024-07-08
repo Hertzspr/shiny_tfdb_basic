@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Virtual Class &quot;MatrixFactorization&quot; of Matrix Factorizations</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for MatrixFactorization-class {Matrix}"><tr><td>MatrixFactorization-class {Matrix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Virtual Class &quot;MatrixFactorization&quot; of Matrix Factorizations</h2>
+
+<h3>Description</h3>
+
+<p><code>MatrixFactorization</code> is the virtual class of
+factorizations of <i>m-by-n</i> matrices <i>A</i>,
+having the general form
+</p>
+<p style="text-align: center;"><i>P1 * A * P2 = A1 * ... * Ap</i></p>
+
+<p>or (equivalently)
+</p>
+<p style="text-align: center;"><i>A = P1' * A1 * ... * Ap * P2'</i></p>
+
+<p>where <i>P1</i> and <i>P2</i> are permutation matrices.
+Factorizations requiring symmetric <i>A</i> have the constraint
+<i>P2 = P1'</i>, and factorizations without row
+or column pivoting have the constraints
+<i>P1 = Im</i> and <i>P2 = In</i>,
+where <i>Im</i> and <i>In</i> are the
+<i>m-by-m</i> and <i>n-by-n</i> identity matrices.
+</p>
+<p><code>CholeskyFactorization</code>, <code>BunchKaufmanFactorization</code>,
+<code>SchurFactorization</code>, <code>LU</code>, and <code>QR</code> are the virtual
+subclasses of <code>MatrixFactorization</code> containing all Cholesky,
+Bunch-Kaufman, Schur, LU, and QR factorizations, respectively.
+</p>
+
+
+<h3>Slots</h3>
+
+
+<dl>
+<dt><code>Dim</code></dt><dd><p>an integer vector of length 2 giving the
+dimensions of the factorized matrix.</p>
+</dd>
+<dt><code>Dimnames</code></dt><dd><p>a list of length 2 preserving the
+<code>dimnames</code> of the factorized matrix.  Each element
+must be <code>NULL</code> or a character vector of length equal
+to the corresponding element of <code>Dim</code>.</p>
+</dd>
+</dl>
+
+
+
+<h3>Methods</h3>
+
+
+<dl>
+<dt><code>determinant</code></dt><dd><p><code>signature(x = "MatrixFactorization", logarithm = "missing")</code>:
+sets <code>logarithm = TRUE</code> and recalls the generic function.</p>
+</dd>
+<dt><code>dim</code></dt><dd><p><code>signature(x = "MatrixFactorization")</code>:
+returns <code>x@Dim</code>.</p>
+</dd>
+<dt><code>dimnames</code></dt><dd><p><code>signature(x = "MatrixFactorization")</code>:
+returns <code>x@Dimnames</code>.</p>
+</dd>
+<dt><code>dimnames&lt;-</code></dt><dd><p><code>signature(x = "MatrixFactorization", value = "NULL")</code>:
+returns <code>x</code> with <code>x@Dimnames</code> set to <code>list(NULL, NULL)</code>.</p>
+</dd>
+<dt><code>dimnames&lt;-</code></dt><dd><p><code>signature(x = "MatrixFactorization", value = "list")</code>:
+returns <code>x</code> with <code>x@Dimnames</code> set to <code>value</code>.</p>
+</dd>
+<dt><code>length</code></dt><dd><p><code>signature(x = "MatrixFactorization")</code>:
+returns <code>prod(x@Dim)</code>.</p>
+</dd>
+<dt><code>show</code></dt><dd><p><code>signature(object = "MatrixFactorization")</code>:
+prints the internal representation of the factorization using
+<code><a href="../../utils/html/str.html">str</a></code>.</p>
+</dd>
+<dt><code>solve</code></dt><dd><p><code>signature(a = "MatrixFactorization", b = .)</code>:
+see <code><a href="../../Matrix/help/solve-methods.html">solve-methods</a></code>.</p>
+</dd>
+<dt><code>unname</code></dt><dd><p><code>signature(obj = "MatrixFactorization")</code>:
+returns <code>obj</code> with <code>obj@Dimnames</code> set to
+<code>list(NULL, NULL)</code>.</p>
+</dd>
+</dl>
+
+
+
+<h3>See Also</h3>
+
+<p>The virtual class <code><a href="../../Matrix/help/compMatrix-class.html">compMatrix</a></code>
+of <em>factorizable</em> matrices.
+</p>
+<p>Classes extending <code>CholeskyFactorization</code>, namely
+<code><a href="../../Matrix/help/Cholesky-class.html">Cholesky</a></code>, <code><a href="../../Matrix/help/pCholesky-class.html">pCholesky</a></code>,
+and <code><a href="../../Matrix/help/CHMfactor-class.html">CHMfactor</a></code>.
+</p>
+<p>Classes extending <code>BunchKaufmanFactorization</code>, namely
+<code><a href="../../Matrix/help/BunchKaufman-class.html">BunchKaufman</a></code> and <code><a href="../../Matrix/help/pBunchKaufman-class.html">pBunchKaufman</a></code>.
+</p>
+<p>Classes extending <code>SchurFactorization</code>, namely
+<code><a href="../../Matrix/help/Schur-class.html">Schur</a></code>.
+</p>
+<p>Classes extending <code>LU</code>, namely
+<code><a href="../../Matrix/help/denseLU-class.html">denseLU</a></code> and <code><a href="../../Matrix/help/sparseLU-class.html">sparseLU</a></code>.
+</p>
+<p>Classes extending <code>QR</code>, namely <code><a href="../../Matrix/help/sparseQR-class.html">sparseQR</a></code>.
+</p>
+<p>Generic functions <code><a href="../../Matrix/help/Cholesky.html">Cholesky</a></code>, <code><a href="../../Matrix/help/BunchKaufman.html">BunchKaufman</a></code>,
+<code><a href="../../Matrix/help/Schur.html">Schur</a></code>, <code><a href="../../Matrix/help/lu.html">lu</a></code>, and <code><a href="../../Matrix/help/qr.html">qr</a></code> for
+<em>computing</em> factorizations.
+</p>
+<p>Generic functions <code><a href="../../Matrix/help/expand1.html">expand1</a></code> and <code><a href="../../Matrix/help/expand2.html">expand2</a></code>
+for constructing matrix factors from <code>MatrixFactorization</code>
+objects.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+showClass("MatrixFactorization")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.6-5 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add a simple Graticule on the map see &lt;URL:...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for addSimpleGraticule {leaflet}"><tr><td>addSimpleGraticule {leaflet}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add a simple Graticule on the map
+see <a href="https://github.com/ablakey/Leaflet.SimpleGraticule">https://github.com/ablakey/Leaflet.SimpleGraticule</a></h2>
+
+<h3>Description</h3>
+
+<p>Add a simple Graticule on the map
+see <a href="https://github.com/ablakey/Leaflet.SimpleGraticule">https://github.com/ablakey/Leaflet.SimpleGraticule</a>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+addSimpleGraticule(
+  map,
+  interval = 20,
+  showOriginLabel = TRUE,
+  redraw = "move",
+  hidden = FALSE,
+  zoomIntervals = list(),
+  layerId = NULL,
+  group = NULL
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>map</code></td>
+<td>
+<p>a map widget object</p>
+</td></tr>
+<tr valign="top"><td><code>interval</code></td>
+<td>
+<p>The spacing in map units between horizontal and vertical lines.</p>
+</td></tr>
+<tr valign="top"><td><code>showOriginLabel</code></td>
+<td>
+<p>true Whether or not to show '(0,0)' at the origin.</p>
+</td></tr>
+<tr valign="top"><td><code>redraw</code></td>
+<td>
+<p>on which map event to redraw the graticule. On move is default but moveend can be smoother.</p>
+</td></tr>
+<tr valign="top"><td><code>hidden</code></td>
+<td>
+<p>hide on start</p>
+</td></tr>
+<tr valign="top"><td><code>zoomIntervals</code></td>
+<td>
+<p>use different intervals in different zoom levels. If not specified, all zoom levels use value in interval option.</p>
+</td></tr>
+<tr valign="top"><td><code>layerId</code></td>
+<td>
+<p>the layer id</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>the name of the group this layer belongs to.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+leaflet() %&gt;%
+  addTiles() %&gt;%
+  addSimpleGraticule()
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet</em> version 2.2.1 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

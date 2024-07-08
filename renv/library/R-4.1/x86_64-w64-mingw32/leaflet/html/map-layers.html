@@ -1,0 +1,532 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Graphics elements and layers</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for addControl {leaflet}"><tr><td>addControl {leaflet}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Graphics elements and layers</h2>
+
+<h3>Description</h3>
+
+<p>Add graphics elements and layers to the map widget.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+addControl(
+  map,
+  html,
+  position = c("topleft", "topright", "bottomleft", "bottomright"),
+  layerId = NULL,
+  className = "info legend",
+  data = getMapData(map)
+)
+
+addTiles(
+  map,
+  urlTemplate = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+  attribution = NULL,
+  layerId = NULL,
+  group = NULL,
+  options = tileOptions(),
+  data = getMapData(map)
+)
+
+addWMSTiles(
+  map,
+  baseUrl,
+  layerId = NULL,
+  group = NULL,
+  options = WMSTileOptions(),
+  attribution = NULL,
+  layers = "",
+  data = getMapData(map)
+)
+
+addPopups(
+  map,
+  lng = NULL,
+  lat = NULL,
+  popup,
+  layerId = NULL,
+  group = NULL,
+  options = popupOptions(),
+  data = getMapData(map)
+)
+
+addMarkers(
+  map,
+  lng = NULL,
+  lat = NULL,
+  layerId = NULL,
+  group = NULL,
+  icon = NULL,
+  popup = NULL,
+  popupOptions = NULL,
+  label = NULL,
+  labelOptions = NULL,
+  options = markerOptions(),
+  clusterOptions = NULL,
+  clusterId = NULL,
+  data = getMapData(map)
+)
+
+addLabelOnlyMarkers(
+  map,
+  lng = NULL,
+  lat = NULL,
+  layerId = NULL,
+  group = NULL,
+  icon = NULL,
+  label = NULL,
+  labelOptions = NULL,
+  options = markerOptions(),
+  clusterOptions = NULL,
+  clusterId = NULL,
+  data = getMapData(map)
+)
+
+addCircleMarkers(
+  map,
+  lng = NULL,
+  lat = NULL,
+  radius = 10,
+  layerId = NULL,
+  group = NULL,
+  stroke = TRUE,
+  color = "#03F",
+  weight = 5,
+  opacity = 0.5,
+  fill = TRUE,
+  fillColor = color,
+  fillOpacity = 0.2,
+  dashArray = NULL,
+  popup = NULL,
+  popupOptions = NULL,
+  label = NULL,
+  labelOptions = NULL,
+  options = pathOptions(),
+  clusterOptions = NULL,
+  clusterId = NULL,
+  data = getMapData(map)
+)
+
+highlightOptions(
+  stroke = NULL,
+  color = NULL,
+  weight = NULL,
+  opacity = NULL,
+  fill = NULL,
+  fillColor = NULL,
+  fillOpacity = NULL,
+  dashArray = NULL,
+  bringToFront = NULL,
+  sendToBack = NULL
+)
+
+addCircles(
+  map,
+  lng = NULL,
+  lat = NULL,
+  radius = 10,
+  layerId = NULL,
+  group = NULL,
+  stroke = TRUE,
+  color = "#03F",
+  weight = 5,
+  opacity = 0.5,
+  fill = TRUE,
+  fillColor = color,
+  fillOpacity = 0.2,
+  dashArray = NULL,
+  popup = NULL,
+  popupOptions = NULL,
+  label = NULL,
+  labelOptions = NULL,
+  options = pathOptions(),
+  highlightOptions = NULL,
+  data = getMapData(map)
+)
+
+addPolylines(
+  map,
+  lng = NULL,
+  lat = NULL,
+  layerId = NULL,
+  group = NULL,
+  stroke = TRUE,
+  color = "#03F",
+  weight = 5,
+  opacity = 0.5,
+  fill = FALSE,
+  fillColor = color,
+  fillOpacity = 0.2,
+  dashArray = NULL,
+  smoothFactor = 1,
+  noClip = FALSE,
+  popup = NULL,
+  popupOptions = NULL,
+  label = NULL,
+  labelOptions = NULL,
+  options = pathOptions(),
+  highlightOptions = NULL,
+  data = getMapData(map)
+)
+
+addRectangles(
+  map,
+  lng1,
+  lat1,
+  lng2,
+  lat2,
+  layerId = NULL,
+  group = NULL,
+  stroke = TRUE,
+  color = "#03F",
+  weight = 5,
+  opacity = 0.5,
+  fill = TRUE,
+  fillColor = color,
+  fillOpacity = 0.2,
+  dashArray = NULL,
+  smoothFactor = 1,
+  noClip = FALSE,
+  popup = NULL,
+  popupOptions = NULL,
+  label = NULL,
+  labelOptions = NULL,
+  options = pathOptions(),
+  highlightOptions = NULL,
+  data = getMapData(map)
+)
+
+addPolygons(
+  map,
+  lng = NULL,
+  lat = NULL,
+  layerId = NULL,
+  group = NULL,
+  stroke = TRUE,
+  color = "#03F",
+  weight = 5,
+  opacity = 0.5,
+  fill = TRUE,
+  fillColor = color,
+  fillOpacity = 0.2,
+  dashArray = NULL,
+  smoothFactor = 1,
+  noClip = FALSE,
+  popup = NULL,
+  popupOptions = NULL,
+  label = NULL,
+  labelOptions = NULL,
+  options = pathOptions(),
+  highlightOptions = NULL,
+  data = getMapData(map)
+)
+
+addGeoJSON(
+  map,
+  geojson,
+  layerId = NULL,
+  group = NULL,
+  stroke = TRUE,
+  color = "#03F",
+  weight = 5,
+  opacity = 0.5,
+  fill = TRUE,
+  fillColor = color,
+  fillOpacity = 0.2,
+  dashArray = NULL,
+  smoothFactor = 1,
+  noClip = FALSE,
+  options = pathOptions(),
+  data = getMapData(map)
+)
+
+addTopoJSON(
+  map,
+  topojson,
+  layerId = NULL,
+  group = NULL,
+  stroke = TRUE,
+  color = "#03F",
+  weight = 5,
+  opacity = 0.5,
+  fill = TRUE,
+  fillColor = color,
+  fillOpacity = 0.2,
+  dashArray = NULL,
+  smoothFactor = 1,
+  noClip = FALSE,
+  options = pathOptions()
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>map</code></td>
+<td>
+<p>a map widget object created from <code><a href="../../leaflet/help/leaflet.html">leaflet</a>()</code></p>
+</td></tr>
+<tr valign="top"><td><code>html</code></td>
+<td>
+<p>the content of the control. May be provided as string or as HTML
+generated with Shiny/htmltools tags</p>
+</td></tr>
+<tr valign="top"><td><code>position</code></td>
+<td>
+<p>position of control: &quot;topleft&quot;, &quot;topright&quot;, &quot;bottomleft&quot;, or
+&quot;bottomright&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>layerId</code></td>
+<td>
+<p>the layer id</p>
+</td></tr>
+<tr valign="top"><td><code>className</code></td>
+<td>
+<p>extra CSS classes to append to the control, space separated</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>the data object from which the argument values are derived; by
+default, it is the <code>data</code> object provided to <code>leaflet()</code>
+initially, but can be overridden</p>
+</td></tr>
+<tr valign="top"><td><code>urlTemplate</code></td>
+<td>
+<p>a character string as the URL template</p>
+</td></tr>
+<tr valign="top"><td><code>attribution</code></td>
+<td>
+<p>the attribution text of the tile layer (HTML)</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>the name of the group the newly created layers should belong to
+(for <code><a href="../../leaflet/help/clearGroup.html">clearGroup</a></code> and <code><a href="../../leaflet/help/addLayersControl.html">addLayersControl</a></code> purposes).
+Human-friendly group names are permitted&ndash;they need not be short,
+identifier-style names. Any number of layers and even different types of
+layers (e.g. markers and polygons) can share the same group name.</p>
+</td></tr>
+<tr valign="top"><td><code>options</code></td>
+<td>
+<p>a list of extra options for tile layers, popups, paths
+(circles, rectangles, polygons, ...), or other map elements</p>
+</td></tr>
+<tr valign="top"><td><code>baseUrl</code></td>
+<td>
+<p>a base URL of the WMS service</p>
+</td></tr>
+<tr valign="top"><td><code>layers</code></td>
+<td>
+<p>comma-separated list of WMS layers to show</p>
+</td></tr>
+<tr valign="top"><td><code>lng</code></td>
+<td>
+<p>a numeric vector of longitudes, or a one-sided formula of the form
+<code>~x</code> where <code>x</code> is a variable in <code>data</code>; by default (if not
+explicitly provided), it will be automatically inferred from <code>data</code> by
+looking for a column named <code>lng</code>, <code>long</code>, or <code>longitude</code>
+(case-insensitively)</p>
+</td></tr>
+<tr valign="top"><td><code>lat</code></td>
+<td>
+<p>a vector of latitudes or a formula (similar to the <code>lng</code>
+argument; the names <code>lat</code> and <code>latitude</code> are used when guessing
+the latitude column from <code>data</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>popup</code></td>
+<td>
+<p>a character vector of the HTML content for the popups (you are
+recommended to escape the text using <code><a href="../../htmltools/help/htmlEscape.html">htmlEscape</a>()</code>
+for security reasons)</p>
+</td></tr>
+<tr valign="top"><td><code>icon</code></td>
+<td>
+<p>the icon(s) for markers; an icon is represented by an R list of
+the form <code>list(iconUrl = "?", iconSize = c(x, y))</code>, and you can use
+<code><a href="../../leaflet/help/icons.html">icons</a>()</code> to create multiple icons; note when you use an R list
+that contains images as local files, these local image files will be base64
+encoded into the HTML page so the icon images will still be available even
+when you publish the map elsewhere</p>
+</td></tr>
+<tr valign="top"><td><code>popupOptions</code></td>
+<td>
+<p>A Vector of <code><a href="../../leaflet/help/popupOptions.html">popupOptions</a></code> to provide popups</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>a character vector of the HTML content for the labels</p>
+</td></tr>
+<tr valign="top"><td><code>labelOptions</code></td>
+<td>
+<p>A Vector of <code><a href="../../leaflet/help/labelOptions.html">labelOptions</a></code> to provide label
+options for each label. Default <code>NULL</code></p>
+</td></tr>
+<tr valign="top"><td><code>clusterOptions</code></td>
+<td>
+<p>if not <code>NULL</code>, markers will be clustered using
+<a href="https://github.com/Leaflet/Leaflet.markercluster">Leaflet.markercluster</a>;
+you can use <code><a href="../../leaflet/help/markerClusterOptions.html">markerClusterOptions</a>()</code> to specify marker cluster
+options</p>
+</td></tr>
+<tr valign="top"><td><code>clusterId</code></td>
+<td>
+<p>the id for the marker cluster layer</p>
+</td></tr>
+<tr valign="top"><td><code>radius</code></td>
+<td>
+<p>a numeric vector of radii for the circles; it can also be a
+one-sided formula, in which case the radius values are derived from the
+<code>data</code> (units in meters for circles, and pixels for circle markers)</p>
+</td></tr>
+<tr valign="top"><td><code>stroke</code></td>
+<td>
+<p>whether to draw stroke along the path (e.g. the borders of
+polygons or circles)</p>
+</td></tr>
+<tr valign="top"><td><code>color</code></td>
+<td>
+<p>stroke color</p>
+</td></tr>
+<tr valign="top"><td><code>weight</code></td>
+<td>
+<p>stroke width in pixels</p>
+</td></tr>
+<tr valign="top"><td><code>opacity</code></td>
+<td>
+<p>stroke opacity (or layer opacity for tile layers)</p>
+</td></tr>
+<tr valign="top"><td><code>fill</code></td>
+<td>
+<p>whether to fill the path with color (e.g. filling on polygons or
+circles)</p>
+</td></tr>
+<tr valign="top"><td><code>fillColor</code></td>
+<td>
+<p>fill color</p>
+</td></tr>
+<tr valign="top"><td><code>fillOpacity</code></td>
+<td>
+<p>fill opacity</p>
+</td></tr>
+<tr valign="top"><td><code>dashArray</code></td>
+<td>
+<p>a string that defines the stroke
+<a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray">dash
+pattern</a></p>
+</td></tr>
+<tr valign="top"><td><code>bringToFront</code></td>
+<td>
+<p>Whether the shape should be brought to front on hover.</p>
+</td></tr>
+<tr valign="top"><td><code>sendToBack</code></td>
+<td>
+<p>whether the shape should be sent to back on mouse out.</p>
+</td></tr>
+<tr valign="top"><td><code>highlightOptions</code></td>
+<td>
+<p>Options for highlighting the shape on mouse over.</p>
+</td></tr>
+<tr valign="top"><td><code>smoothFactor</code></td>
+<td>
+<p>how much to simplify the polyline on each zoom level
+(more means better performance and less accurate representation)</p>
+</td></tr>
+<tr valign="top"><td><code>noClip</code></td>
+<td>
+<p>whether to disable polyline clipping</p>
+</td></tr>
+<tr valign="top"><td><code>lng1, lat1, lng2, lat2</code></td>
+<td>
+<p>latitudes and longitudes of the south-west and
+north-east corners of rectangles</p>
+</td></tr>
+<tr valign="top"><td><code>geojson</code></td>
+<td>
+<p>a GeoJSON list, or character vector of length 1</p>
+</td></tr>
+<tr valign="top"><td><code>topojson</code></td>
+<td>
+<p>a TopoJSON list, or character vector of length 1</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>the new <code>map</code> object
+</p>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>addControl()</code>: Add arbitrary HTML controls to the map
+</p>
+</li>
+<li> <p><code>addTiles()</code>: Add a tile layer to the map
+</p>
+</li>
+<li> <p><code>addWMSTiles()</code>: Add a WMS tile layer to the map
+</p>
+</li>
+<li> <p><code>addPopups()</code>: Add popups to the map
+</p>
+</li>
+<li> <p><code>addMarkers()</code>: Add markers to the map
+</p>
+</li>
+<li> <p><code>addLabelOnlyMarkers()</code>: Add Label only markers to the map
+</p>
+</li>
+<li> <p><code>addCircleMarkers()</code>: Add circle markers to the map
+</p>
+</li>
+<li> <p><code>highlightOptions()</code>: Options to highlight a shape on hover
+</p>
+</li>
+<li> <p><code>addCircles()</code>: Add circles to the map
+</p>
+</li>
+<li> <p><code>addPolylines()</code>: Add polylines to the map
+</p>
+</li>
+<li> <p><code>addRectangles()</code>: Add rectangles to the map
+</p>
+</li>
+<li> <p><code>addPolygons()</code>: Add polygons to the map
+</p>
+</li>
+<li> <p><code>addGeoJSON()</code>: Add GeoJSON layers to the map
+</p>
+</li>
+<li> <p><code>addTopoJSON()</code>: Add TopoJSON layers to the map
+</p>
+</li></ul>
+
+
+<h3>References</h3>
+
+<p>The Leaflet API documentation:
+<a href="https://web.archive.org/web/20220702182250/https://leafletjs.com/reference-1.3.4.html">https://web.archive.org/web/20220702182250/https://leafletjs.com/reference-1.3.4.html</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../leaflet/help/tileOptions.html">tileOptions</a></code>, <code><a href="../../leaflet/help/WMSTileOptions.html">WMSTileOptions</a></code>,
+<code><a href="../../leaflet/help/popupOptions.html">popupOptions</a></code>, <code><a href="../../leaflet/help/markerOptions.html">markerOptions</a></code>,
+<code><a href="../../leaflet/help/pathOptions.html">pathOptions</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet</em> version 2.2.1 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

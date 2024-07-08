@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Persistently prefer one function over another</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for conflict_prefer {conflicted}"><tr><td>conflict_prefer {conflicted}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Persistently prefer one function over another</h2>
+
+<h3>Description</h3>
+
+<p><code>conflict_prefer()</code> allows you to declare &quot;winners&quot; of conflicts.
+You can either declare a specific pairing (i.e. <code>dplyr::filter()</code> beats
+<code>base::filter()</code>), or an overall winner (i.e. <code>dplyr::filter()</code> beats
+all comers). As of conflicted 1.2.0, in most case you should use
+<code><a href="../../conflicted/help/conflicts_prefer.html">conflicts_prefer()</a></code> instead as it's both faster and easier to use.
+</p>
+<p>Use <code>conflicted_prefer_all()</code> to prefer all functions in a package, or
+<code>conflicted_prefer_matching()</code> to prefer functions that match a regular
+expression.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+conflict_prefer(name, winner, losers = NULL, quiet = FALSE)
+
+conflict_prefer_matching(pattern, winner, losers = NULL, quiet = FALSE)
+
+conflict_prefer_all(winner, losers = NULL, quiet = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>name</code></td>
+<td>
+<p>Name of function.</p>
+</td></tr>
+<tr valign="top"><td><code>winner</code></td>
+<td>
+<p>Name of package that should win the conflict.</p>
+</td></tr>
+<tr valign="top"><td><code>losers</code></td>
+<td>
+<p>Optional vector of packages that should lose the conflict.
+If omitted, <code>winner</code> will beat all comers.</p>
+</td></tr>
+<tr valign="top"><td><code>quiet</code></td>
+<td>
+<p>If <code>TRUE</code>, all output will be suppressed</p>
+</td></tr>
+<tr valign="top"><td><code>pattern</code></td>
+<td>
+<p>Regular expression used to select objects from the <code>winner</code>
+package.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Prefer over all other packages
+conflict_prefer("filter", "dplyr")
+
+# Prefer over specified package or packages
+conflict_prefer("filter", "dplyr", "base")
+conflict_prefer("filter", "dplyr", c("base", "filtration"))
+
+# Prefer many functions that match a pattern
+## Not run: 
+# Prefer col_* from vroom
+conflict_prefer_matching("^col_", "vroom")
+
+## End(Not run)
+# Or all functions from a package:
+## Not run: 
+# Prefer all tidylog functions over dtplyr functions
+conflict_prefer_all("tidylog", "dtplyr")
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>conflicted</em> version 1.2.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

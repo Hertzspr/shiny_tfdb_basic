@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Extra options for map elements and layers</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for tileOptions {leaflet}"><tr><td>tileOptions {leaflet}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Extra options for map elements and layers</h2>
+
+<h3>Description</h3>
+
+<p>The rest of all possible options for map elements and layers that are not
+listed in the layer functions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+tileOptions(
+  minZoom = 0,
+  maxZoom = 18,
+  maxNativeZoom = NULL,
+  tileSize = 256,
+  subdomains = "abc",
+  errorTileUrl = "",
+  tms = FALSE,
+  noWrap = FALSE,
+  zoomOffset = 0,
+  zoomReverse = FALSE,
+  opacity = 1,
+  zIndex = 1,
+  unloadInvisibleTiles = NULL,
+  updateWhenIdle = NULL,
+  detectRetina = FALSE,
+  ...
+)
+
+WMSTileOptions(
+  styles = "",
+  format = "image/jpeg",
+  transparent = FALSE,
+  version = "1.1.1",
+  crs = NULL,
+  ...
+)
+
+popupOptions(
+  maxWidth = 300,
+  minWidth = 50,
+  maxHeight = NULL,
+  autoPan = TRUE,
+  keepInView = FALSE,
+  closeButton = TRUE,
+  zoomAnimation = NULL,
+  closeOnClick = NULL,
+  className = "",
+  ...
+)
+
+labelOptions(
+  interactive = FALSE,
+  clickable = NULL,
+  noHide = NULL,
+  permanent = FALSE,
+  className = "",
+  direction = "auto",
+  offset = c(0, 0),
+  opacity = 1,
+  textsize = "10px",
+  textOnly = FALSE,
+  style = NULL,
+  zoomAnimation = NULL,
+  sticky = TRUE,
+  ...
+)
+
+markerOptions(
+  interactive = TRUE,
+  clickable = NULL,
+  draggable = FALSE,
+  keyboard = TRUE,
+  title = "",
+  alt = "",
+  zIndexOffset = 0,
+  opacity = 1,
+  riseOnHover = FALSE,
+  riseOffset = 250,
+  ...
+)
+
+markerClusterOptions(
+  showCoverageOnHover = TRUE,
+  zoomToBoundsOnClick = TRUE,
+  spiderfyOnMaxZoom = TRUE,
+  removeOutsideVisibleBounds = TRUE,
+  spiderLegPolylineOptions = list(weight = 1.5, color = "#222", opacity = 0.5),
+  freezeAtZoom = FALSE,
+  ...
+)
+
+pathOptions(
+  lineCap = NULL,
+  lineJoin = NULL,
+  clickable = NULL,
+  interactive = TRUE,
+  pointerEvents = NULL,
+  className = "",
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>minZoom, maxZoom, maxNativeZoom, tileSize, subdomains, errorTileUrl, tms, noWrap, zoomOffset, zoomReverse, zIndex, unloadInvisibleTiles, updateWhenIdle, detectRetina</code></td>
+<td>
+<p>the tile layer options; see
+<a href="https://web.archive.org/web/20220702182250/https://leafletjs.com/reference-1.3.4.html#tilelayer">https://web.archive.org/web/20220702182250/https://leafletjs.com/reference-1.3.4.html#tilelayer</a></p>
+</td></tr>
+<tr valign="top"><td><code>opacity</code></td>
+<td>
+<p>Tooltip container opacity. Ranges from 0 to 1. Default value is <code>1</code> (different from leaflet.js <code>0.9</code>); see <a href="https://web.archive.org/web/20220702182250/https://leafletjs.com/reference-1.3.4.html#tooltip-opacity">https://web.archive.org/web/20220702182250/https://leafletjs.com/reference-1.3.4.html#tooltip-opacity</a></p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>extra options passed to underlying Javascript object constructor.</p>
+</td></tr>
+<tr valign="top"><td><code>styles</code></td>
+<td>
+<p>comma-separated list of WMS styles</p>
+</td></tr>
+<tr valign="top"><td><code>format</code></td>
+<td>
+<p>WMS image format (use <code>"image/png"</code> for layers with
+transparency)</p>
+</td></tr>
+<tr valign="top"><td><code>transparent</code></td>
+<td>
+<p>if <code>TRUE</code>, the WMS service will return images with
+transparency</p>
+</td></tr>
+<tr valign="top"><td><code>version</code></td>
+<td>
+<p>version of the WMS service to use</p>
+</td></tr>
+<tr valign="top"><td><code>crs</code></td>
+<td>
+<p>Coordinate Reference System to use for the WMS requests, defaults.</p>
+</td></tr>
+<tr valign="top"><td><code>maxWidth, minWidth, maxHeight, autoPan, keepInView, closeButton, closeOnClick</code></td>
+<td>
+<p>popup options; see <a href="https://web.archive.org/web/20220702182250/https://leafletjs.com/reference-1.3.4.html#popup-option">https://web.archive.org/web/20220702182250/https://leafletjs.com/reference-1.3.4.html#popup-option</a></p>
+</td></tr>
+<tr valign="top"><td><code>zoomAnimation</code></td>
+<td>
+<p>deprecated. See <a href="https://github.com/Leaflet/Leaflet/blob/master/CHANGELOG.md#api-changes-5">https://github.com/Leaflet/Leaflet/blob/master/CHANGELOG.md#api-changes-5</a></p>
+</td></tr>
+<tr valign="top"><td><code>className</code></td>
+<td>
+<p>a CSS class name set on an element</p>
+</td></tr>
+<tr valign="top"><td><code>interactive</code></td>
+<td>
+<p>whether the element emits mouse events</p>
+</td></tr>
+<tr valign="top"><td><code>clickable</code></td>
+<td>
+<p>DEPRECATED! Use the <code>interactive</code> option.</p>
+</td></tr>
+<tr valign="top"><td><code>noHide, direction, offset, permanent</code></td>
+<td>
+<p>label options; see <a href="https://web.archive.org/web/20220702182250/https://leafletjs.com/reference-1.3.4.html#tooltip-option">https://web.archive.org/web/20220702182250/https://leafletjs.com/reference-1.3.4.html#tooltip-option</a></p>
+</td></tr>
+<tr valign="top"><td><code>textsize</code></td>
+<td>
+<p>Change the text size of a single tooltip</p>
+</td></tr>
+<tr valign="top"><td><code>textOnly</code></td>
+<td>
+<p>Display only the text, no regular surrounding box.</p>
+</td></tr>
+<tr valign="top"><td><code>style</code></td>
+<td>
+<p>list of css style to be added to the tooltip</p>
+</td></tr>
+<tr valign="top"><td><code>sticky</code></td>
+<td>
+<p>If true, the tooltip will follow the mouse instead of being fixed at the feature center. Default value is <code>TRUE</code> (different from leaflet.js <code>FALSE</code>); see <a href="https://web.archive.org/web/20220702182250/https://leafletjs.com/reference-1.3.4.html#tooltip-sticky">https://web.archive.org/web/20220702182250/https://leafletjs.com/reference-1.3.4.html#tooltip-sticky</a></p>
+</td></tr>
+<tr valign="top"><td><code>draggable, keyboard, title, alt, zIndexOffset, riseOnHover, riseOffset</code></td>
+<td>
+<p>marker options; see <a href="https://web.archive.org/web/20220702182250/https://leafletjs.com/reference-1.3.4.html#marker-option">https://web.archive.org/web/20220702182250/https://leafletjs.com/reference-1.3.4.html#marker-option</a></p>
+</td></tr>
+<tr valign="top"><td><code>showCoverageOnHover</code></td>
+<td>
+<p>when you mouse over a cluster it shows the bounds
+of its markers</p>
+</td></tr>
+<tr valign="top"><td><code>zoomToBoundsOnClick</code></td>
+<td>
+<p>when you click a cluster we zoom to its bounds</p>
+</td></tr>
+<tr valign="top"><td><code>spiderfyOnMaxZoom</code></td>
+<td>
+<p>when you click a cluster at the bottom zoom level we
+spiderfy it so you can see all of its markers</p>
+</td></tr>
+<tr valign="top"><td><code>removeOutsideVisibleBounds</code></td>
+<td>
+<p>clusters and markers too far from the
+viewport are removed from the map for performance</p>
+</td></tr>
+<tr valign="top"><td><code>spiderLegPolylineOptions</code></td>
+<td>
+<p>Allows you to specify
+<a href="https://web.archive.org/web/20220702182250/https://leafletjs.com/reference-1.3.4.html#polyline-option">PolylineOptions</a>
+to style spider legs. By default, they are
+<code>{weight: 1.5, color: "#222", opacity: 0.5 }</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>freezeAtZoom</code></td>
+<td>
+<p>Allows you to freeze cluster expansion to a zoom level.
+Can be a zoom level e.g. 10, 12 or &quot;max&quot; or &quot;maxKeepSpiderify&quot;.
+See &lt;https://github.com/ghybs/Leaflet.MarkerCluster.Freezable#api-reference&gt;.</p>
+</td></tr>
+<tr valign="top"><td><code>lineCap</code></td>
+<td>
+<p>a string that defines
+<a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linecap">shape
+to be used at the end</a> of the stroke</p>
+</td></tr>
+<tr valign="top"><td><code>lineJoin</code></td>
+<td>
+<p>a string that defines
+<a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linejoin">shape
+to be used at the corners</a> of the stroke</p>
+</td></tr>
+<tr valign="top"><td><code>pointerEvents</code></td>
+<td>
+<p>sets the <code>pointer-events</code> attribute on the path if
+SVG backend is used</p>
+</td></tr>
+</table>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>tileOptions()</code>: Options for tile layers
+</p>
+</li>
+<li> <p><code>WMSTileOptions()</code>: Options for WMS tile layers
+</p>
+</li>
+<li> <p><code>popupOptions()</code>: Options for popups
+</p>
+</li>
+<li> <p><code>labelOptions()</code>: Options for labels
+</p>
+</li>
+<li> <p><code>markerOptions()</code>: Options for markers
+</p>
+</li>
+<li> <p><code>markerClusterOptions()</code>: Options for marker clusters
+</p>
+</li>
+<li> <p><code>pathOptions()</code>: Options for vector layers (polylines, polygons,
+rectangles, and circles, etc)
+</p>
+</li></ul>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../leaflet/help/leafletCRS.html">leafletCRS</a></code>
+to map CRS (don't change this if you're not sure what it means)
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet</em> version 2.2.1 <a href="00Index.html">Index</a>]</div>
+</div></body></html>
