@@ -3,10 +3,7 @@ on: push
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-    # Remove 'needs: tests' if tests aren't required before deployment
-    #needs: tests  # Uncomment if needed
-
+    runs-on: windows-latest
     env:
       IMAGE_NAME: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}
       GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
