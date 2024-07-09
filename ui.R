@@ -5,7 +5,8 @@ ui <- page_navbar(
   title = "Premier League Transfers Dashboard",
   fillable = F,
   sidebar = sidebar(
-    sidebar_season,
+    sidebar_season, # select season
+    sidebar_loan_opt, # exclude loans?
     conditionalPanel(
       condition = "input.nav == 'Teams'", sidebar_club)
   ),
@@ -29,23 +30,14 @@ ui <- page_navbar(
 
     # plot tf by  season and loan
     card(
-      height ="400px",
-      plotOutput("plot_tfbs"),
-      plotOutput("plot_tfbl")
+      fill = T,
+      plotOutput("plot_tfbs")
   ),
 ),
 
   nav_panel(
     title = "Teams",
-    card(
-      radioButtons(
-        "loanstat",
-        label = "Exclude Loans?",
-        choices = c("Yes", "No"),
-        selected = "No",
-        inline = T
-        )
-    ),
+
 
     layout_column_wrap(
       fill = FALSE,

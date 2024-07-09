@@ -13,6 +13,17 @@ sidebar_season <- card(
   seasonInput
 )
 
+
+sidebar_loan_opt <- card(
+  radioButtons(
+    "loanstat",
+    label = "Exclude Loans?",
+    choices = c("Yes", "No"),
+    selected = "No",
+    inline = T
+  )
+)
+
 arr_dep <- checkboxGroupInput(
   inputId = "arrdep",
   label = "Transfers Type",

@@ -6,15 +6,29 @@ library(shiny)
 
 server <- function(input, output, session) {
 
+  # LOAN?
+  stat_loan <- reactive({
+
+      if (input$loanstat == "No"){
+      is_loan_input <- c(TRUE, FALSE)
+    } else {
+      is_loan_input <- c(FALSE)
+    }
+
+    return(is_loan_input)
+  })
+
 
   # VALUE BOXES ####
 
 
   ### arrival count
   count_arr <- reactive({
+
     ca <- transfers_df %>%
     filter(transfer_type == "Arrivals") %>%
     filter(season %in% c(input$season_year)) %>%
+    filter(is_loan %in% stat_loan()) %>%
     nrow()
     return(ca)
     })
@@ -29,6 +43,7 @@ server <- function(input, output, session) {
     cd <- transfers_df %>%
       filter(transfer_type != "Arrivals") %>%
       filter(season %in% c(input$season_year)) %>%
+      filter(is_loan %in% stat_loan()) %>%
       nrow()
     return(cd)
   })
@@ -43,6 +58,7 @@ server <- function(input, output, session) {
     sfa <- transfers_df %>%
       filter(transfer_type == "Arrivals") %>%
       filter(season %in% c(input$season_year)) %>%
+      filter(is_loan %in% stat_loan()) %>%
       summarise(total_transfer_arrivals = sum(transfer_fee)) %>% pull()
     sfa <-
       scales::number(
@@ -64,6 +80,7 @@ server <- function(input, output, session) {
     sfd <- transfers_df %>%
       filter(transfer_type != "Arrivals") %>%
       filter(season %in% c(input$season_year)) %>%
+      filter(is_loan %in% stat_loan()) %>%
       summarise(total_transfer_arrivals = sum(transfer_fee)) %>% pull()
     sfd <-
       scales::number(
@@ -91,6 +108,7 @@ server <- function(input, output, session) {
         season %in% c(input$season_year),
         transfer_type == "Arrivals"
       ) %>%
+      filter(is_loan %in% stat_loan()) %>%
       group_by(country_2) %>%
       summarise(sum_fee = sum(transfer_fee)) %>%
       ungroup() %>%
@@ -103,6 +121,7 @@ server <- function(input, output, session) {
         season %in% c(input$season_year),
         transfer_type == "Departures"
       ) %>%
+      filter(is_loan %in% stat_loan()) %>%
       group_by(country_2) %>%
       summarise(sum_fee = sum(transfer_fee)) %>%
       ungroup() %>%
@@ -198,7 +217,9 @@ server <- function(input, output, session) {
       transfers_df %>%
       filter(season %in% c(input$season_year)) %>%
       filter(transfer_type %in% c("Arrivals", "Departures")) %>%
-      group_by(season) %>%
+      filter(is_loan %in% stat_loan()) %>%
+      mutate(is_loan = ifelse(is_loan == T, "LOANS", "NOT LOANS")) %>%
+      group_by(season, is_loan) %>%
       mutate(sumtf = sum(transfer_fee))
 
     group_color <- c("#9B9B4D", "#5F4B8B")
@@ -216,12 +237,14 @@ server <- function(input, output, session) {
         plot.title.position = "panel",
         plot.subtitle = ggtext::element_markdown(), # used to let the html style in title to be colored
         title = element_text(size = rel(1.5)),
+        strip.text.x.top = element_text(size = rel(1.4), face = "bold", colour = "black"),
         axis.line.x = element_blank(),
       )
 
     p_tfcount_byseason <-
       ggplot(df, aes(x = season, fill = transfer_type))+
       geom_histogram(stat = "count", position = "dodge", show.legend = F)+
+      facet_wrap(vars(is_loan))+
       labs(x = xlab, y = ylab, title = tlab, subtitle =  stlab)+
       scale_fill_manual(values = group_color)+
       theme_setting
@@ -234,6 +257,7 @@ server <- function(input, output, session) {
   # PLOT COUNT BY LOAN ####
 
   ptfbl <- reactive({
+
     df <-
       transfers_df %>%
       filter(season %in% c(input$season_year)) %>%
@@ -262,7 +286,13 @@ server <- function(input, output, session) {
       coord_flip()+
       theme_setting
 
-    return(plot_tfbl)
+    if(stat_loan() == TRUE){
+      return(plot_tfbl)
+    } else {
+      return(NULL)
+    }
+
+
   })
 
   output$plot_tfbl <- renderPlot({ ptfbl() })
