@@ -2,7 +2,7 @@ source("uiHelpers.R")
 
 ui <- page_navbar(
   id = "nav",
-  title = "Transfers Dashboard",
+  title = "Premier League Transfers Dashboard",
   fillable = F,
   sidebar = sidebar(
     sidebar_season,
@@ -22,6 +22,7 @@ ui <- page_navbar(
 
     # map
     card(
+      div(class = "card-header", "Top 10 Transfers Traffic by Country"),
       leafletOutput("top_map"),
       min_height = "400px"
       ),

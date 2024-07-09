@@ -1,6 +1,6 @@
 seasonInput <- selectInput(
   inputId = "season_year",
-  label = "Choose season:",
+  label = "2014 - 2023:",
   selected = transfers_df$season %>% unique() %>% sample(size = 1),
   multiple = T,
   choice = transfers_df$season %>% unique()
@@ -41,12 +41,12 @@ vbs <- list(
     theme = bslib::value_box_theme(bg = "#5F4B8B", fg = "#e6f2fd")
   ),
   value_box(
-    title = "Sum Arrivals Fee",
+    title = "Total Arrivals Fee",
     value = textOutput(outputId = "arrivals_sumfee"),
     theme = bslib::value_box_theme(bg = "#e6f2fd", fg = "#9B9B4d")
   ),
   value_box(
-    title = "Sum Departures Fee",
+    title = "Total Departures Fee",
     value = textOutput(outputId = "departures_sumfee"),
     theme = bslib::value_box_theme(bg = "#5F4B8B", fg = "#e6f2fd")
   )
@@ -65,12 +65,12 @@ vbs_club <- list(
     theme = bslib::value_box_theme(bg = "#5F4B8B", fg = "#e6f2fd")
   ),
   value_box(
-    title = "Sum Arrivals Fee",
+    title = "Total Arrivals Fee",
     value = textOutput(outputId = "club_arrivals_sumfee"),
     theme = bslib::value_box_theme(bg = "#e6f2fd", fg = "#9B9B4d")
   ),
   value_box(
-    title = "Sum Departures Fee",
+    title = "Total Departures Fee",
     value = textOutput(outputId = "club_departures_sumfee"),
     theme = bslib::value_box_theme(bg = "#5F4B8B", fg = "#e6f2fd")
   )
