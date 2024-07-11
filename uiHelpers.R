@@ -6,11 +6,14 @@ seasonInput <- checkboxGroupInput(width = "100%",
   choices = transfers_df$season %>% unique()
 )
 
+uncheckSeasonInput <- actionButton(inputId = "unc_season", "Uncheck Seasons")
+
 sidebar_season <- card(
   min_height = "300px",
   #full_screen = TRUE,
   card_header("Select Season"),
-  seasonInput
+  seasonInput,
+  uncheckSeasonInput
 )
 
 

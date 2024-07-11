@@ -254,6 +254,14 @@ server <- function(input, output, session) {
 
   output$plot_tfbs <- renderPlot({ ptfbs() })
 
+
+  # UNCHECK BUTTON ####
+
+    observeEvent(input$unc_season, {
+      updateCheckboxGroupInput(session = session,inputId = "season_year", selected = character(0))
+    })
+
+
   # PLOT COUNT BY LOAN ####
 
   ptfbl <- reactive({
