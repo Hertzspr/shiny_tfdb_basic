@@ -313,9 +313,9 @@ server <- function(input, output, session) {
     selectizeInput(
       inputId = "club_name",
       label = "Choose club:",
-      selected = dfsf()$team_name %>% unique() %>% sample(size = 2),
+      selected = dfsf()$team_name %>% unique() %>% sample(2),
+      choices =  dfsf()$team_name %>% unique(),
       multiple = T,
-      choice = dfsf()$team_name %>% unique(),
       options = list(maxItems = 6)
     )
   })
@@ -643,15 +643,16 @@ server <- function(input, output, session) {
 
   # TABLE  ####
   output$tf_table <- renderDataTable({
-    df_dir <-
-      dfsncf() %>%
-      arrange(desc(transfer_fee)) %>%
-      head(n = 10) %>%
-      mutate(tf_direction = ifelse(
-        transfer_type == "Departures", transfer_fee * -1, transfer_fee
-      ))
 
-    return(df_dir)
+    table_filtered <-
+    transfers_df %>%
+      filter(season %in% c(input$season_year)) %>%
+      filter(is_loan %in% stat_loan()) %>%
+      filter(
+        player_age >= input$age_slider[1] &
+        player_age <= input$age_slider[2])
+
+    return(table_filtered)
   })
 }
 

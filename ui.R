@@ -5,10 +5,21 @@ ui <- page_navbar(
   title = "Premier League Transfers Dashboard",
   fillable = F,
   sidebar = sidebar(
-    sidebar_season, # select season
-    sidebar_loan_opt, # exclude loans?
+    open = "desktop",
+    sidebar_season,
+    sidebar_loan_opt,
     conditionalPanel(
-      condition = "input.nav == 'Teams'", sidebar_club)
+      condition = "input.nav == 'Teams'", sidebar_club
+    ),
+    conditionalPanel(
+      condition = "input.nav == 'Table'", age_slider
+    ),
+    # conditionalPanel(
+    #   condition = "input.nav == 'Table'", !!!transfer_slider
+    # ),
+    # conditionalPanel(
+    #   condition = "input.nav == 'Table'", !!!position_checkbox
+    # ),
   ),
   nav_spacer(),
   nav_panel(

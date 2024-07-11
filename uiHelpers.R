@@ -1,9 +1,9 @@
-seasonInput <- selectInput(
+seasonInput <- checkboxGroupInput(width = "100%",
+  inline = T,
   inputId = "season_year",
-  label = "2014 - 2023:",
-  selected = transfers_df$season %>% unique() %>% sample(size = 1),
-  multiple = T,
-  choice = transfers_df$season %>% unique()
+  label = NULL,
+  selected = transfers_df$season %>% unique(),
+  choices = transfers_df$season %>% unique()
 )
 
 sidebar_season <- card(
@@ -86,3 +86,11 @@ vbs_club <- list(
     theme = bslib::value_box_theme(bg = "#5F4B8B", fg = "#e6f2fd")
   )
 )
+
+
+age_slider <-
+  sliderInput(
+    inputId = "age_slider",
+    label = h3("Age Range"),
+    min = min(transfers_df$player_age),
+    max = max(transfers_df$player_age),value = c(25, 27))
