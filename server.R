@@ -101,6 +101,7 @@ server <- function(input, output, session) {
 
   # MAP ####
 
+
   transfers_transformations <- reactive({
     top10country_byfee_arrivals1 <-
       transfers_df %>%
@@ -142,7 +143,14 @@ server <- function(input, output, session) {
       bind_rows(top10country_byfee_arrivals2, top10country_byfee_departures2) %>%
       arrange(desc(sum_fee))
 
+    # if(input$season_year != 0){
+    #   return(top10country_byfee)
+    # } else {
+    #   return(print(input$season_year))
+    # }
+
     return(top10country_byfee)
+
     })
 
 
@@ -204,7 +212,14 @@ server <- function(input, output, session) {
   })
 
   output$top_map <- renderLeaflet({
-    top_map()
+
+    if(is.null(input$season_year) || length(input$season_year) == 0){
+      plot.new()
+      title("No options selected")
+    } else {
+      top_map()
+    }
+
   })
 
 
@@ -252,7 +267,15 @@ server <- function(input, output, session) {
     return(p_tfcount_byseason)
   })
 
-  output$plot_tfbs <- renderPlot({ ptfbs() })
+  output$plot_tfbs <- renderPlot({
+
+    if(is.null(input$season_year) || length(input$season_year) == 0){
+      plot.new()
+      title("No options selected")
+    } else {
+      ptfbs()
+    }
+     })
 
 
   # UNCHECK BUTTON ####
