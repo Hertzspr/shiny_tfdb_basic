@@ -211,11 +211,14 @@ server <- function(input, output, session) {
       return(top_country_map)
   })
 
+  plain_map <- reactive({
+    leaflet() %>% addTiles()
+  })
+
   output$top_map <- renderLeaflet({
 
     if(is.null(input$season_year) || length(input$season_year) == 0){
-      plot.new()
-      title("No options selected")
+      plain_map()
     } else {
       top_map()
     }
