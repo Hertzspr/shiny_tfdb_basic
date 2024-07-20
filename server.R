@@ -29,6 +29,7 @@ server <- function(input, output, session) {
     filter(transfer_type == "Arrivals") %>%
     filter(season %in% c(input$season_year)) %>%
     filter(is_loan %in% stat_loan()) %>%
+    filter(transfer_type %in% c(input$arrdep)) %>%
     nrow()
     return(ca)
     })
@@ -44,6 +45,7 @@ server <- function(input, output, session) {
       filter(transfer_type != "Arrivals") %>%
       filter(season %in% c(input$season_year)) %>%
       filter(is_loan %in% stat_loan()) %>%
+      filter(transfer_type %in% c(input$arrdep)) %>%
       nrow()
     return(cd)
   })
@@ -59,6 +61,7 @@ server <- function(input, output, session) {
       filter(transfer_type == "Arrivals") %>%
       filter(season %in% c(input$season_year)) %>%
       filter(is_loan %in% stat_loan()) %>%
+      filter(transfer_type %in% c(input$arrdep)) %>%
       summarise(total_transfer_arrivals = sum(transfer_fee)) %>% pull()
     sfa <-
       scales::number(
@@ -81,6 +84,7 @@ server <- function(input, output, session) {
       filter(transfer_type != "Arrivals") %>%
       filter(season %in% c(input$season_year)) %>%
       filter(is_loan %in% stat_loan()) %>%
+      filter(transfer_type %in% c(input$arrdep)) %>%
       summarise(total_transfer_arrivals = sum(transfer_fee)) %>% pull()
     sfd <-
       scales::number(
@@ -110,6 +114,7 @@ server <- function(input, output, session) {
         transfer_type == "Arrivals"
       ) %>%
       filter(is_loan %in% stat_loan()) %>%
+      filter(transfer_type %in% c(input$arrdep)) %>%
       group_by(country_2) %>%
       summarise(sum_fee = sum(transfer_fee)) %>%
       ungroup() %>%
@@ -123,6 +128,7 @@ server <- function(input, output, session) {
         transfer_type == "Departures"
       ) %>%
       filter(is_loan %in% stat_loan()) %>%
+      filter(transfer_type %in% c(input$arrdep)) %>%
       group_by(country_2) %>%
       summarise(sum_fee = sum(transfer_fee)) %>%
       ungroup() %>%
@@ -217,7 +223,12 @@ server <- function(input, output, session) {
 
   output$top_map <- renderLeaflet({
 
-    if(is.null(input$season_year) || length(input$season_year) == 0){
+    if(
+      is.null(input$season_year) ||
+      length(input$season_year) == 0 ||
+      is.null(input$arrdep) ||
+      length(input$arrdep) == 0
+      ){
       plain_map()
     } else {
       top_map()
@@ -236,6 +247,7 @@ server <- function(input, output, session) {
       filter(season %in% c(input$season_year)) %>%
       filter(transfer_type %in% c("Arrivals", "Departures")) %>%
       filter(is_loan %in% stat_loan()) %>%
+      filter(transfer_type %in% c(input$arrdep)) %>%
       mutate(is_loan = ifelse(is_loan == T, "LOANS", "NOT LOANS")) %>%
       group_by(season, is_loan) %>%
       mutate(sumtf = sum(transfer_fee))
@@ -272,9 +284,16 @@ server <- function(input, output, session) {
 
   output$plot_tfbs <- renderPlot({
 
-    if(is.null(input$season_year) || length(input$season_year) == 0){
+    # filter not chosen handling
+
+    if(
+      is.null(input$season_year) ||
+      length(input$season_year) == 0 ||
+      is.null(input$arrdep) ||
+      length(input$arrdep) == 0
+      ){
       plot.new()
-      title("No options selected")
+      title("Please choose the relevant options available")
     } else {
       ptfbs()
     }
@@ -332,6 +351,18 @@ server <- function(input, output, session) {
   output$plot_tfbl <- renderPlot({ ptfbl() })
 
 
+  # render UI for choosing team based on selected season ####
+  output$teamInput <- renderUI({
+    selectizeInput(
+      inputId = "club_name",
+      label = "Choose club:",
+      selected = NULL,
+      choices =  dfsf()$team_name %>% unique(),
+      multiple = T,
+      options = list(maxItems = 6)
+    )
+  })
+
 
   # PLOT CLUB COMPARISON ####
 
@@ -342,17 +373,7 @@ server <- function(input, output, session) {
     return(df_season_filtered)
   })
 
-  # render UI for choosing team based on selected season ####
-  output$teamInput <- renderUI({
-    selectizeInput(
-      inputId = "club_name",
-      label = "Choose club:",
-      selected = dfsf()$team_name %>% unique() %>% sample(2),
-      choices =  dfsf()$team_name %>% unique(),
-      multiple = T,
-      options = list(maxItems = 6)
-    )
-  })
+
 
   dfsncf <- reactive({
     if (input$loanstat == "No"){
@@ -430,15 +451,39 @@ server <- function(input, output, session) {
       scale_y_continuous(labels = label_number(scale_cut = cut_short_scale(space = T)))+
       theme_setting
 
-    gpcc <- girafe(
-      ggobj = pcc,
-      options = list(
-        opts_hover(css = ""),
-        opts_hover_inv(css = "opacity:0.1;")
-      )
 
-    )
+
+    if (
+      is.null(input$season_year) ||
+      length(input$season_year) == 0 ||
+      is.null(input$arrdep) ||
+      length(input$arrdep) == 0 ||
+      is.null(input$club_name) ||
+      length(input$club_name) == 0
+      ){
+
+      # Create ggplot
+      p <- ggplot() +
+        annotate("text", x = 0.5, y = 0.5, label = "Please choose the relevant options available", size = 6, hjust = 0.5) +
+        theme_void()
+
+      # Convert to ggiraph
+      gpcc <- girafe(ggobj = p)
+
+    } else {
+      gpcc <- girafe(
+        ggobj = pcc,
+        options = list(
+          opts_hover(css = ""),
+          opts_hover_inv(css = "opacity:0.1;")
+        )
+
+      )
+    }
+
+
     return(gpcc)
+
   })
 
 
@@ -595,12 +640,34 @@ server <- function(input, output, session) {
       # add margin between position
       theme(axis.text.y = element_text(margin = margin(t = 45, b = 45), size = 9))
 
-    gpp <- girafe(
-      ggobj = pp,
-      options = list(
-        opts_hover(css = ""),
-        opts_hover_inv(css = "opacity:0.1;")
-      ))
+    p <- ggplot() +
+      annotate("text", x = 0.5, y = 0.5, label = "Please choose the relevant options available", size = 6, hjust = 0.5) +
+      theme_void()
+
+    if(
+      is.null(input$season_year) ||
+      length(input$season_year) == 0 ||
+      is.null(input$arrdep) ||
+      length(input$arrdep) == 0 ||
+      is.null(input$club_name) ||
+      length(input$club_name) == 0
+    ){
+      gpp <- girafe(
+        ggobj = p
+      )
+    } else {
+      gpp <- girafe(
+        ggobj = pp,
+        options = list(
+          opts_hover(css = ""),
+          opts_hover_inv(css = "opacity:0.1;")
+        ))
+    }
+
+
+
+
+
     return(gpp)
   })
 
@@ -680,13 +747,23 @@ server <- function(input, output, session) {
 
     table_filtered <-
     transfers_df %>%
+      select(-c(centroid_longitude,centroid_latitude)) %>%
       filter(season %in% c(input$season_year)) %>%
       filter(is_loan %in% stat_loan()) %>%
+      filter(transfer_type %in% c(input$arrdep)) %>%
       filter(
         player_age >= input$age_slider[1] &
-        player_age <= input$age_slider[2])
+        player_age <= input$age_slider[2]
+        ) %>%
+      filter(
+        transfer_fee >= input$fee_slider[1] &
+        transfer_fee <= input$fee_slider[2]
+      )
+
 
     return(table_filtered)
   })
-}
 
+
+
+}

@@ -35,10 +35,10 @@ arr_dep <- checkboxGroupInput(
 )
 
 sidebar_club <- card(
-  min_height = "300px",
+  min_height = "1200px",
   card_header("Compare Up to Six Clubs"),
-  uiOutput(outputId = "teamInput"), # sourced from server from renderUI
-  arr_dep
+  uiOutput(outputId = "teamInput",fill = T), # sourced from server from renderUI
+ # arr_dep
 )
 
 
@@ -92,8 +92,24 @@ vbs_club <- list(
 
 
 age_slider <-
-  sliderInput(
-    inputId = "age_slider",
-    label = h3("Age Range"),
-    min = min(transfers_df$player_age),
-    max = max(transfers_df$player_age),value = c(25, 27))
+  card(
+    sliderInput(
+      inputId = "age_slider",
+      label = h4("Age Range"),
+      min = min(transfers_df$player_age),
+      max = max(transfers_df$player_age),value = c(25, 27)
+      )
+  )
+
+fee_slider <-
+  card(
+    sliderInput(
+      inputId = "fee_slider",
+      label = h4("Fee Range"),
+      min = min(transfers_df$transfer_fee),
+      max = max(transfers_df$transfer_fee),
+      value = c(
+        0,
+        max(transfers_df$transfer_fee)/2)
+    )
+  )

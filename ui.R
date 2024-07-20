@@ -1,88 +1,98 @@
 source("uiHelpers.R")
 
-ui <- page_navbar(
-  id = "nav",
-  title = "Premier League Transfers Dashboard",
-  fillable = F,
-  sidebar = sidebar(
-    open = "desktop",
-    sidebar_season,
-    sidebar_loan_opt,
-    conditionalPanel(
-      condition = "input.nav == 'Teams'", sidebar_club
-    ),
-    conditionalPanel(
-      condition = "input.nav == 'Table'", age_slider
-    ),
-    # conditionalPanel(
-    #   condition = "input.nav == 'Table'", !!!transfer_slider
-    # ),
-    # conditionalPanel(
-    #   condition = "input.nav == 'Table'", !!!position_checkbox
-    # ),
-  ),
-  nav_spacer(),
-  nav_panel(
-    title = "Transfers Overview",
+ui <-
+  page_navbar(
 
-    # value boxes
-    layout_column_wrap(
-      fill = FALSE,
-      width = "150px",
-      !!!vbs
-    ),
 
-    # map
-    card(
-      div(class = "card-header", "Top 10 Transfers Traffic by Country"),
-      leafletOutput("top_map"),
-      min_height = "400px"
+    id = "nav",
+    title = "Premier League Transfers Dashboard",
+    fillable = F,
+    sidebar = sidebar(
+      open = "desktop",
+      sidebar_season,
+      sidebar_loan_opt,
+      card(arr_dep),
+      conditionalPanel(
+        condition = "input.nav == 'Teams'", sidebar_club
+      ),
+      conditionalPanel(
+        condition = "input.nav == 'Table'", age_slider
+      ),
+      conditionalPanel(
+        condition = "input.nav == 'Table'", fee_slider
+      ),
+      # conditionalPanel(
+      #   condition = "input.nav == 'Table'", !!!position_checkbox
+      # ),
+    ),
+    nav_spacer(),
+    nav_panel(
+      title = "Transfers Overview",
+
+      # value boxes
+      layout_column_wrap(
+        fill = FALSE,
+        width = "150px",
+        !!!vbs
       ),
 
-    # plot tf by  season and loan
-    card(
-      fill = T,
-      plotOutput("plot_tfbs")
-  ),
-),
+      # map
+      card(
+        div(class = "card-header", "Top 10 Transfers Traffic by Country"),
+        leafletOutput("top_map"),
+        min_height = "400px"
+      ),
 
-  nav_panel(
-    title = "Teams",
-
-
-    layout_column_wrap(
-      fill = FALSE,
-      width = "150px",
-      !!!vbs_club
+      # plot tf by  season and loan
+      card(
+        fill = T,
+        plotOutput("plot_tfbs")
+      ),
     ),
 
-    # plot: transfers fee agg by club
-    card(
-      girafeOutput("ccfp")
-    ),
-    card(fill = T,
-         girafeOutput("plot_pp")
+    nav_panel(
+      title = "Teams",
+
+
+      layout_column_wrap(
+        fill = FALSE,
+        width = "150px",
+        !!!vbs_club
+      ),
+
+      # plot: transfers fee agg by club
+      card(
+        girafeOutput("ccfp")
+      ),
+      card(fill = T,
+           girafeOutput("plot_pp")
+      ),
+
+      # plot: top 10 players
+      card(
+        girafeOutput("t10p")
+      )
+
     ),
 
-    # plot: top 10 players
-    card(
-      girafeOutput("t10p")
+
+    nav_panel(
+      "Table",
+      card(full_screen = T,
+           dataTableOutput("tf_table")
+      )
     )
 
-  ),
 
 
-  nav_panel(
-    "Table",
-    card(full_screen = T,
-      dataTableOutput("tf_table")
-    )
+
   )
 
 
 
 
-)
+
+
 
 
 
