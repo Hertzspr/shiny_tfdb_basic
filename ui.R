@@ -1,13 +1,27 @@
 source("uiHelpers.R")
 
-ui <-
-  page_navbar(
-
+ui <- page_navbar(
 
     id = "nav",
-    title = "Premier League Transfers Dashboard",
+    title = "English Premier League Transfers Dashboard",
+    footer = tagList(
+      div(
+        style =
+        "
+          text-align: center;
+          padding: 10px;
+          background: #f8f9fa;
+        ",
+        "Created by Sasmito Yudha Husada",
+        br(),
+        "Data source: Transfermarkt data processed via worldfootballR library"
+      )
+    ),
     fillable = F,
     sidebar = sidebar(
+      fg = "red",
+      bg = "white",
+      width = "600px",
       open = "desktop",
       sidebar_season,
       sidebar_loan_opt,

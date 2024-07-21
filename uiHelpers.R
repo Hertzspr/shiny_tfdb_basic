@@ -9,8 +9,6 @@ seasonInput <- checkboxGroupInput(width = "100%",
 uncheckSeasonInput <- actionButton(inputId = "unc_season", "Uncheck Seasons")
 
 sidebar_season <- card(
-  min_height = "300px",
-  #full_screen = TRUE,
   card_header("Select Season"),
   seasonInput,
   uncheckSeasonInput
@@ -96,20 +94,22 @@ age_slider <-
     sliderInput(
       inputId = "age_slider",
       label = h4("Age Range"),
-      min = min(transfers_df$player_age),
-      max = max(transfers_df$player_age),value = c(25, 27)
+      min = min(transfers_df$player_age, na.rm = T),
+      max = max(transfers_df$player_age, na.rm = T),
+      value = c(min(transfers_df$player_age, na.rm = T), max(transfers_df$player_age, na.rm = T))
       )
   )
 
 fee_slider <-
   card(
-    sliderInput(
+    sliderInput(step = 4,
       inputId = "fee_slider",
       label = h4("Fee Range"),
       min = min(transfers_df$transfer_fee),
       max = max(transfers_df$transfer_fee),
       value = c(
-        0,
-        max(transfers_df$transfer_fee)/2)
+        min(transfers_df$transfer_fee),
+        max(transfers_df$transfer_fee)
+        )
     )
   )

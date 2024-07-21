@@ -353,23 +353,44 @@ server <- function(input, output, session) {
 
   # render UI for choosing team based on selected season ####
   output$teamInput <- renderUI({
-    selectizeInput(
-      inputId = "club_name",
-      label = "Choose club:",
-      selected = NULL,
-      choices =  dfsf()$team_name %>% unique(),
-      multiple = T,
-      options = list(maxItems = 6)
-    )
-  })
+
+    if(is.null(input$season_year) ||
+       length(input$season_year) == 0
+    ){
+      selectizeInput(
+        inputId = "club_name",
+        label = "Choose club:",
+        selected = NULL,
+        choices =  NULL,
+        multiple = T,
+        options = list(maxItems = 6)
+      )
+    } else {
+      selectizeInput(
+        inputId = "club_name",
+        label = "Choose club:",
+        selected = dfsf()$team_name %>% unique() %>% sample(3),
+        choices =  dfsf()$team_name %>% unique(),
+        multiple = T,
+        options = list(maxItems = 6)
+      )
+    }
+
+
+
+
+    })
 
 
   # PLOT CLUB COMPARISON ####
 
   dfsf <- reactive({
+
     df_season_filtered <-
       transfers_df %>%
       filter(season %in% c(input$season_year))
+
+
     return(df_season_filtered)
   })
 
@@ -758,6 +779,22 @@ server <- function(input, output, session) {
       filter(
         transfer_fee >= input$fee_slider[1] &
         transfer_fee <= input$fee_slider[2]
+      ) %>%
+      rename(
+        "Club" = team_name,
+        "Season" = season,
+        "Transfer Type" = transfer_type,
+        "Name" = player_name,
+        "Position" = player_position,
+        "Age" = player_age,
+        "Nationality" = player_nationality,
+        "Club From/To" = club_2,
+        "League From/To" = league_2,
+        "Country From/To" = country_2,
+        "Transfer Fee" = transfer_fee,
+        "Is This Loan?" = is_loan,
+        "Notes" = transfer_notes,
+        "Window" = window,
       )
 
 
